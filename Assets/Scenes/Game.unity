@@ -653,15 +653,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aeccac282374344e9868aaf651f076c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tilemap: {fileID: 1811579189}
-  DTiles:
+  _diamondTiles:
   - {fileID: 11400000, guid: 137ec4df6177c7e4a9a12181469b1836, type: 2}
   - {fileID: 11400000, guid: 28f6b45d638dff04ca57c91c461a8f9a, type: 2}
   - {fileID: 11400000, guid: 0f27ea289cff14d4a92d0769361ab68c, type: 2}
   - {fileID: 11400000, guid: 173ea209e0bfffb4cafd0214a1dc81d7, type: 2}
   - {fileID: 11400000, guid: baa58ff96767fe44c9eac5101dc2e7b1, type: 2}
-  Rows: 8
-  Columns: 16
+  _tilemap: {fileID: 1811579189}
+  _initObjectPool: {fileID: 506030108}
+  _rows: 8
+  _columns: 8
 --- !u!114 &1811579191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,7 +678,6 @@ MonoBehaviour:
   _tilemap: {fileID: 1811579189}
   _bordermap: {fileID: 521060310}
   _borderTile: {fileID: 11400000, guid: ba7c1a2277442c9478020ded808b1f4d, type: 2}
-  _initObjectPool: {fileID: 506030108}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
