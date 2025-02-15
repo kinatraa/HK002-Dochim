@@ -29,39 +29,41 @@ public class DiamondClick : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!_diamondManager.IsDropping())
         {
-            Vector3 worldPoint = _camera.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int gridPosition = _tilemap.WorldToCell(worldPoint);
+            if (Input.GetMouseButtonDown(0))
+            {
+                Vector3 worldPoint = _camera.ScreenToWorldPoint(Input.mousePosition);
+                Vector3Int gridPosition = _tilemap.WorldToCell(worldPoint);
 
-            if (_selected)
-            {
-                _selected = false;
-                _bordermap.SetTile(_selectedTile, null);
-                if (ValidClick(gridPosition) && CheckAdjacentVector(_selectedTile, gridPosition))
+                if (_selected)
                 {
-                    SwapTile(_selectedTile, gridPosition);
-                    
-                    if (!CanSwap(_selectedTile, gridPosition))
+                    _selected = false;
+                    _bordermap.SetTile(_selectedTile, null);
+                    if (ValidClick(gridPosition) && CheckAdjacentVector(_selectedTile, gridPosition))
                     {
-                        Debug.Log("Can't swap");
                         SwapTile(_selectedTile, gridPosition);
-                    }
-                    else
-                    {
-                        Debug.Log("Swap");
-                    }
                     
-                    /*StartCoroutine(ClearDiamond());*/
+                        if (!CanSwap(_selectedTile, gridPosition))
+                        {
+                            SwapTile(_selectedTile, gridPosition);
+                        }
+                        else
+                        {
+                            StartCoroutine(_diamondManager.ClearDiamond(1f));
+                        }
+                    
+                        /*StartCoroutine(ClearDiamond());*/
+                    }
                 }
-            }
-            else
-            {
-                if (ValidClick(gridPosition))
+                else
                 {
-                    _selected = true;
-                    _selectedTile = gridPosition;
-                    _bordermap.SetTile(_selectedTile, _borderTile);
+                    if (ValidClick(gridPosition))
+                    {
+                        _selected = true;
+                        _selectedTile = gridPosition;
+                        _bordermap.SetTile(_selectedTile, _borderTile);
+                    }
                 }
             }
         }

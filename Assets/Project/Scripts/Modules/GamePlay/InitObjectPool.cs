@@ -8,7 +8,7 @@ public class InitObjectPool : MonoBehaviour
     [SerializeField] private GameObject prefab;
     public List<GameObject> objectPool;
 
-    void OnEnable()
+    void Awake()
     {
         for (int i = 0; i < 64; i++)
         {

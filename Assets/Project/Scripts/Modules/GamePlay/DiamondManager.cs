@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
@@ -15,24 +16,27 @@ public class DiamondManager : MonoBehaviour
 
     private List<GameObject> _objectPool;
     
-    private Camera _camera;
     private BoundsInt _bounds;
+
+    private bool _dropping = false;
     
-    private Vector3Int[] _directions;
+    /*private Vector3Int[] _directions;*/
     void Start()
     {
-        _camera = Camera.main;
-        _bounds = _tilemap.cellBounds;
+        _bounds.xMin = -_rows / 2;
+        _bounds.xMax = _rows / 2;
+        _bounds.yMin = -_columns / 2;
+        _bounds.yMax = _columns / 2;
         
         _objectPool = _initObjectPool.GetObjectPool();
         
-        _directions = new Vector3Int[]
+        /*_directions = new Vector3Int[]
         {
             new Vector3Int(1, 0, 0),
             new Vector3Int(0, 1, 0),
             new Vector3Int(-1, 0, 0),
             new Vector3Int(0, -1, 0)
-        };
+        };*/
         
         GenerateBoard();
     }
@@ -51,12 +55,31 @@ public class DiamondManager : MonoBehaviour
                 _tilemap.SetTile(new Vector3Int(i, j, 0), _diamondTiles[Random.Range(0, _diamondTiles.Length)]);
             }
         }
+
+        StartCoroutine(ClearDiamond(0f));
+    }
+
+    private IEnumerator SpawnBoard()
+    {
+        for (int i = -_rows / 2; i < _rows / 2; i++)
+        {
+            for (int j = _columns / 2; j < _columns + _columns / 2; j++)
+            {
+                Vector3Int position = new Vector3Int(i, j, 0);
+                if (_tilemap.GetTile(position) == null)
+                {
+                    _tilemap.SetTile(position, _diamondTiles[Random.Range(0, _diamondTiles.Length)]);
+                }
+            }
+        }
+
+        yield return null;
     }
     
-    private List<Vector3Int> CheckAdjacentTiles(HashSet<Vector3Int> visited, Vector3Int curPos)
+    private List<Vector3Int> CheckAdjacentTiles(Vector3Int curPos)
     {
         //BFS
-        List<Vector3Int> clearTiles = new List<Vector3Int>();
+        /*List<Vector3Int> clearTiles = new List<Vector3Int>();
         Queue<Vector3Int> queue = new Queue<Vector3Int>();
 
         queue.Enqueue(curPos);
@@ -79,37 +102,107 @@ public class DiamondManager : MonoBehaviour
             }
         }
 
-        return clearTiles;
+        return clearTiles;*/
+        
+        List<Vector3Int> adjTiles = new List<Vector3Int>();
+        
+        int cnt = 1;
+        Vector3Int pos = curPos;
+        --pos.x;
+        while (pos.x >= _bounds.xMin)
+        {
+            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
+            else break;
+            --pos.x;
+        }
+        pos = curPos;
+        ++pos.x;
+        while (pos.x < _bounds.xMax)
+        {
+            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
+            else break;
+            ++pos.x;
+        }
+
+        if (cnt >= 3)
+        {
+            --pos.x;
+            for (int i = 0; i < cnt; i++)
+            {
+                adjTiles.Add(pos);
+                --pos.x;
+            }
+        }
+
+        cnt = 1;
+        pos = curPos;
+        --pos.y;
+        while (pos.y >= _bounds.yMin)
+        {
+            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
+            else break;
+            --pos.y;
+        }
+        pos = curPos;
+        ++pos.y;
+        while (pos.y < _bounds.yMax / 3)
+        {
+            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
+            else break;
+            ++pos.y;
+        }
+        if (cnt >= 3)
+        {
+            --pos.y;
+            for (int i = 0; i < cnt; i++)
+            {
+                adjTiles.Add(pos);
+                --pos.y;
+            }
+        }
+        
+        adjTiles = new HashSet<Vector3Int>(adjTiles).ToList();
+        return adjTiles;
     }
     
-    private IEnumerator ClearDiamond()
+    public IEnumerator ClearDiamond(float waitTime)
     {
-        int t = 1;
-        while (t-- > 0)
+        _dropping = true;
+        
+        while (true)
         {
-            HashSet<Vector3Int> visited = new HashSet<Vector3Int>();
-
+            List<Vector3Int> clearTiles = new List<Vector3Int>();
             for (int x = _bounds.xMin; x < _bounds.xMax; x++)
             {
                 for (int y = _bounds.yMin; y < _bounds.yMax; y++)
                 {
                     Vector3Int curPos = new Vector3Int(x, y, 0);
-                    if (visited.Contains(curPos) || _tilemap.GetTile(curPos) == null) continue;
 
-                    List<Vector3Int> clearTiles = CheckAdjacentTiles(visited, curPos);
+                    if (_tilemap.GetTile(curPos) == null) continue;
 
-                    if (clearTiles.Count <= 2) continue;
-
-                    foreach (Vector3Int tilePos in clearTiles)
-                    {
-                        _tilemap.SetTile(tilePos, null);
-                    }
+                    //khong toi uu (nhu c)
+                    clearTiles.AddRange(CheckAdjacentTiles(curPos));
                 }
+            }
+            
+            clearTiles = new HashSet<Vector3Int>(clearTiles).ToList();
+            if (clearTiles.Count == 0)
+            {
+                break;
+            }
+            foreach (Vector3Int tilePos in clearTiles)
+            {
+                _tilemap.SetTile(tilePos, null);
             }
 
             yield return StartCoroutine(DropTile());
+            
+            yield return new WaitForSeconds(waitTime);
+            
+            yield return StartCoroutine(SpawnBoard());
         }
 
+        _dropping = false;
         yield return null;
     }
     
@@ -124,10 +217,9 @@ public class DiamondManager : MonoBehaviour
                 if (_tilemap.GetTile(new Vector3Int(x, y, 0)) != null) continue;
 
                 Queue<Vector3Int> aboveTiles = GetAboveTiles(x, y);
-                if (aboveTiles.Count == 0) continue;
 
                 StartCoroutine(DropAboveTiles(new Queue<Vector3Int>(aboveTiles), x, y));
-
+                
                 break;
             }
         }
@@ -139,11 +231,12 @@ public class DiamondManager : MonoBehaviour
     {
         Queue<Vector3Int> aboveTiles = new Queue<Vector3Int>();
 
-        for (int k = y + 1; k < _bounds.yMax; k++)
+        for (int k = y + 1; k < _bounds.yMax + _columns; k++)
         {
-            if (_tilemap.GetTile(new Vector3Int(x, k, 0)) == null) continue;
+            Vector3Int curPos = new Vector3Int(x, k, 0);
+            if (_tilemap.GetTile(curPos) == null) continue;
 
-            aboveTiles.Enqueue(new Vector3Int(x, k, 0));
+            aboveTiles.Enqueue(curPos);
         }
 
         return aboveTiles;
@@ -151,11 +244,15 @@ public class DiamondManager : MonoBehaviour
     
     private IEnumerator DropAboveTiles(Queue<Vector3Int> aboveTiles, int x, int y)
     {
+        Vector3Int pos = new Vector3Int(x, y, 0);
+        
         while (aboveTiles.Count > 0)
         {
             Vector3Int aboveTilePos = aboveTiles.Dequeue();
 
-            StartCoroutine(MoveTileCoroutine(aboveTilePos, new Vector3Int(x, y++, 0), _tilemap.GetTile(aboveTilePos)));
+            StartCoroutine(MoveTileCoroutine(aboveTilePos, pos, _tilemap.GetTile(aboveTilePos)));
+
+            ++pos.y;
         }
 
         yield return null;
@@ -198,5 +295,10 @@ public class DiamondManager : MonoBehaviour
 
         _tilemap.SetTile(toPos, tile);
         tempTile.SetActive(false);
+    }
+
+    public bool IsDropping()
+    {
+        return _dropping;
     }
 }
