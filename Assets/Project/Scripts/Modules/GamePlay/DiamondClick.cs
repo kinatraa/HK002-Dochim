@@ -11,67 +11,55 @@ public class DiamondClick : MonoBehaviour
     [SerializeField] private Tilemap _bordermap;
     [SerializeField] private TileBase _borderTile;
     
-    private DiamondManager _diamondManager;
+    [SerializeField] private DiamondManager _diamondManager;
 
     private Camera _camera;
     private BoundsInt _bounds;
 
-    private Vector3Int[] _directions;
-    private Vector3Int _selectedTile = default;
+    /*private Vector3Int[] _directions;*/
+    private Vector3Int _selectedTile;
     private bool _selected = false;
 
     void Start()
     {
         _camera = Camera.main;
-        _bounds = _tilemap.cellBounds;
-        _diamondManager = GetComponent<DiamondManager>();
+        _tilemap = GamePlayManager.Instance.Tilemap;
+        _bordermap = GamePlayManager.Instance.BorderTilemap;
+        
+        _bounds = GamePlayManager.Instance.BoardBounds;
     }
 
-    void Update()
+    public void SelectTile(Vector3Int selectedPos)
     {
-        if (!_diamondManager.IsDropping())
+        if (_selected)
         {
-            if (Input.GetMouseButtonDown(0))
+            _selected = false;
+            _bordermap.SetTile(_selectedTile, null);
+            if (GamePlayManager.Instance.ValidClick(selectedPos) && CheckAdjacentVector(_selectedTile, selectedPos))
             {
-                Vector3 worldPoint = _camera.ScreenToWorldPoint(Input.mousePosition);
-                Vector3Int gridPosition = _tilemap.WorldToCell(worldPoint);
-
-                if (_selected)
+                SwapTile(_selectedTile, selectedPos);
+                    
+                if (!CanSwap(_selectedTile, selectedPos))
                 {
-                    _selected = false;
-                    _bordermap.SetTile(_selectedTile, null);
-                    if (ValidClick(gridPosition) && CheckAdjacentVector(_selectedTile, gridPosition))
-                    {
-                        SwapTile(_selectedTile, gridPosition);
-                    
-                        if (!CanSwap(_selectedTile, gridPosition))
-                        {
-                            SwapTile(_selectedTile, gridPosition);
-                        }
-                        else
-                        {
-                            StartCoroutine(_diamondManager.ClearDiamond(1f));
-                        }
-                    
-                        /*StartCoroutine(ClearDiamond());*/
-                    }
+                    SwapTile(_selectedTile, selectedPos);
                 }
                 else
                 {
-                    if (ValidClick(gridPosition))
-                    {
-                        _selected = true;
-                        _selectedTile = gridPosition;
-                        _bordermap.SetTile(_selectedTile, _borderTile);
-                    }
+                    StartCoroutine(_diamondManager.ClearDiamond(0.5f));
                 }
+                    
+                /*StartCoroutine(ClearDiamond());*/
             }
         }
-    }
-
-    private bool ValidClick(Vector3Int v)
-    {
-        return v.x >= _bounds.xMin && v.x < _bounds.xMax && v.y >= _bounds.yMin && v.y < _bounds.yMax / 3;
+        else
+        {
+            if (GamePlayManager.Instance.ValidClick(selectedPos))
+            {
+                _selected = true;
+                _selectedTile = selectedPos;
+                _bordermap.SetTile(_selectedTile, _borderTile);
+            }
+        }
     }
 
     private bool CanSwap(Vector3Int a, Vector3Int b)
@@ -102,7 +90,7 @@ public class DiamondClick : MonoBehaviour
             else break;
         }
         pos = a;
-        while (pos.y + 1 < _bounds.yMax / 3)
+        while (pos.y + 1 < _bounds.yMax)
         {
             ++pos.y;
             if (_tilemap.GetTile(pos) == _tilemap.GetTile(a)) ++cnt;
@@ -136,7 +124,7 @@ public class DiamondClick : MonoBehaviour
             else break;
         }
         pos = b;
-        while (pos.y + 1 < _bounds.yMax / 3)
+        while (pos.y + 1 < _bounds.yMax)
         {
             ++pos.y;
             if (_tilemap.GetTile(pos) == _tilemap.GetTile(b)) ++cnt;
@@ -158,5 +146,10 @@ public class DiamondClick : MonoBehaviour
     {
         int dist = Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y) + Mathf.Abs(a.z - b.z);
         return dist == 1;
+    }
+
+    public bool CanClick()
+    {
+        return !_diamondManager.IsDropping();
     }
 }
