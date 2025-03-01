@@ -29,23 +29,24 @@ public class DiamondClick : MonoBehaviour
         _bounds = GamePlayManager.Instance.BoardBounds;
     }
 
-    public void SelectTile(Vector3Int selectedPos)
+    public IEnumerator SelectTile(Vector3Int selectedPos)
     {
         if (_selected)
         {
             _selected = false;
             _bordermap.SetTile(_selectedTile, null);
-            if (GamePlayManager.Instance.ValidClick(selectedPos) && CheckAdjacentVector(_selectedTile, selectedPos))
+            if (ValidClick(selectedPos) && CheckAdjacentVector(_selectedTile, selectedPos))
             {
-                SwapTile(_selectedTile, selectedPos);
-                    
-                if (!CanSwap(_selectedTile, selectedPos))
+                yield return StartCoroutine(_diamondManager.SwapTile(_selectedTile, selectedPos));
+                if (!CanSwap(_selectedTile, selectedPos, 0))
                 {
-                    SwapTile(_selectedTile, selectedPos);
+                    /*Debug.Log("Can't swap");*/
+                    yield return StartCoroutine(_diamondManager.SwapTile(_selectedTile, selectedPos));
                 }
                 else
                 {
-                    StartCoroutine(_diamondManager.ClearDiamond(0.5f));
+                    /*Debug.Log("Swap");*/
+                    yield return StartCoroutine(_diamondManager.ClearDiamond(0.5f));
                 }
                     
                 /*StartCoroutine(ClearDiamond());*/
@@ -53,93 +54,111 @@ public class DiamondClick : MonoBehaviour
         }
         else
         {
-            if (GamePlayManager.Instance.ValidClick(selectedPos))
+            if (ValidClick(selectedPos))
             {
                 _selected = true;
                 _selectedTile = selectedPos;
                 _bordermap.SetTile(_selectedTile, _borderTile);
             }
         }
+        
+        yield return null;
     }
 
-    private bool CanSwap(Vector3Int a, Vector3Int b)
+    public bool CanSwap(Vector3Int a, Vector3Int b, int rev)
     {
+        TileBase[] checkTiles = {_tilemap.GetTile(a), _tilemap.GetTile(b)};
+        
         int cnt = 1;
         Vector3Int pos = a;
         while (pos.x - 1 >= _bounds.xMin)
         {
             --pos.x;
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(a)) ++cnt;
+            if (rev == 1 && pos == b) break;
+            if (_tilemap.GetTile(pos) == checkTiles[rev]) ++cnt;
             else break;
         }
         pos = a;
         while (pos.x + 1 < _bounds.xMax)
         {
             ++pos.x;
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(a)) ++cnt;
+            if (rev == 1 && pos == b) break;
+            if (_tilemap.GetTile(pos) == checkTiles[rev]) ++cnt;
             else break;
         }
-        if (cnt >= 3) return true;
+
+        if (cnt >= 3)
+        {
+            return true;
+        }
 
         cnt = 1;
         pos = a;
         while (pos.y - 1 >= _bounds.yMin)
         {
             --pos.y;
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(a)) ++cnt;
+            if (rev == 1 && pos == b) break;
+            if (_tilemap.GetTile(pos) == checkTiles[rev]) ++cnt;
             else break;
         }
         pos = a;
         while (pos.y + 1 < _bounds.yMax)
         {
             ++pos.y;
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(a)) ++cnt;
+            if (rev == 1 && pos == b) break;
+            if (_tilemap.GetTile(pos) == checkTiles[rev]) ++cnt;
             else break;
         }
-        if (cnt >= 3) return true;
+        if (cnt >= 3)
+        {
+            return true;
+        }
         
         cnt = 1;
         pos = b;
         while (pos.x - 1 >= _bounds.xMin)
         {
             --pos.x;
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(b)) ++cnt;
+            if (rev == 1 && pos == a) break;
+            if (_tilemap.GetTile(pos) == checkTiles[1 - rev]) ++cnt;
             else break;
         }
         pos = b;
         while (pos.x + 1 < _bounds.xMax)
         {
             ++pos.x;
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(b)) ++cnt;
+            if (rev == 1 && pos == a) break;
+            if (_tilemap.GetTile(pos) == checkTiles[1 - rev]) ++cnt;
             else break;
         }
-        if (cnt >= 3) return true;
+        if (cnt >= 3)
+        {
+            return true;
+        }
 
         cnt = 1;
         pos = b;
         while (pos.y - 1 >= _bounds.yMin)
         {
             --pos.y;
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(b)) ++cnt;
+            if (rev == 1 && pos == a) break;
+            if (_tilemap.GetTile(pos) == checkTiles[1 - rev]) ++cnt;
             else break;
         }
         pos = b;
         while (pos.y + 1 < _bounds.yMax)
         {
             ++pos.y;
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(b)) ++cnt;
+            if (rev == 1 && pos == a) break;
+            if (_tilemap.GetTile(pos) == checkTiles[1 - rev]) ++cnt;
             else break;
         }
-        if (cnt >= 3) return true;
+        if (cnt >= 3)
+        {
+            return true;
+        }
 
         return false;
-    }
-
-    private void SwapTile(Vector3Int a, Vector3Int b)
-    {
-        TileBase saveTile = _tilemap.GetTile(a);
-        _tilemap.SetTile(a, _tilemap.GetTile(b));
-        _tilemap.SetTile(b, saveTile);
     }
 
     private bool CheckAdjacentVector(Vector3Int a, Vector3Int b)
@@ -151,5 +170,10 @@ public class DiamondClick : MonoBehaviour
     public bool CanClick()
     {
         return !_diamondManager.IsDropping();
+    }
+    
+    public bool ValidClick(Vector3Int v)
+    {
+        return v.x >= _bounds.xMin && v.x < _bounds.xMax && v.y >= _bounds.yMin && v.y < _bounds.yMax;
     }
 }

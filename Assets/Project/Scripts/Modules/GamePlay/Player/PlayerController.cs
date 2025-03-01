@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private DiamondClick _diamondClick;
     
     private Camera _camera;
+
+    public bool IsPlayerTurn = false;
     void Start()
     {
         _tilemap = GamePlayManager.Instance.Tilemap;
@@ -19,14 +21,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (_diamondClick.CanClick())
+        if (_diamondClick.CanClick() && IsPlayerTurn)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 worldPoint = _camera.ScreenToWorldPoint(Input.mousePosition);
                 Vector3Int gridPosition = _tilemap.WorldToCell(worldPoint);
-                
-                _diamondClick.SelectTile(gridPosition);
+
+                StartCoroutine(_diamondClick.SelectTile(gridPosition));
             }
         }
     }

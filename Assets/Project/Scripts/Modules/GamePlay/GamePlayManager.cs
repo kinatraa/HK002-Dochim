@@ -10,6 +10,14 @@ using UnityEngine.Tilemaps;
 
 public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
 {
+    [SerializeField] private GameTurnController _gameTurnController;
+
+    public GameTurnController GameTurnController
+    {
+        get => _gameTurnController;
+        set => _gameTurnController = value;
+    }
+    
     [SerializeField] public int _rows = 8;
     [SerializeField] public int _columns = 8;
     
@@ -60,10 +68,5 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
     public void Handle(Message message)
     {
         throw new NotImplementedException();
-    }
-    
-    public bool ValidClick(Vector3Int v)
-    {
-        return v.x >= _bounds.xMin && v.x < _bounds.xMax && v.y >= _bounds.yMin && v.y < _bounds.yMax;
     }
 }

@@ -10,14 +10,16 @@ public class DiamondManager : MonoBehaviour
     [SerializeField] private TileBase[] _diamondTiles;
     [SerializeField] private Tilemap _tilemap;
     [SerializeField] private InitObjectPool _initObjectPool;
-
-    private List<SpriteRenderer> _objectPool;
+    private GameTurnController _gameTurnController;
+    
+    private Queue<SpriteRenderer> _objectPool;
 
     private BoundsInt _bounds;
     private int _rows;
     private int _columns;
 
     private int _dropping = 0;
+    private bool _swapping = false;
     
     void Awake()
     {
@@ -28,12 +30,14 @@ public class DiamondManager : MonoBehaviour
 
         _rows = GamePlayManager.Instance._rows;
         _columns = GamePlayManager.Instance._columns;
+        
+        _gameTurnController = GamePlayManager.Instance.GameTurnController;
     }
     
     void Start()
     {
-        _objectPool = _initObjectPool.GetObjectPool();
-
+        _objectPool = new Queue<SpriteRenderer>(_initObjectPool.GetObjectPool());
+        Debug.Log(_objectPool.Count);
         GenerateBoard();
     }
 
@@ -185,6 +189,8 @@ public class DiamondManager : MonoBehaviour
             yield return StartCoroutine(SpawnBoard());
         }
         
+        _gameTurnController.ChangeTurn();
+        
         yield return null;
     }
 
@@ -240,6 +246,7 @@ public class DiamondManager : MonoBehaviour
 
     private IEnumerator MoveTileCoroutine(Vector3Int fromPos, Vector3Int toPos, TileBase tile)
     {
+        
         ++_dropping;
         
         float elapsedTime = 0f;
@@ -249,14 +256,10 @@ public class DiamondManager : MonoBehaviour
 
         SpriteRenderer tempTile = null;
 
-        foreach (var obj in _objectPool)
+        if (_objectPool.Count > 0)
         {
-            if (obj.gameObject.activeInHierarchy == false)
-            {
-                tempTile = obj;
-                tempTile.gameObject.SetActive(true);
-                break;
-            }
+            tempTile = _objectPool.Dequeue();
+            tempTile.gameObject.SetActive(true);
         }
 
         tempTile.sprite = (tile as Tile)?.sprite;
@@ -277,7 +280,22 @@ public class DiamondManager : MonoBehaviour
 
         _tilemap.SetTile(toPos, tile);
         tempTile.gameObject.SetActive(false);
+        _objectPool.Enqueue(tempTile);
         --_dropping;
+    }
+    
+    public IEnumerator SwapTile(Vector3Int a, Vector3Int b)
+    {
+        TileBase saveTile = _tilemap.GetTile(a);
+        StartCoroutine(MoveTileCoroutine(b, a, _tilemap.GetTile(b)));
+        StartCoroutine(MoveTileCoroutine(a, b, saveTile));
+
+        while (_dropping != 0)
+        {
+            yield return null;
+        }
+        
+        yield return null;
     }
 
     public bool IsDropping()
