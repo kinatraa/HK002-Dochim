@@ -12,7 +12,7 @@ public class GameTurnController : MonoBehaviour
 
     void Start()
     {
-        _turn = 1;
+        _turn = -1;
     }
 
     public void PlayTurn()
@@ -32,8 +32,18 @@ public class GameTurnController : MonoBehaviour
 
     public void ChangeTurn()
     {
+        if (_turn == -1)
+        {
+            _turn = 1;
+        }
+        
         _turn = 1 - _turn;
         
         PlayTurn();
+    }
+
+    public int GetTurn()
+    {
+        return _turn;
     }
 }

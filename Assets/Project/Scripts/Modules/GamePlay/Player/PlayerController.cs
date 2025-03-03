@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,6 +13,9 @@ public class PlayerController : MonoBehaviour
     private Camera _camera;
 
     public bool IsPlayerTurn = false;
+
+    [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private int _score = 0;
     void Start()
     {
         _tilemap = GamePlayManager.Instance.Tilemap;

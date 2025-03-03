@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using HaKien;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
@@ -176,6 +177,8 @@ public class DiamondManager : MonoBehaviour
             {
                 _tilemap.SetTile(tilePos, null);
             }
+            
+            UpdatePlayersScore(clearTiles.Count);
 
             yield return StartCoroutine(DropTile());
             
@@ -296,6 +299,21 @@ public class DiamondManager : MonoBehaviour
         }
         
         yield return null;
+    }
+
+    private void UpdatePlayersScore(int score)
+    {
+        switch (_gameTurnController.GetTurn())
+        {
+            case 0:
+                DataManager.Instance.PlayerScore += score;
+                MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+                break;
+            case 1:
+                DataManager.Instance.OpponentScore += score;
+                MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+                break;
+        }
     }
 
     public bool IsDropping()

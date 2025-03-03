@@ -9,18 +9,10 @@ namespace HaKien
     public enum MessageType
     {
         OnGameStart,
-
-        /// <summary>
-        /// When the game is over
-        /// </summary>
         OnGameLose,
         OnGameWin,
         OnButtonClick,
-        OnHitEnemy,
-        OnEnemyDie,
-        OnCollectCoin,
         OnDataChanged,
-
     }
     public class Message
     {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class AIController : MonoBehaviour
@@ -11,6 +12,9 @@ public class AIController : MonoBehaviour
     private IAIBehavior _ai;
 
     private BoundsInt _bounds;
+    
+    [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private int _score = 0;
 
     void Awake()
     {
