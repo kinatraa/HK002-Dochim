@@ -17,7 +17,7 @@ public class EasyAI : MonoBehaviour, IAIBehavior
         new Vector3Int(0, 1, 0),
     };
     
-    void Awake()
+    void Start()
     {
         _bounds = GamePlayManager.Instance.BoardBounds;
     }

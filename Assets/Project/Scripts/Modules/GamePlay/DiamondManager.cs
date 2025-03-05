@@ -25,8 +25,6 @@ public class DiamondManager : MonoBehaviour
     void Awake()
     {
         _tilemap = GamePlayManager.Instance.Tilemap;
-        
-        _bounds = GamePlayManager.Instance.BoardBounds;
         /*Debug.Log($"{_bounds.xMin}, {_bounds.yMin}, {_bounds.xMax}, {_bounds.yMax}");*/
 
         _rows = GamePlayManager.Instance._rows;
@@ -37,8 +35,8 @@ public class DiamondManager : MonoBehaviour
     
     void Start()
     {
+        _bounds = GamePlayManager.Instance.BoardBounds;
         _objectPool = new Queue<SpriteRenderer>(_initObjectPool.GetObjectPool());
-        Debug.Log(_objectPool.Count);
         GenerateBoard();
     }
 
