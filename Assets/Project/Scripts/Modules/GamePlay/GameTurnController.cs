@@ -7,16 +7,20 @@ public class GameTurnController : MonoBehaviour
 {
     [SerializeField] private PlayerController _player1;
     [SerializeField] private AIController _player2;
-
+    public int maxActionPerTurn = 3;
+    private int remainingActions;
     private int _turn = 0;
 
     void Start()
     {
         _turn = -1;
-    }
+        remainingActions = maxActionPerTurn;
+		ChangeTurn();
+	}
 
     public void PlayTurn()
     {
+        remainingActions = maxActionPerTurn;
         if (_turn == 0)
         {
             Debug.Log("Player turn");
@@ -29,8 +33,19 @@ public class GameTurnController : MonoBehaviour
             _player2.PlayTurn();
         }
     }
-
-    public void ChangeTurn()
+    public void UseAction()
+    {
+        remainingActions--;
+        Debug.Log("Actions left: " + remainingActions);
+        if(remainingActions == 0)
+            ChangeTurn();
+    }
+	public void AddExtraAction(int extra)
+	{
+		remainingActions += extra;
+		Debug.Log("gain " + extra + " action");
+	}
+	public void ChangeTurn()
     {
         if (_turn == -1)
         {
@@ -38,8 +53,8 @@ public class GameTurnController : MonoBehaviour
         }
         
         _turn = 1 - _turn;
-        
-        PlayTurn();
+        remainingActions = maxActionPerTurn;
+		PlayTurn();
     }
 
     public int GetTurn()

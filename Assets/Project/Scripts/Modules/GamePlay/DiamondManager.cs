@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using HaKien;
@@ -178,7 +178,19 @@ public class DiamondManager : MonoBehaviour
             {
                 break;
             }
-
+            if (clearTiles.Count > 0) 
+            {
+                if (GamePlayManager.Instance.GameTurnController.GetTurn() == 0)
+                {
+                    ButcherLoren butcher = FindObjectOfType<ButcherLoren>();
+                    var name = FindObjectOfType<ButcherLoren>().name;
+                    Debug.Log(name);
+                    if (butcher != null)
+                    {
+                        butcher.Trigger(null, clearTiles.Count);
+                    }
+                }
+			}
             foreach (Vector3Int tilePos in clearTiles)
             {
                 if (IsLocked(tilePos))
@@ -203,7 +215,7 @@ public class DiamondManager : MonoBehaviour
             yield return StartCoroutine(SpawnBoard());
         }
         
-        _gameTurnController.ChangeTurn();
+        //_gameTurnController.ChangeTurn();
         
         yield return null;
     }

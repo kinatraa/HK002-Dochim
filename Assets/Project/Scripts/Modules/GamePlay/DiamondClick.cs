@@ -47,6 +47,7 @@ public class DiamondClick : MonoBehaviour
                 {
                     /*Debug.Log("Swap");*/
                     yield return StartCoroutine(_diamondManager.ClearDiamond(0.5f));
+                    GamePlayManager.Instance.GameTurnController.UseAction();
                 }
                     
                 /*StartCoroutine(ClearDiamond());*/
