@@ -67,6 +67,7 @@ public class DiamondClick : MonoBehaviour
 
     public bool CanSwap(Vector3Int a, Vector3Int b, int rev)
     {
+        if(_diamondManager.IsLocked(a) ||  _diamondManager.IsLocked(b)) { return false; }
         TileBase[] checkTiles = {_tilemap.GetTile(a), _tilemap.GetTile(b)};
         
         int cnt = 1;

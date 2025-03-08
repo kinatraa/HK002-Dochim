@@ -22,6 +22,7 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
     [SerializeField] public int _columns = 8;
     
     [SerializeField] private Tilemap _tilemap;
+    [SerializeField] private Tilemap _licoriceTileMap;
     public Tilemap Tilemap
     {
         get => _tilemap;
@@ -33,6 +34,11 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
     {
         get => _borderTilemap;
         set => _borderTilemap = value;
+    }
+    public Tilemap LicoriceTileMap
+    {
+        get => _licoriceTileMap;
+        set => _licoriceTileMap = value;
     }
 
     public BoundsInt _bounds;

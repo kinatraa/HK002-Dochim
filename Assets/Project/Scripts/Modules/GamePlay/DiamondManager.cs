@@ -9,8 +9,11 @@ using UnityEngine.Tilemaps;
 public class DiamondManager : MonoBehaviour
 {
     [SerializeField] private TileBase[] _diamondTiles;
+    [SerializeField] private TileBase licoriceTile;
+    [SerializeField] private Tilemap licoriceTileMap;
     [SerializeField] private Tilemap _tilemap;
     [SerializeField] private InitObjectPool _initObjectPool;
+
     private GameTurnController _gameTurnController;
     
     private Queue<SpriteRenderer> _objectPool;
@@ -46,8 +49,13 @@ public class DiamondManager : MonoBehaviour
         {
             for (int j = _bounds.yMin; j < _bounds.yMax; j++)
             {
-                _tilemap.SetTile(new Vector3Int(i, j, 0), _diamondTiles[Random.Range(0, _diamondTiles.Length)]);
-            }
+                Vector3Int position = new Vector3Int(i, j,0);          
+                _tilemap.SetTile(position, _diamondTiles[Random.Range(0, _diamondTiles.Length)]);
+				if (Random.value < 0.2f)
+				{
+					licoriceTileMap.SetTile(position, licoriceTile);
+				}
+			}
         }
 
         for (int i = _bounds.xMin; i < _bounds.xMax; i++)
@@ -173,7 +181,12 @@ public class DiamondManager : MonoBehaviour
 
             foreach (Vector3Int tilePos in clearTiles)
             {
-                _tilemap.SetTile(tilePos, null);
+                if (IsLocked(tilePos))
+                {
+                    licoriceTileMap.SetTile(tilePos, null);
+                }
+                else
+                    _tilemap.SetTile(tilePos, null);
             }
             
             UpdatePlayersScore(clearTiles.Count);
@@ -284,9 +297,15 @@ public class DiamondManager : MonoBehaviour
         _objectPool.Enqueue(tempTile);
         --_dropping;
     }
-    
+
     public IEnumerator SwapTile(Vector3Int a, Vector3Int b)
     {
+
+        if (IsLocked(a) || IsLocked(b)) 
+        {
+            Debug.Log("Either one is blocked");
+            yield break;
+        }
         TileBase saveTile = _tilemap.GetTile(a);
         StartCoroutine(MoveTileCoroutine(b, a, _tilemap.GetTile(b)));
         StartCoroutine(MoveTileCoroutine(a, b, saveTile));
@@ -313,7 +332,16 @@ public class DiamondManager : MonoBehaviour
                 break;
         }
     }
+    //Licorice
+    public bool IsLocked(Vector3Int position)
+    {
+        return licoriceTileMap.GetTile(position) == licoriceTile;
+    }
 
+    private void UnlockLicorice(Vector3Int position)
+    {
+        licoriceTileMap.SetTile(position, null);
+    }
     public bool IsDropping()
     {
         return _dropping != 0;
