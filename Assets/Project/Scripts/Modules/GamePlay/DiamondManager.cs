@@ -49,14 +49,23 @@ public class DiamondManager : MonoBehaviour
         {
             for (int j = _bounds.yMin; j < _bounds.yMax; j++)
             {
-                Vector3Int position = new Vector3Int(i, j,0);          
-                _tilemap.SetTile(position, _diamondTiles[Random.Range(0, _diamondTiles.Length)]);
-				if (Random.value < 0.2f)
+                Vector3Int position = new Vector3Int(i, j,0);
+				//_tilemap.SetTile(position, _diamondTiles[Random.Range(0, _diamondTiles.Length)]);
+				TileBase tile;
+				do
+				{
+					tile = _diamondTiles[Random.Range(0, _diamondTiles.Length)];
+				}
+				while (CheckMatch(i, j, tile));
+				_tilemap.SetTile(new Vector3Int(i, j, 0), tile);
+
+				if (Random.value < 0.1f)
 				{
 					licoriceTileMap.SetTile(position, licoriceTile);
 				}
 			}
         }
+
 
         for (int i = _bounds.xMin; i < _bounds.xMax; i++)
         {
@@ -66,10 +75,22 @@ public class DiamondManager : MonoBehaviour
             }
         }
 
-        StartCoroutine(ClearDiamond(0f));
+        //StartCoroutine(ClearDiamond(0f));
     }
+	private bool CheckMatch(int i, int j, TileBase newTile)
+	{
 
-    private IEnumerator SpawnBoard()
+		if (i >= _bounds.xMin + 2 &&
+			_tilemap.GetTile(new Vector3Int(i - 1, j, 0)) == newTile &&
+			_tilemap.GetTile(new Vector3Int(i - 2, j, 0)) == newTile)
+			return true;
+		if (j >= _bounds.yMin + 2 &&
+			_tilemap.GetTile(new Vector3Int(i, j - 1, 0)) == newTile &&
+			_tilemap.GetTile(new Vector3Int(i, j - 2, 0)) == newTile)
+			return true;
+		return false;
+	}
+	private IEnumerator SpawnBoard()
     {
         for (int i = _bounds.xMin; i < _bounds.xMax; i++)
         {
@@ -180,15 +201,13 @@ public class DiamondManager : MonoBehaviour
             }
             if (clearTiles.Count > 0) 
             {
-                if (GamePlayManager.Instance.GameTurnController.GetTurn() == 0)
+				var name = FindObjectOfType<ButcherLoren>().name;
+				if (GamePlayManager.Instance.GameTurnController.GetTurn() == 0)
                 {
                     ButcherLoren butcher = FindObjectOfType<ButcherLoren>();
-                    var name = FindObjectOfType<ButcherLoren>().name;
                     Debug.Log(name);
-                    if (butcher != null)
-                    {
+                    
                         butcher.Trigger(null, clearTiles.Count);
-                    }
                 }
 			}
             foreach (Vector3Int tilePos in clearTiles)

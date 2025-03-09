@@ -61,4 +61,9 @@ public class GameTurnController : MonoBehaviour
     {
         return _turn;
     }
+
+    public void SetTurn(int turn)
+    {
+        _turn = turn;
+    }
 }
