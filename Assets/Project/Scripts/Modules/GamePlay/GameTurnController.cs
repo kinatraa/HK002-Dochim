@@ -33,6 +33,11 @@ public class GameTurnController : MonoBehaviour
             _player2.PlayTurn();
         }
     }
+
+    public BaseCharacter GetPlayerCharacter()
+    {
+        return _player1.Character;
+    }
     public void UseAction()
     {
         remainingActions--;

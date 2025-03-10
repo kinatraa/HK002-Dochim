@@ -28,18 +28,18 @@ public class DiamondManager : MonoBehaviour
     void Awake()
     {
         _tilemap = GamePlayManager.Instance.Tilemap;
-        /*Debug.Log($"{_bounds.xMin}, {_bounds.yMin}, {_bounds.xMax}, {_bounds.yMax}");*/
 
         _rows = GamePlayManager.Instance._rows;
         _columns = GamePlayManager.Instance._columns;
         
         _gameTurnController = GamePlayManager.Instance.GameTurnController;
-    }
+	}
     
     void Start()
     {
         _bounds = GamePlayManager.Instance.BoardBounds;
-        _objectPool = new Queue<SpriteRenderer>(_initObjectPool.GetObjectPool());
+		//Debug.Log($"{_bounds.xMin}, {_bounds.yMin}, {_bounds.xMax}, {_bounds.yMax}");
+		_objectPool = new Queue<SpriteRenderer>(_initObjectPool.GetObjectPool());
         GenerateBoard();
     }
 
@@ -201,14 +201,13 @@ public class DiamondManager : MonoBehaviour
             }
             if (clearTiles.Count > 0) 
             {
-				var name = FindObjectOfType<ButcherLoren>().name;
-				if (GamePlayManager.Instance.GameTurnController.GetTurn() == 0)
-                {
-                    ButcherLoren butcher = FindObjectOfType<ButcherLoren>();
-                    Debug.Log(name);
+                  if(GamePlayManager.Instance.GameTurnController.GetTurn() == 0)
+				  {
+                    var playercharacter = _gameTurnController.GetPlayerCharacter();
+                    playercharacter.Trigger(clearTiles,clearTiles.Count);
                     
-                        butcher.Trigger(null, clearTiles.Count);
-                }
+				  }
+
 			}
             foreach (Vector3Int tilePos in clearTiles)
             {

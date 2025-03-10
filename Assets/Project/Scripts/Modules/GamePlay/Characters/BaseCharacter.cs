@@ -9,6 +9,7 @@ public abstract class BaseCharacter : MonoBehaviour
 	public int maxHP;
 	public int currentHP;
 	public Sprite characterSprite;
+	public Sprite activeSkillIcon;
 	private void Start()
 	{
 		currentHP = maxHP;
@@ -21,5 +22,14 @@ public abstract class BaseCharacter : MonoBehaviour
 		health = maxHP;
 		characterSprite = sprite;
 	}
-	public abstract void Trigger(TileBase conditionTile, int amount);
+	public abstract void Trigger(List<Vector3Int> triggerPosition, int amount);
+
+	public abstract void Active();
+	public enum status
+	{
+		None = 0,
+		BloodLost = 1,
+		Charm = 2
+	}
+	
 }

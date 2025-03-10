@@ -23,6 +23,8 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
     
     [SerializeField] private Tilemap _tilemap;
     [SerializeField] private Tilemap _licoriceTileMap;
+    [SerializeField] private Tilemap _effectTileMap;
+
     public Tilemap Tilemap
     {
         get => _tilemap;
@@ -41,14 +43,16 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         set => _licoriceTileMap = value;
     }
 
-    public BoundsInt _bounds;
+	public Tilemap EffectTileMap { get => _effectTileMap; set => _effectTileMap = value; }
+
+	public BoundsInt _bounds;
     public BoundsInt BoardBounds
     {
         get => _bounds;
         set => _bounds = value;
     }
 
-    private void Awake()
+	private void Awake()
     {
         _bounds.xMin = -_columns / 2;
         _bounds.xMax = _columns / 2;
