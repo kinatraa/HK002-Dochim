@@ -13,12 +13,10 @@ public class SkillButtonClick : MonoBehaviour, IPointerClickHandler
 	{
 		_gameTurnController = gameTurnController;
 		_character = GamePlayManager.Instance.PlayerCharacter;
-		Debug.Log(_character.gameObject.name);
 		_spriteRenderer = GetComponent<SpriteRenderer>();
 		if (_character is IActiveSkill)
 		{
 			_spriteRenderer.sprite = _character.activeSkillIcon;
-			Debug.Log("Actvie");
 		}
 		else
 		{

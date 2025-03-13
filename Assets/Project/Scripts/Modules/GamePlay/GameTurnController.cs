@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,11 +10,16 @@ public class GameTurnController : MonoBehaviour
     public int maxActionPerTurn = 3;
     private int remainingActions;
     private int _turn = 0;
+    private BaseCharacter playerCharacter;
+    private BaseCharacter opponentCharacter;
 
     void Start()
     {
+        playerCharacter = GamePlayManager.Instance.PlayerCharacter;
+        opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
         _turn = -1;
         remainingActions = maxActionPerTurn;
+
 		ChangeTurn();
 	}
 
@@ -36,8 +41,11 @@ public class GameTurnController : MonoBehaviour
     {
         remainingActions--;
         Debug.Log("Actions left: " + remainingActions);
-        if(remainingActions == 0)
+        if (remainingActions == 0)
+        {
+            EndOfRound();
             ChangeTurn();
+        }
         else
         {
             PlayTurn();
@@ -57,9 +65,21 @@ public class GameTurnController : MonoBehaviour
         
         _turn = 1 - _turn;
         remainingActions = maxActionPerTurn;
+		if (_turn == 0 && opponentCharacter != null)
+		{
+			opponentCharacter.ApplyBloodLoss(playerCharacter);
+		}
+		else if (_turn == 1 && playerCharacter != null)
+		{
+			playerCharacter.ApplyBloodLoss(opponentCharacter);
+		}
+
 		PlayTurn();
     }
 
+    private void EndOfRound()
+    {
+    }
     public int GetTurn()
     {
         return _turn;

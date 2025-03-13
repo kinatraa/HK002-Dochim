@@ -228,8 +228,8 @@ public class DiamondManager : MonoBehaviour
                     playercharacter.Trigger(clearTiles,clearTiles.Count);
                     
 				  }
-
 			}
+            Dictionary<TileBase,int> destroyedTiles = new Dictionary<TileBase, int>();
             int bonus = 0, count = 0;
             foreach (Vector3Int tilePos in clearTiles)
             {
@@ -239,6 +239,18 @@ public class DiamondManager : MonoBehaviour
                 }
                 else
                 {
+                    TileBase tile = _tilemap.GetTile(tilePos);
+                    if(tile != null)
+                    {
+						if (destroyedTiles.ContainsKey(tile))
+						{
+							destroyedTiles[tile]++;
+						}
+						else
+						{
+							destroyedTiles[tile] = 1;
+						}
+					}
 					if (CheckTerrainEffect(tilePos))
 					{
 						bonus += 1;
@@ -246,9 +258,23 @@ public class DiamondManager : MonoBehaviour
 					_tilemap.SetTile(tilePos, null);
                     ++count;
 				}
-                    
-
             }
+			if (_gameTurnController.GetTurn() == 0)
+			{
+				var playerCharacter = GamePlayManager.Instance.PlayerCharacter;
+				if (playerCharacter != null)
+				{
+					playerCharacter.AddTilesDestroyed(destroyedTiles);
+				}
+			}
+			else
+			{
+				var opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
+				if (opponentCharacter != null)
+				{
+					opponentCharacter.AddTilesDestroyed(destroyedTiles);
+				}
+			}
 
 			UpdatePlayersScore(count, (int)Mathf.Ceil(bonus / 2.0f));
 
