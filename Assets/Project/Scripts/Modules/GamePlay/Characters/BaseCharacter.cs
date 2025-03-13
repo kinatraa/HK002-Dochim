@@ -14,7 +14,7 @@ public abstract class BaseCharacter : MonoBehaviour
 
 	protected List<StatusData> activeStatus = new List<StatusData>();
 	private Dictionary<StatusType,int> tileDestroyedPreEffect = new Dictionary<StatusType,int>();
-	private void Start()
+	private void Awake()
 	{
 		currentHP = maxHP;
 	}
@@ -63,6 +63,11 @@ public abstract class BaseCharacter : MonoBehaviour
 				source.currentHP = Mathf.Min(source.currentHP, maxHP);
 				Debug.Log($"{source.characterName} recovers {damage} HP from Bloodloss!");
 				Debug.Log($"{source.currentHP}");
+			}
+			while (damage > 0)
+			{
+				RemoveEffectStack(bloodLoss.Type);
+				--damage;
 			}
 		}
 	}
