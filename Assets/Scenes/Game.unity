@@ -773,6 +773,7 @@ GameObject:
   - component: {fileID: 649725117}
   - component: {fileID: 649725116}
   - component: {fileID: 649725118}
+  - component: {fileID: 649725119}
   m_Layer: 0
   m_Name: SkillButton
   m_TagString: Untagged
@@ -860,6 +861,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _character: {fileID: 0}
+--- !u!61 &649725119
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649725115}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.060585976, y: 0.09953439}
+  m_SpriteTilingProperty:
+    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.1813087, y: 1.2245841}
+  m_EdgeRadius: 0
 --- !u!1 &692877822
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,6 +1418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1150383060}
   - component: {fileID: 1150383061}
+  - component: {fileID: 1150383062}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -1408,6 +1455,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIGameHUD: {fileID: 1692931247}
+--- !u!114 &1150383062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150383059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b531911555b2d4a8226573832a472f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonClick: {fileID: 0}
 --- !u!1 &1377086446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,7 +1550,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1494166210
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1507,7 +1567,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 752, y: 156}
+  m_AnchoredPosition: {x: 607, y: -77}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1494166211
@@ -1624,7 +1684,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1503023035
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1641,7 +1701,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -761, y: 156}
+  m_AnchoredPosition: {x: -608, y: -77}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1503023036
@@ -2049,6 +2109,7 @@ MonoBehaviour:
   licoriceTile: {fileID: 11400000, guid: f9e8cc91bca33c8419292d75ecc4ed03, type: 2}
   licoriceTileMap: {fileID: 786912190}
   _tilemap: {fileID: 1811579189}
+  _terrainTile: {fileID: 692877825}
   _initObjectPool: {fileID: 506030108}
 --- !u!1 &1869064626
 GameObject:
@@ -2156,6 +2217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameTurnController: {fileID: 1618832790}
+  _playerCharacter: {fileID: 0}
+  _opponentCharacter: {fileID: 0}
   _rows: 8
   _columns: 8
   _tilemap: {fileID: 1811579189}
@@ -2213,12 +2276,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tilemap: {fileID: 0}
+  _character: {fileID: 0}
   IsPlayerTurn: 0
   _scoreText: {fileID: 0}
   _score: 0
   characterPool:
-  - {fileID: 773205572}
   - {fileID: 696961908}
+  - {fileID: 773205572}
 --- !u!212 &1976182027
 SpriteRenderer:
   m_ObjectHideFlags: 0

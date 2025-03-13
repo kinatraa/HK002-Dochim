@@ -13,8 +13,7 @@ public class PlayerController : MonoBehaviour
     private DiamondClick _diamondClick;
     
     private Camera _camera;
-    private BaseCharacter _character;
-    public BaseCharacter Character {  get { return _character; } }
+    [SerializeField] private BaseCharacter _character;
 
     public bool IsPlayerTurn = false;
 
@@ -28,6 +27,8 @@ public class PlayerController : MonoBehaviour
         _diamondClick = GetComponent<DiamondClick>();
 
         _character = characterPool.First().GetComponent<BaseCharacter>();
+        GamePlayManager.Instance.PlayerCharacter = _character;
+
 		SkillButtonClick skillButton = FindObjectOfType<SkillButtonClick>();
 		if (skillButton != null)
 		{

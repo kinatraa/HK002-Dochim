@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class AuthenticItalian : BaseCharacter, ActiveSkill
+public class AuthenticItalian : BaseCharacter, IActiveSkill
 {
 	[SerializeField] private TileBase conditionTile;
 	[SerializeField] private TileBase fireTile;
@@ -43,14 +43,17 @@ public class AuthenticItalian : BaseCharacter, ActiveSkill
 		if (!isReady)
 			return;
 		Vector3Int randomPos = new Vector3Int(Random.Range(bounds.xMin + 2, bounds.xMax - 2), Random.Range(bounds.yMin + 2, bounds.yMax - 2), 0);
-		for (int x = -1; x <= 1; x++)
+		/*for (int x = -1; x <= 1; x++)
 		{
 			for (int y = -1; y <= 1; y++)
 			{
 				Vector3Int tilePos = new Vector3Int(randomPos.x + x, randomPos.y + y, 0);
 				effectTileMap.SetTile(tilePos, fireTile);
 			}
-		}
+		}*/
+
+		Vector3Int tilePos = new Vector3Int(randomPos.x, randomPos.y, 0);
+		effectTileMap.SetTile(tilePos, fireTile);
 		isReady = false;
 
 	}

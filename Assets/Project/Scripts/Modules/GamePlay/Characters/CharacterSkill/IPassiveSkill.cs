@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ActiveSkill
+public interface IPassiveSkill
 {
-    public void ActiveSkills();
+	public void PassiveSkills();
 }

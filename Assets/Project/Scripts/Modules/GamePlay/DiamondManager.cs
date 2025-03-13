@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using HaKien;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
@@ -12,6 +13,7 @@ public class DiamondManager : MonoBehaviour
     [SerializeField] private TileBase licoriceTile;
     [SerializeField] private Tilemap licoriceTileMap;
     [SerializeField] private Tilemap _tilemap;
+    [SerializeField] private Tilemap _terrainTile;
     [SerializeField] private InitObjectPool _initObjectPool;
 
     private GameTurnController _gameTurnController;
@@ -24,8 +26,20 @@ public class DiamondManager : MonoBehaviour
 
     private int _dropping = 0;
     private bool _swapping = false;
-    
-    void Awake()
+
+    private Vector3Int[] dir =
+		{
+			new Vector3Int(-1, 0, 0),
+			new Vector3Int(1, 0, 0),
+			new Vector3Int(0, -1, 0),
+			new Vector3Int(0, 1, 0),
+			new Vector3Int(-1, -1, 0),
+			new Vector3Int(1, -1, 0),
+			new Vector3Int(1, 1, 0),
+			new Vector3Int(-1, 1, 0),
+		};
+
+	void Awake()
     {
         _tilemap = GamePlayManager.Instance.Tilemap;
 
@@ -107,6 +121,7 @@ public class DiamondManager : MonoBehaviour
         yield return null;
     }
 
+
     private List<Vector3Int> CheckAdjacentTiles(Vector3Int curPos)
     {
         List<Vector3Int> adjTiles = new List<Vector3Int>();
@@ -173,6 +188,12 @@ public class DiamondManager : MonoBehaviour
         return adjTiles;
     }
 
+    //private List<Vector3Int> CheckAdjacentTiles(Vector3Int curPos)
+    //{
+    //    List<>
+    //}
+
+
     public IEnumerator ClearDiamond(float waitTime)
     {
         _dropping = 0;
@@ -203,12 +224,13 @@ public class DiamondManager : MonoBehaviour
             {
                   if(GamePlayManager.Instance.GameTurnController.GetTurn() == 0)
 				  {
-                    var playercharacter = _gameTurnController.GetPlayerCharacter();
+                    var playercharacter = GamePlayManager.Instance.PlayerCharacter;
                     playercharacter.Trigger(clearTiles,clearTiles.Count);
                     
 				  }
 
 			}
+            int bonus = 0, count = 0;
             foreach (Vector3Int tilePos in clearTiles)
             {
                 if (IsLocked(tilePos))
@@ -216,10 +238,19 @@ public class DiamondManager : MonoBehaviour
                     licoriceTileMap.SetTile(tilePos, null);
                 }
                 else
-                    _tilemap.SetTile(tilePos, null);
+                {
+					if (CheckTerrainEffect(tilePos))
+					{
+						bonus += 1;
+					}
+					_tilemap.SetTile(tilePos, null);
+                    ++count;
+				}
+                    
+
             }
-            
-            UpdatePlayersScore(clearTiles.Count);
+
+			UpdatePlayersScore(count, (int)Mathf.Ceil(bonus / 2.0f));
 
             yield return StartCoroutine(DropTile());
             
@@ -236,6 +267,22 @@ public class DiamondManager : MonoBehaviour
         //_gameTurnController.ChangeTurn();
         
         yield return null;
+    }
+
+    private bool CheckTerrainEffect(Vector3Int pos)
+    {
+        if(_terrainTile.GetTile(pos) != null)
+        {
+            return true;
+        }
+        for (int i = 0; i < dir.Length; i++)
+        {
+			if (_terrainTile.GetTile(pos + dir[i]) != null)
+			{
+				return true;
+			}
+		}
+        return false;
     }
 
     private IEnumerator DropTile()
@@ -348,16 +395,24 @@ public class DiamondManager : MonoBehaviour
         yield return null;
     }
 
-    private void UpdatePlayersScore(int score)
+    private void UpdatePlayersScore(int count, int bonus)
     {
+		if (GamePlayManager.Instance.PlayerCharacter is AuthenticItalian)
+        {
+			DataManager.Instance.PlayerScore += bonus;
+		}
+        else if(GamePlayManager.Instance.OpponentCharacter is AuthenticItalian)
+        {
+			DataManager.Instance.OpponentScore += bonus;
+		}
         switch (_gameTurnController.GetTurn())
         {
             case 0:
-                DataManager.Instance.PlayerScore += score;
+                DataManager.Instance.PlayerScore += count;
                 MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
                 break;
             case 1:
-                DataManager.Instance.OpponentScore += score;
+                DataManager.Instance.OpponentScore += count;
                 MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
                 break;
         }

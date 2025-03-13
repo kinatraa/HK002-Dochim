@@ -17,8 +17,21 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         get => _gameTurnController;
         set => _gameTurnController = value;
     }
-    
-    [SerializeField] public int _rows = 8;
+
+    [SerializeField] private BaseCharacter _playerCharacter;
+    public BaseCharacter PlayerCharacter
+    {
+        get => _playerCharacter;
+        set => _playerCharacter = value;
+    }
+	[SerializeField] private BaseCharacter _opponentCharacter;
+	public BaseCharacter OpponentCharacter
+	{
+		get => _opponentCharacter;
+		set => _opponentCharacter = value;
+	}
+
+	[SerializeField] public int _rows = 8;
     [SerializeField] public int _columns = 8;
     
     [SerializeField] private Tilemap _tilemap;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class ButcherLoren : BaseCharacter, PassiveSkill
+public class ButcherLoren : BaseCharacter, IPassiveSkill
 {
 	private int tileCount = 0;
 	private int overflow = 0;

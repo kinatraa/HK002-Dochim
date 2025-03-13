@@ -20,7 +20,6 @@ public class GameTurnController : MonoBehaviour
 
     public void PlayTurn()
     {
-        remainingActions = maxActionPerTurn;
         if (_turn == 0)
         {
             Debug.Log("Player turn");
@@ -33,17 +32,16 @@ public class GameTurnController : MonoBehaviour
             _player2.PlayTurn();
         }
     }
-
-    public BaseCharacter GetPlayerCharacter()
-    {
-        return _player1.Character;
-    }
     public void UseAction()
     {
         remainingActions--;
         Debug.Log("Actions left: " + remainingActions);
         if(remainingActions == 0)
             ChangeTurn();
+        else
+        {
+            PlayTurn();
+        }
     }
 	public void AddExtraAction(int extra)
 	{
