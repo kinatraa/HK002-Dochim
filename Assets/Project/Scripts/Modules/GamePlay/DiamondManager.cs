@@ -27,7 +27,11 @@ public class DiamondManager : MonoBehaviour
     private int _dropping = 0;
     private bool _swapping = false;
 
-    private Vector3Int[] dir =
+    private List<Vector3Int> clearTiles = new List<Vector3Int>();
+    private List<Vector3Int> lockTiles = new List<Vector3Int>();
+
+
+	private Vector3Int[] dir =
 		{
 			new Vector3Int(-1, 0, 0),
 			new Vector3Int(1, 0, 0),
@@ -150,7 +154,14 @@ public class DiamondManager : MonoBehaviour
             --pos.x;
             for (int i = 0; i < cnt; i++)
             {
-                adjTiles.Add(pos);
+				if (!IsLocked(pos))
+				{
+					adjTiles.Add(pos);
+				}
+                else
+                {
+					lockTiles.Add(pos);
+				}
                 --pos.x;
             }
         }
@@ -179,8 +190,15 @@ public class DiamondManager : MonoBehaviour
             --pos.y;
             for (int i = 0; i < cnt; i++)
             {
-                adjTiles.Add(pos);
-                --pos.y;
+				if (!IsLocked(pos))
+				{
+					adjTiles.Add(pos);
+				}
+                else
+                {
+					lockTiles.Add(pos);
+				}
+				--pos.y;
             }
         }
 
@@ -200,14 +218,15 @@ public class DiamondManager : MonoBehaviour
         
         while (true)
         {
-            List<Vector3Int> clearTiles = new List<Vector3Int>();
+            clearTiles.Clear();
+            lockTiles.Clear();
             
             for (int x = _bounds.xMin; x < _bounds.xMax; x++)
             {
                 for (int y = _bounds.yMin; y < _bounds.yMax; y++)
                 {
                     Vector3Int curPos = new Vector3Int(x, y, 0);
-
+                        
                     if (_tilemap.GetTile(curPos) == null) continue;
 
                     //khong toi uu (nhu c)
@@ -216,39 +235,67 @@ public class DiamondManager : MonoBehaviour
             }
 
             clearTiles = new HashSet<Vector3Int>(clearTiles).ToList();
+            lockTiles = new HashSet<Vector3Int>(lockTiles).ToList();
+            for(int i = 0; i < lockTiles.Count; i++)
+            {
+                licoriceTileMap.SetTile(lockTiles[i], null);
+            }
             if (clearTiles.Count == 0)
             {
                 break;
             }
-            if (clearTiles.Count > 0) 
-            {
-                  if(GamePlayManager.Instance.GameTurnController.GetTurn() == 0)
-				  {
-                    var playercharacter = GamePlayManager.Instance.PlayerCharacter;
-                    playercharacter.Trigger(clearTiles,clearTiles.Count);
-                    
-				  }
+
+			if (GamePlayManager.Instance.GameTurnController.GetTurn() == 0)
+			{
+				var playercharacter = GamePlayManager.Instance.PlayerCharacter;
+				playercharacter.Trigger(clearTiles, clearTiles.Count);
 
 			}
+			else if (GamePlayManager.Instance.GameTurnController.GetTurn() == 1)
+			{
+
+			}
+
+			Dictionary<TileBase,int> destroyedTiles = new Dictionary<TileBase, int>();
             int bonus = 0, count = 0;
             foreach (Vector3Int tilePos in clearTiles)
             {
-                if (IsLocked(tilePos))
-                {
-                    licoriceTileMap.SetTile(tilePos, null);
-                }
-                else
-                {
-					if (CheckTerrainEffect(tilePos))
+				TileBase tile = _tilemap.GetTile(tilePos);
+				if (tile != null)
+				{
+					if (destroyedTiles.ContainsKey(tile))
 					{
-						bonus += 1;
+						destroyedTiles[tile]++;
 					}
-					_tilemap.SetTile(tilePos, null);
-                    ++count;
+					else
+					{
+						destroyedTiles[tile] = 1;
+					}
 				}
-                    
+				if (CheckTerrainEffect(tilePos))
+				{
+					bonus += 1;
+				}
+				_tilemap.SetTile(tilePos, null);
+				++count;
+			}
 
-            }
+            if (_gameTurnController.GetTurn() == 0)
+			{
+				var playerCharacter = GamePlayManager.Instance.PlayerCharacter;
+				if (playerCharacter != null)
+				{
+					playerCharacter.AddTilesDestroyed(destroyedTiles);
+				}
+			}
+			else
+			{
+				var opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
+				if (opponentCharacter != null)
+				{
+					opponentCharacter.AddTilesDestroyed(destroyedTiles);
+				}
+			}
 
 			UpdatePlayersScore(count, (int)Mathf.Ceil(bonus / 2.0f));
 

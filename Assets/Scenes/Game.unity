@@ -1343,6 +1343,59 @@ MonoBehaviour:
     score: 0
   OpponentData:
     score: 0
+--- !u!1 &869116742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 869116743}
+  - component: {fileID: 869116744}
+  m_Layer: 0
+  m_Name: ImpalerHilda
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &869116743
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869116742}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1108005141}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &869116744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869116742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bbf82649b51cbb46b13c6320c4a0a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Hilda
+  maxHP: 10
+  currentHP: 0
+  characterSprite: {fileID: 0}
+  activeSkillIcon: {fileID: 21300000, guid: 6de94df4c1b023842b6d42cf1237619e, type: 3}
+  conditionTile:
+  - {fileID: 11400000, guid: 173ea209e0bfffb4cafd0214a1dc81d7, type: 2}
+  - {fileID: 11400000, guid: 0f27ea289cff14d4a92d0769361ab68c, type: 2}
+  isReady: 0
 --- !u!1 &1108005140
 GameObject:
   m_ObjectHideFlags: 0

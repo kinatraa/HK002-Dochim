@@ -19,7 +19,6 @@ public class AIController : MonoBehaviour
     void Awake()
     {
         _diamondClick = GetComponent<DiamondClick>();
-        
         _bounds = GamePlayManager.Instance.BoardBounds;
     }
 
