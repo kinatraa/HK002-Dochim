@@ -1427,6 +1427,7 @@ Transform:
   m_Children:
   - {fileID: 696961909}
   - {fileID: 773205573}
+  - {fileID: 869116743}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1149339001
@@ -2334,6 +2335,7 @@ MonoBehaviour:
   _scoreText: {fileID: 0}
   _score: 0
   characterPool:
+  - {fileID: 869116742}
   - {fileID: 696961908}
   - {fileID: 773205572}
 --- !u!212 &1976182027
@@ -2435,6 +2437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aiObject: {fileID: 1869064626}
+  character: {fileID: 773205574}
   _scoreText: {fileID: 0}
   _score: 0
 --- !u!212 &2084482604

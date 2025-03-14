@@ -29,14 +29,14 @@ public class PlayerController : MonoBehaviour
         _character = characterPool.First().GetComponent<BaseCharacter>();
         GamePlayManager.Instance.PlayerCharacter = _character;
 
-		SkillButtonClick skillButton = FindObjectOfType<SkillButtonClick>();
+        SkillButtonClick skillButton = FindObjectOfType<SkillButtonClick>();
 		if (skillButton != null)
 		{
 			skillButton.Init(GamePlayManager.Instance.GameTurnController);
 		}
 	}
 
-    void Update()
+	void Update()
     {
         if (_diamondClick.CanClick() && IsPlayerTurn)
         {

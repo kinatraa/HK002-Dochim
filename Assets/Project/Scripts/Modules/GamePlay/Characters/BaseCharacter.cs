@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -159,11 +160,4 @@ public abstract class BaseCharacter : MonoBehaviour
 	public abstract void Trigger(List<Vector3Int> triggerPosition, int amount);
 
 	public abstract void Active();
-	public enum status
-	{
-		None = 0,
-		BloodLost = 1,
-		Charm = 2
-	}
-	
 }
