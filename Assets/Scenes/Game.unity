@@ -403,6 +403,131 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddcd3bef905882441ac89fcad463df82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &425291283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 425291285}
+  - component: {fileID: 425291284}
+  m_Layer: 0
+  m_Name: TilesData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &425291284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425291283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46275587977abef4d84d43c09fbaa247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tempDataList:
+  - Tile: {fileID: 11400000, guid: 173ea209e0bfffb4cafd0214a1dc81d7, type: 2}
+    Properties:
+      Color: 0
+      Type: 0
+  - Tile: {fileID: 11400000, guid: 28f6b45d638dff04ca57c91c461a8f9a, type: 2}
+    Properties:
+      Color: 1
+      Type: 0
+  - Tile: {fileID: 11400000, guid: 137ec4df6177c7e4a9a12181469b1836, type: 2}
+    Properties:
+      Color: 2
+      Type: 0
+  - Tile: {fileID: 11400000, guid: baa58ff96767fe44c9eac5101dc2e7b1, type: 2}
+    Properties:
+      Color: 3
+      Type: 0
+  - Tile: {fileID: 11400000, guid: 0f27ea289cff14d4a92d0769361ab68c, type: 2}
+    Properties:
+      Color: 4
+      Type: 0
+  - Tile: {fileID: 11400000, guid: 0563b4bad4e1c974e93863bdd47cd5e4, type: 2}
+    Properties:
+      Color: 0
+      Type: 1
+  - Tile: {fileID: 11400000, guid: 7d41eab0ce50657409f1731ec1be646b, type: 2}
+    Properties:
+      Color: 1
+      Type: 1
+  - Tile: {fileID: 11400000, guid: 74609d024f20923469883fb5160510df, type: 2}
+    Properties:
+      Color: 2
+      Type: 1
+  - Tile: {fileID: 11400000, guid: 6fe967233b9d0f243bd275840bcac98a, type: 2}
+    Properties:
+      Color: 3
+      Type: 1
+  - Tile: {fileID: 11400000, guid: 8d1efb28ded231c48bab0510bc6c7299, type: 2}
+    Properties:
+      Color: 4
+      Type: 1
+  - Tile: {fileID: 11400000, guid: 99c13f7490808c541bd51cd26eed1647, type: 2}
+    Properties:
+      Color: 0
+      Type: 2
+  - Tile: {fileID: 11400000, guid: 5310b5ce3e3c1a949bf6093fb01d7dae, type: 2}
+    Properties:
+      Color: 1
+      Type: 2
+  - Tile: {fileID: 11400000, guid: 08a6d3aa330e5fc419dc0ae6c06a98e2, type: 2}
+    Properties:
+      Color: 2
+      Type: 2
+  - Tile: {fileID: 11400000, guid: ca9c9734355e2384d869e375f106777a, type: 2}
+    Properties:
+      Color: 3
+      Type: 2
+  - Tile: {fileID: 11400000, guid: 66a0f9f8fbc8b9042aba355aff5cc2a5, type: 2}
+    Properties:
+      Color: 4
+      Type: 2
+  - Tile: {fileID: 11400000, guid: 9b9fdbcf984b6c144b0c6c6400482225, type: 2}
+    Properties:
+      Color: 0
+      Type: 3
+  - Tile: {fileID: 11400000, guid: fc16a05271a39224b99ffab237e7b1ca, type: 2}
+    Properties:
+      Color: 1
+      Type: 3
+  - Tile: {fileID: 11400000, guid: 52d8e447e5463c24bb0e5a3cadc1e64f, type: 2}
+    Properties:
+      Color: 2
+      Type: 3
+  - Tile: {fileID: 11400000, guid: 3931abd4a2e5736459bc6884ee7137ec, type: 2}
+    Properties:
+      Color: 3
+      Type: 3
+  - Tile: {fileID: 11400000, guid: 780702d77c9c12249977884a0b4c7ce7, type: 2}
+    Properties:
+      Color: 4
+      Type: 3
+--- !u!4 &425291285
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425291283}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1626240386}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &506030107
 GameObject:
   m_ObjectHideFlags: 0
@@ -1931,6 +2056,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 425291285}
   - {fileID: 1870957915}
   - {fileID: 1618832791}
   - {fileID: 506030109}
@@ -2154,12 +2280,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aeccac282374344e9868aaf651f076c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _diamondTiles:
-  - {fileID: 11400000, guid: 137ec4df6177c7e4a9a12181469b1836, type: 2}
-  - {fileID: 11400000, guid: 28f6b45d638dff04ca57c91c461a8f9a, type: 2}
-  - {fileID: 11400000, guid: 0f27ea289cff14d4a92d0769361ab68c, type: 2}
+  _normalTiles:
   - {fileID: 11400000, guid: 173ea209e0bfffb4cafd0214a1dc81d7, type: 2}
+  - {fileID: 11400000, guid: 28f6b45d638dff04ca57c91c461a8f9a, type: 2}
+  - {fileID: 11400000, guid: 137ec4df6177c7e4a9a12181469b1836, type: 2}
   - {fileID: 11400000, guid: baa58ff96767fe44c9eac5101dc2e7b1, type: 2}
+  - {fileID: 11400000, guid: 0f27ea289cff14d4a92d0769361ab68c, type: 2}
+  _columnTiles:
+  - {fileID: 11400000, guid: 0563b4bad4e1c974e93863bdd47cd5e4, type: 2}
+  - {fileID: 11400000, guid: 7d41eab0ce50657409f1731ec1be646b, type: 2}
+  - {fileID: 11400000, guid: 74609d024f20923469883fb5160510df, type: 2}
+  - {fileID: 11400000, guid: 6fe967233b9d0f243bd275840bcac98a, type: 2}
+  - {fileID: 11400000, guid: 8d1efb28ded231c48bab0510bc6c7299, type: 2}
+  _rowTiles:
+  - {fileID: 11400000, guid: 99c13f7490808c541bd51cd26eed1647, type: 2}
+  - {fileID: 11400000, guid: 5310b5ce3e3c1a949bf6093fb01d7dae, type: 2}
+  - {fileID: 11400000, guid: 08a6d3aa330e5fc419dc0ae6c06a98e2, type: 2}
+  - {fileID: 11400000, guid: ca9c9734355e2384d869e375f106777a, type: 2}
+  - {fileID: 11400000, guid: 66a0f9f8fbc8b9042aba355aff5cc2a5, type: 2}
+  _areaTiles:
+  - {fileID: 11400000, guid: 9b9fdbcf984b6c144b0c6c6400482225, type: 2}
+  - {fileID: 11400000, guid: fc16a05271a39224b99ffab237e7b1ca, type: 2}
+  - {fileID: 11400000, guid: 52d8e447e5463c24bb0e5a3cadc1e64f, type: 2}
+  - {fileID: 11400000, guid: 3931abd4a2e5736459bc6884ee7137ec, type: 2}
+  - {fileID: 11400000, guid: 780702d77c9c12249977884a0b4c7ce7, type: 2}
   licoriceTile: {fileID: 11400000, guid: f9e8cc91bca33c8419292d75ecc4ed03, type: 2}
   licoriceTileMap: {fileID: 786912190}
   _tilemap: {fileID: 1811579189}
@@ -2273,6 +2417,7 @@ MonoBehaviour:
   _gameTurnController: {fileID: 1618832790}
   _playerCharacter: {fileID: 0}
   _opponentCharacter: {fileID: 0}
+  _tileData: {fileID: 425291284}
   _rows: 8
   _columns: 8
   _tilemap: {fileID: 1811579189}

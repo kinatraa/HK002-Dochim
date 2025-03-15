@@ -5,11 +5,16 @@ using HaKien;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class DiamondManager : MonoBehaviour
 {
-    [SerializeField] private TileBase[] _diamondTiles;
+    [SerializeField] private TileBase[] _normalTiles;
+    [SerializeField] private TileBase[] _columnTiles;
+    [SerializeField] private TileBase[] _rowTiles;
+    [SerializeField] private TileBase[] _areaTiles;
+    
     [SerializeField] private TileBase licoriceTile;
     [SerializeField] private Tilemap licoriceTileMap;
     [SerializeField] private Tilemap _tilemap;
@@ -30,6 +35,7 @@ public class DiamondManager : MonoBehaviour
     private List<Vector3Int> clearTiles = new List<Vector3Int>();
     private List<Vector3Int> lockTiles = new List<Vector3Int>();
 
+    private Dictionary<TileBase, TileProperties> _tilesData;
 
 	private Vector3Int[] dir =
 		{
@@ -51,6 +57,7 @@ public class DiamondManager : MonoBehaviour
         _columns = GamePlayManager.Instance._columns;
         
         _gameTurnController = GamePlayManager.Instance.GameTurnController;
+        _tilesData = GamePlayManager.Instance.TilesData;
 	}
     
     void Start()
@@ -72,7 +79,7 @@ public class DiamondManager : MonoBehaviour
 				TileBase tile;
 				do
 				{
-					tile = _diamondTiles[Random.Range(0, _diamondTiles.Length)];
+					tile = _normalTiles[Random.Range(0, _normalTiles.Length)];
 				}
 				while (CheckMatch(i, j, tile));
 				_tilemap.SetTile(new Vector3Int(i, j, 0), tile);
@@ -89,7 +96,7 @@ public class DiamondManager : MonoBehaviour
         {
             for (int j = _bounds.yMax; j < _bounds.yMax + _rows; j++)
             {
-                _tilemap.SetTile(new Vector3Int(i, j, 0), _diamondTiles[Random.Range(0, _diamondTiles.Length)]);
+                _tilemap.SetTile(new Vector3Int(i, j, 0), _normalTiles[Random.Range(0, _normalTiles.Length)]);
             }
         }
 
@@ -117,7 +124,7 @@ public class DiamondManager : MonoBehaviour
                 Vector3Int position = new Vector3Int(i, j, 0);
                 if (_tilemap.GetTile(position) == null)
                 {
-                    _tilemap.SetTile(position, _diamondTiles[Random.Range(0, _diamondTiles.Length)]);
+                    _tilemap.SetTile(position, _normalTiles[Random.Range(0, _normalTiles.Length)]);
                 }
             }
         }
@@ -135,7 +142,7 @@ public class DiamondManager : MonoBehaviour
         --pos.x;
         while (pos.x >= _bounds.xMin)
         {
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
+            if (SameTileColor(pos, curPos)) ++cnt;
             else break;
             --pos.x;
         }
@@ -144,7 +151,7 @@ public class DiamondManager : MonoBehaviour
         ++pos.x;
         while (pos.x < _bounds.xMax)
         {
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
+            if (SameTileColor(pos, curPos)) ++cnt;
             else break;
             ++pos.x;
         }
@@ -171,7 +178,7 @@ public class DiamondManager : MonoBehaviour
         --pos.y;
         while (pos.y >= _bounds.yMin)
         {
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
+            if (SameTileColor(pos, curPos)) ++cnt;
             else break;
             --pos.y;
         }
@@ -180,7 +187,7 @@ public class DiamondManager : MonoBehaviour
         ++pos.y;
         while (pos.y < _bounds.yMax)
         {
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
+            if (SameTileColor(pos, curPos)) ++cnt;
             else break;
             ++pos.y;
         }
@@ -477,5 +484,10 @@ public class DiamondManager : MonoBehaviour
     public bool IsDropping()
     {
         return _dropping != 0;
+    }
+
+    private bool SameTileColor(Vector3Int a, Vector3Int b)
+    {
+	    return _tilesData[_tilemap.GetTile(a)].Color == _tilesData[_tilemap.GetTile(b)].Color;
     }
 }
