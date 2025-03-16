@@ -30,6 +30,14 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
 		get => _opponentCharacter;
 		set => _opponentCharacter = value;
 	}
+    
+    [SerializeField] private TilesData _tileData;
+
+    public Dictionary<TileBase, TileProperties> TilesData
+    {
+        get => _tileData.TilesDictionary;
+        set => _tileData.TilesDictionary = value;
+    }
 
 	[SerializeField] public int _rows = 8;
     [SerializeField] public int _columns = 8;
