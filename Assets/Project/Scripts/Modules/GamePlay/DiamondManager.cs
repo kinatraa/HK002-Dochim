@@ -31,6 +31,7 @@ public class DiamondManager : MonoBehaviour
     private List<Vector3Int> lockTiles = new List<Vector3Int>();
 
 
+    private List<Vector3Int> _visited = new List<Vector3Int>();
 	private Vector3Int[] dir =
 		{
 			new Vector3Int(-1, 0, 0),
@@ -135,8 +136,8 @@ public class DiamondManager : MonoBehaviour
         --pos.x;
         while (pos.x >= _bounds.xMin)
         {
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
-            else break;
+	        if (SameTileColor(pos, curPos)) ++cnt;
+	        else break;
             --pos.x;
         }
 
@@ -144,8 +145,8 @@ public class DiamondManager : MonoBehaviour
         ++pos.x;
         while (pos.x < _bounds.xMax)
         {
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
-            else break;
+	        if (SameTileColor(pos, curPos)) ++cnt;
+	        else break;
             ++pos.x;
         }
 
@@ -154,6 +155,9 @@ public class DiamondManager : MonoBehaviour
             --pos.x;
             for (int i = 0; i < cnt; i++)
             {
+	            if(_visited.Contains(pos)) continue;
+	            _visited.Add(pos);
+	            
 				if (!IsLocked(pos))
 				{
 					adjTiles.Add(pos);
@@ -171,8 +175,8 @@ public class DiamondManager : MonoBehaviour
         --pos.y;
         while (pos.y >= _bounds.yMin)
         {
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
-            else break;
+	        if (SameTileColor(pos, curPos)) ++cnt;
+	        else break;
             --pos.y;
         }
 
@@ -180,8 +184,8 @@ public class DiamondManager : MonoBehaviour
         ++pos.y;
         while (pos.y < _bounds.yMax)
         {
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
-            else break;
+	        if (SameTileColor(pos, curPos)) ++cnt;
+	        else break;
             ++pos.y;
         }
 
@@ -190,6 +194,9 @@ public class DiamondManager : MonoBehaviour
             --pos.y;
             for (int i = 0; i < cnt; i++)
             {
+	            if(_visited.Contains(pos)) continue;
+	            _visited.Add(pos);
+	            
 				if (!IsLocked(pos))
 				{
 					adjTiles.Add(pos);
@@ -206,12 +213,6 @@ public class DiamondManager : MonoBehaviour
         return adjTiles;
     }
 
-    //private List<Vector3Int> CheckAdjacentTiles(Vector3Int curPos)
-    //{
-    //    List<>
-    //}
-
-
     public IEnumerator ClearDiamond(float waitTime)
     {
         _dropping = 0;
@@ -220,6 +221,7 @@ public class DiamondManager : MonoBehaviour
         {
             clearTiles.Clear();
             lockTiles.Clear();
+            _visited.Clear();
             
             for (int x = _bounds.xMin; x < _bounds.xMax; x++)
             {
@@ -227,14 +229,16 @@ public class DiamondManager : MonoBehaviour
                 {
                     Vector3Int curPos = new Vector3Int(x, y, 0);
                         
-                    if (_tilemap.GetTile(curPos) == null) continue;
-
-                    //khong toi uu (nhu c)
+                    if (_tilemap.GetTile(curPos) == null || _visited.Contains(curPos)) continue;
+			
+                    //cung toi uu hon mot ti thi phai
                     clearTiles.AddRange(CheckAdjacentTiles(curPos));
                 }
             }
 
+            Debug.Log($"before: {clearTiles.Count}");
             clearTiles = new HashSet<Vector3Int>(clearTiles).ToList();
+            Debug.Log($"after: {clearTiles.Count}");
             lockTiles = new HashSet<Vector3Int>(lockTiles).ToList();
             for(int i = 0; i < lockTiles.Count; i++)
             {
