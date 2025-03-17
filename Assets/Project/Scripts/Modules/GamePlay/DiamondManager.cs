@@ -138,87 +138,106 @@ public class DiamondManager : MonoBehaviour
         yield return null;
     }
 
+	private List<Vector3Int> GetAdjacentTiles(Vector3Int curPos)
+	{
+		List<Vector3Int> adjacentTiles = new List<Vector3Int>();
+		adjacentTiles.AddRange(CheckAdjacentTiles(curPos, 0));
+		adjacentTiles.AddRange(CheckAdjacentTiles(curPos, 1));
+		
+		return adjacentTiles;
+	}
 
-    private List<Vector3Int> CheckAdjacentTiles(Vector3Int curPos)
+	//axis: 0 la ngang, 1 la doc
+	//chac la DFS
+    private List<Vector3Int> CheckAdjacentTiles(Vector3Int curPos, int axis)
     {
 	    List<Vector3Int> adjacentTiles = new List<Vector3Int>();
 	    
-        int cnt = 1;
-        Vector3Int pos = curPos;
-        --pos.x;
-        while (pos.x >= _bounds.xMin)
-        {
-            if (GamePlayManager.Instance.SameTileColor(pos, curPos)) ++cnt;
-            else break;
-            --pos.x;
-        }
+        int cnt; Vector3Int pos;
 
-        pos = curPos;
-        ++pos.x;
-        while (pos.x < _bounds.xMax)
+        //check theo hang ngang
+        if (axis == 0)
         {
-            if (GamePlayManager.Instance.SameTileColor(pos, curPos)) ++cnt;
-            else break;
-            ++pos.x;
-        }
+	        cnt = 1; pos = curPos;
+	        --pos.x;
+	        while (pos.x >= _bounds.xMin)
+	        {
+		        if (SameTileColor(pos, curPos)) ++cnt;
+		        else break;
+		        --pos.x;
+	        }
 
-        if (cnt >= 3)
-        {
-            --pos.x;
-            for (int i = 0; i < cnt; i++)
-            {
-	            if(_visited.Contains(pos)) continue;
-	            _visited.Add(pos);
+	        pos = curPos;
+	        ++pos.x;
+	        while (pos.x < _bounds.xMax)
+	        {
+		        if (SameTileColor(pos, curPos)) ++cnt;
+		        else break;
+		        ++pos.x;
+	        }
+
+	        if (cnt >= 3)
+	        {
+		        --pos.x;
+		        for (int i = 0; i < cnt; i++)
+		        {
+			        if(_visited.Contains(pos)) continue;
+			        _visited.Add(pos);
 	            
-				if (!IsLocked(pos))
-				{
-					adjacentTiles.Add(pos);
-				}
-                else
-                {
-					lockTiles.Add(pos);
-				}
-                --pos.x;
-            }
+			        if (!IsLocked(pos))
+			        {
+				        adjacentTiles.Add(pos);
+				        adjacentTiles.AddRange(CheckAdjacentTiles(pos, 1 - axis));
+			        }
+			        else
+			        {
+				        lockTiles.Add(pos);
+			        }
+			        --pos.x;
+		        }
+	        }
         }
-
-        cnt = 1;
-        pos = curPos;
-        --pos.y;
-        while (pos.y >= _bounds.yMin)
+        //check theo hang doc
+        else
         {
-            if (GamePlayManager.Instance.SameTileColor(pos, curPos)) ++cnt;
-            else break;
-            --pos.y;
-        }
+	        cnt = 1; pos = curPos;
+	        --pos.y;
+	        while (pos.y >= _bounds.yMin)
+	        {
+		        if (SameTileColor(pos, curPos)) ++cnt;
+		        else break;
+		        --pos.y;
+	        }
 
-        pos = curPos;
-        ++pos.y;
-        while (pos.y < _bounds.yMax)
-        {
-            if (GamePlayManager.Instance.SameTileColor(pos, curPos)) ++cnt;
-            else break;
-            ++pos.y;
-        }
+	        pos = curPos;
+	        ++pos.y;
+	        while (pos.y < _bounds.yMax)
+	        {
+		        if (SameTileColor(pos, curPos)) ++cnt;
+		        else break;
+		        ++pos.y;
+	        }
 
-        if (cnt >= 3)
-        {
-            --pos.y;
-            for (int i = 0; i < cnt; i++)
-            {
-	            if(_visited.Contains(pos)) continue;
-	            _visited.Add(pos);
+	        if (cnt >= 3)
+	        {
+		        --pos.y;
+		        for (int i = 0; i < cnt; i++)
+		        {
+			        if(_visited.Contains(pos)) continue;
+			        _visited.Add(pos);
 	            
-				if (!IsLocked(pos))
-				{
-					adjacentTiles.Add(pos);
-				}
-                else
-                {
-					lockTiles.Add(pos);
-				}
-				--pos.y;
-            }
+			        if (!IsLocked(pos))
+			        {
+				        adjacentTiles.Add(pos);
+				        adjacentTiles.AddRange(CheckAdjacentTiles(pos, 1 - axis));
+			        }
+			        else
+			        {
+				        lockTiles.Add(pos);
+			        }
+			        --pos.y;
+		        }
+	        }
         }
         
         return adjacentTiles;
@@ -411,7 +430,8 @@ public class DiamondManager : MonoBehaviour
                     if (_tilemap.GetTile(curPos) == null || _visited.Contains(curPos)) continue;
 			
                     //cung toi uu hon mot ti thi phai
-                    List<Vector3Int> adjacentTiles = CheckAdjacentTiles(curPos);
+                    List<Vector3Int> adjacentTiles = GetAdjacentTiles(curPos);
+                    
                     clearTiles.AddRange(adjacentTiles);
 					CheckForSpawnSpecialTile(adjacentTiles);
                 }
@@ -460,6 +480,7 @@ public class DiamondManager : MonoBehaviour
 
 			UpdatePlayersScore(count, (int)Mathf.Ceil(bonus / 2.0f));
 
+			yield return new WaitForSeconds(1f); //wait for debug
             yield return StartCoroutine(DropTile());
             
             while (_dropping != 0)
@@ -638,5 +659,10 @@ public class DiamondManager : MonoBehaviour
     public bool IsDropping()
     {
         return _dropping != 0;
+    }
+    
+    private bool SameTileColor(Vector3Int a, Vector3Int b)
+    {
+	    return _tilesData[_tilemap.GetTile(a)].Color == _tilesData[_tilemap.GetTile(b)].Color;
     }
 }
