@@ -80,6 +80,21 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         _bounds.yMin = -_rows / 2;
         _bounds.yMax = _rows / 2;
     }
+    
+    public bool IsInBound(Vector3Int v)
+    {
+        return v.x >= _bounds.xMin && v.x < _bounds.xMax && v.y >= _bounds.yMin && v.y < _bounds.yMax;
+    }
+    
+    public bool SameTileColor(Vector3Int a, Vector3Int b)
+    {
+        return TilesData[_tilemap.GetTile(a)].Color == TilesData[_tilemap.GetTile(b)].Color;
+    }
+    
+    public bool SameTileType(Vector3Int a, Vector3Int b)
+    {
+        return TilesData[_tilemap.GetTile(a)].Type == TilesData[_tilemap.GetTile(b)].Type;
+    }
 
     private void OnDestroy()
     {

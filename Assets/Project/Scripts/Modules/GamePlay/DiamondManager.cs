@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using HaKien;
@@ -7,6 +8,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public class DiamondManager : MonoBehaviour
 {
@@ -31,9 +33,12 @@ public class DiamondManager : MonoBehaviour
 
     private int _dropping = 0;
     private bool _swapping = false;
+    
+    private Vector3Int _firstMousePos, _secondMousePos;
 
     private List<Vector3Int> clearTiles = new List<Vector3Int>();
     private List<Vector3Int> lockTiles = new List<Vector3Int>();
+    private List<(Vector3Int setPos, TileBase)> specialTiles = new List<(Vector3Int setPos, TileBase)>();
 
     private Dictionary<TileBase, TileProperties> _tilesData;
 
@@ -136,14 +141,14 @@ public class DiamondManager : MonoBehaviour
 
     private List<Vector3Int> CheckAdjacentTiles(Vector3Int curPos)
     {
-        List<Vector3Int> adjTiles = new List<Vector3Int>();
-
+	    List<Vector3Int> adjacentTiles = new List<Vector3Int>();
+	    
         int cnt = 1;
         Vector3Int pos = curPos;
         --pos.x;
         while (pos.x >= _bounds.xMin)
         {
-            if (SameTileColor(pos, curPos)) ++cnt;
+            if (GamePlayManager.Instance.SameTileColor(pos, curPos)) ++cnt;
             else break;
             --pos.x;
         }
@@ -152,7 +157,7 @@ public class DiamondManager : MonoBehaviour
         ++pos.x;
         while (pos.x < _bounds.xMax)
         {
-            if (SameTileColor(pos, curPos)) ++cnt;
+            if (GamePlayManager.Instance.SameTileColor(pos, curPos)) ++cnt;
             else break;
             ++pos.x;
         }
@@ -167,7 +172,7 @@ public class DiamondManager : MonoBehaviour
 	            
 				if (!IsLocked(pos))
 				{
-					adjTiles.Add(pos);
+					adjacentTiles.Add(pos);
 				}
                 else
                 {
@@ -182,7 +187,7 @@ public class DiamondManager : MonoBehaviour
         --pos.y;
         while (pos.y >= _bounds.yMin)
         {
-            if (SameTileColor(pos, curPos)) ++cnt;
+            if (GamePlayManager.Instance.SameTileColor(pos, curPos)) ++cnt;
             else break;
             --pos.y;
         }
@@ -191,7 +196,7 @@ public class DiamondManager : MonoBehaviour
         ++pos.y;
         while (pos.y < _bounds.yMax)
         {
-            if (SameTileColor(pos, curPos)) ++cnt;
+            if (GamePlayManager.Instance.SameTileColor(pos, curPos)) ++cnt;
             else break;
             ++pos.y;
         }
@@ -206,7 +211,7 @@ public class DiamondManager : MonoBehaviour
 	            
 				if (!IsLocked(pos))
 				{
-					adjTiles.Add(pos);
+					adjacentTiles.Add(pos);
 				}
                 else
                 {
@@ -215,19 +220,186 @@ public class DiamondManager : MonoBehaviour
 				--pos.y;
             }
         }
-
-        adjTiles = new HashSet<Vector3Int>(adjTiles).ToList();
-        return adjTiles;
+        
+        return adjacentTiles;
     }
 
-    public IEnumerator ClearDiamond(float waitTime)
+    private void CheckForSpawnSpecialTile(List<Vector3Int> poss)
+    {
+	    if(poss.Count < 4) return;
+
+	    Vector3Int setPos = poss[Random.Range(0, poss.Count)];
+	    if (poss.Contains(_firstMousePos) || poss.Contains(_secondMousePos))
+	    {
+		    if (poss.Contains(_firstMousePos)) setPos = _firstMousePos;
+		    else setPos = _secondMousePos;
+		    
+		    _firstMousePos = _secondMousePos = new Vector3Int(-1000, -1000, 0);
+	    }
+	    
+	    if (poss.Count >= 5)
+	    {
+		    for (int i = 0; i < _areaTiles.Length; i++)
+		    {
+			    if (_tilesData[_tilemap.GetTile(setPos)].Color == _tilesData[_areaTiles[i]].Color)
+			    {
+				    specialTiles.Add((setPos, _areaTiles[i]));
+				    break;
+			    }
+		    }
+	    }
+	    else
+	    {
+		    if (poss.All(p => p.y == poss[0].y))
+		    {
+			    for (int i = 0; i < _rowTiles.Length; i++)
+			    {
+				    if (_tilesData[_tilemap.GetTile(setPos)].Color == _tilesData[_rowTiles[i]].Color)
+				    {
+					    specialTiles.Add((setPos, _rowTiles[i]));
+					    break;
+				    }
+			    }
+		    }
+		    else
+		    {
+			    for (int i = 0; i < _columnTiles.Length; i++)
+			    {
+				    if (_tilesData[_tilemap.GetTile(setPos)].Color == _tilesData[_columnTiles[i]].Color)
+				    {
+					    specialTiles.Add((setPos, _columnTiles[i]));
+					    break;
+				    }
+			    }
+		    }
+	    }
+    }
+
+    private void SetSpecialTile()
+    {
+	    for (int i = 0; i < specialTiles.Count; i++)
+	    {
+		    Debug.Log(specialTiles[i].Item1);
+		    _tilemap.SetTile(specialTiles[i].Item1, specialTiles[i].Item2);
+	    }
+    }
+
+    private int ActiveSpecialTile(Vector3Int pos)
+    {
+	    int count = 0;
+	    
+	    TileBase tile = _tilemap.GetTile(pos);
+	    if (_tilesData[tile].Type == TileType.Column)
+	    {
+		    for (int y = _bounds.yMin; y < _bounds.yMax; y++)
+		    {
+			    pos.y = y;
+			    if(_visited.Contains(pos)) continue;
+			    _visited.Add(pos);
+			    if (!IsLocked(pos))
+			    {
+				    if (_tilesData[tile].Type != TileType.Normal) ActiveSpecialTile(pos);
+				    _tilemap.SetTile(pos, null);
+				    ++count;
+			    }
+			    else
+			    {
+				    lockTiles.Add(pos);
+			    }
+		    }
+	    }
+	    else if (_tilesData[tile].Type == TileType.Row)
+	    {
+		    for (int x = _bounds.xMin; x < _bounds.xMax; x++)
+		    {
+			    pos.x = x;
+			    if(_visited.Contains(pos)) continue;
+			    _visited.Add(pos);
+			    if (!IsLocked(pos))
+			    {
+				    if (_tilesData[tile].Type != TileType.Normal) ActiveSpecialTile(pos);
+				    _tilemap.SetTile(pos, null);
+				    ++count;
+			    }
+			    else
+			    {
+				    lockTiles.Add(pos);
+			    }
+		    }
+	    }
+	    else if (_tilesData[tile].Type == TileType.Area)
+	    {
+		    for (int i = 0; i < dir.Length; i++)
+		    {
+			    if(!GamePlayManager.Instance.IsInBound(pos + dir[i])) continue;
+			    if(_visited.Contains(pos + dir[i])) continue;
+			    _visited.Add(pos + dir[i]);
+			    if (!IsLocked(pos + dir[i]))
+			    {
+				    if (_tilesData[tile].Type != TileType.Normal) ActiveSpecialTile(pos + dir[i]);
+				    _tilemap.SetTile(pos + dir[i], null);
+				    ++count;
+			    }
+			    else
+			    {
+				    lockTiles.Add(pos + dir[i]);
+			    }
+		    }
+	    }
+	    
+	    return count;
+    }
+
+    private void CalculateScore(ref int count, ref int bonus, Dictionary<TileBase, int> destroyedTiles)
+    {
+	    foreach (Vector3Int tilePos in clearTiles)
+	    {
+		    TileBase tile = _tilemap.GetTile(tilePos);
+		    if (tile != null)
+		    {
+			    if (destroyedTiles.ContainsKey(tile))
+			    {
+				    destroyedTiles[tile]++;
+			    }
+			    else
+			    {
+				    destroyedTiles[tile] = 1;
+			    }
+		    }
+		    if (CheckTerrainEffect(tilePos))
+		    {
+			    bonus += 1;
+		    }
+
+		    if (_tilesData[tile].Type != TileType.Normal)
+		    {
+			    count += ActiveSpecialTile(tilePos);
+		    }
+		    
+		    _tilemap.SetTile(tilePos, null);
+		    ++count;
+	    }
+    }
+
+    private void UnlockTiles()
+    {
+	    for(int i = 0; i < lockTiles.Count; i++)
+	    {
+		    licoriceTileMap.SetTile(lockTiles[i], null);
+	    }
+    }
+
+    public IEnumerator ClearDiamond(Vector3Int firstPos, Vector3Int secondPos)
     {
         _dropping = 0;
+        _firstMousePos = firstPos;
+        _secondMousePos = secondPos;
         
         while (true)
         {
             clearTiles.Clear();
             lockTiles.Clear();
+            specialTiles.Clear();
             _visited.Clear();
             
             for (int x = _bounds.xMin; x < _bounds.xMax; x++)
@@ -239,18 +411,12 @@ public class DiamondManager : MonoBehaviour
                     if (_tilemap.GetTile(curPos) == null || _visited.Contains(curPos)) continue;
 			
                     //cung toi uu hon mot ti thi phai
-                    clearTiles.AddRange(CheckAdjacentTiles(curPos));
+                    List<Vector3Int> adjacentTiles = CheckAdjacentTiles(curPos);
+                    clearTiles.AddRange(adjacentTiles);
+					CheckForSpawnSpecialTile(adjacentTiles);
                 }
             }
-
-            Debug.Log($"before: {clearTiles.Count}");
-            clearTiles = new HashSet<Vector3Int>(clearTiles).ToList();
-            Debug.Log($"after: {clearTiles.Count}");
-            lockTiles = new HashSet<Vector3Int>(lockTiles).ToList();
-            for(int i = 0; i < lockTiles.Count; i++)
-            {
-                licoriceTileMap.SetTile(lockTiles[i], null);
-            }
+            
             if (clearTiles.Count == 0)
             {
                 break;
@@ -269,27 +435,11 @@ public class DiamondManager : MonoBehaviour
 
 			Dictionary<TileBase,int> destroyedTiles = new Dictionary<TileBase, int>();
             int bonus = 0, count = 0;
-            foreach (Vector3Int tilePos in clearTiles)
-            {
-				TileBase tile = _tilemap.GetTile(tilePos);
-				if (tile != null)
-				{
-					if (destroyedTiles.ContainsKey(tile))
-					{
-						destroyedTiles[tile]++;
-					}
-					else
-					{
-						destroyedTiles[tile] = 1;
-					}
-				}
-				if (CheckTerrainEffect(tilePos))
-				{
-					bonus += 1;
-				}
-				_tilemap.SetTile(tilePos, null);
-				++count;
-			}
+            CalculateScore(ref count, ref bonus, destroyedTiles);
+            
+            UnlockTiles();
+            
+            SetSpecialTile();
 
             if (_gameTurnController.GetTurn() == 0)
 			{
@@ -317,7 +467,7 @@ public class DiamondManager : MonoBehaviour
                 yield return null;
             }
 
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(0.5f);
 
             yield return StartCoroutine(SpawnBoard());
         }
@@ -488,10 +638,5 @@ public class DiamondManager : MonoBehaviour
     public bool IsDropping()
     {
         return _dropping != 0;
-    }
-
-    private bool SameTileColor(Vector3Int a, Vector3Int b)
-    {
-	    return _tilesData[_tilemap.GetTile(a)].Color == _tilesData[_tilemap.GetTile(b)].Color;
     }
 }

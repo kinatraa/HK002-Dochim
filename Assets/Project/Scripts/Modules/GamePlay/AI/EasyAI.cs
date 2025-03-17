@@ -60,7 +60,7 @@ public class EasyAI : MonoBehaviour, IAIBehavior
                 
                 foreach (Vector3Int dir in directions)
                 {
-                    if(!_diamondClick.ValidClick(curTile + dir)) continue;
+                    if(!GamePlayManager.Instance.IsInBound(curTile + dir)) continue;
                     if(!_diamondClick.CanSwap(curTile, curTile + dir, 1)) continue;
                     
                     list.Add(Tuple.Create(curTile, curTile + dir));
