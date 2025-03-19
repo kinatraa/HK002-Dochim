@@ -106,7 +106,6 @@ public abstract class BaseCharacter : MonoBehaviour
 				int cnt = tileDestroyedPreEffect[effect.Type] / effect.AmountOfTileRequired;
 				while(cnt-- > 0)
 				{
-					Debug.Log("...");
 					RemoveEffectStack(effect.Type);
 					tileDestroyedPreEffect[effect.Type] -= effect.AmountOfTileRequired;
 				}
