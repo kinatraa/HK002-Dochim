@@ -69,8 +69,8 @@ public class DiamondManager : MonoBehaviour
     void Start()
     {
         _bounds = GamePlayManager.Instance.BoardBounds;
-		//Debug.Log($"{_bounds.xMin}, {_bounds.yMin}, {_bounds.xMax}, {_bounds.yMax}");
-		_objectPool = new Queue<SpriteRenderer>(_initObjectPool.GetObjectPool());
+        //Debug.Log($"{_bounds.xMin}, {_bounds.yMin}, {_bounds.xMax}, {_bounds.yMax}");
+        _objectPool = new Queue<SpriteRenderer>(_initObjectPool.GetObjectPool());
         GenerateBoard();
     }
 
@@ -461,7 +461,7 @@ public class DiamondManager : MonoBehaviour
             
             SetSpecialTile();
 
-            if (_gameTurnController.GetTurn() == 0)
+			if (_gameTurnController.GetTurn() == 0)
 			{
 				var playerCharacter = GamePlayManager.Instance.PlayerCharacter;
 				if (playerCharacter != null)
@@ -638,11 +638,11 @@ public class DiamondManager : MonoBehaviour
         {
             case 0:
                 DataManager.Instance.PlayerScore += count;
-                MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+                //MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
                 break;
             case 1:
                 DataManager.Instance.OpponentScore += count;
-                MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+                //MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
                 break;
         }
     }

@@ -22,6 +22,8 @@ public class AIController : MonoBehaviour
         _diamondClick = GetComponent<DiamondClick>();
         _bounds = GamePlayManager.Instance.BoardBounds;
         GamePlayManager.Instance.OpponentCharacter = character;
+        DataManager.Instance.OpponentHP = character.GetCurrentHP();
+        DataManager.Instance.OpponentMaxHP = character.GetCurrentHP();
     }
 
     void OnEnable()

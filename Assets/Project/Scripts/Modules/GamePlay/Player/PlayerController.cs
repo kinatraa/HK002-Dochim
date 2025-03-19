@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
 
         _character = characterPool.First().GetComponent<BaseCharacter>();
         GamePlayManager.Instance.PlayerCharacter = _character;
+        DataManager.Instance.PlayerMaxHP = _character.GetCurrentHP();
+        DataManager.Instance.PlayerHP = _character.GetCurrentHP();
 
         SkillButtonClick skillButton = FindObjectOfType<SkillButtonClick>();
 		if (skillButton != null)

@@ -7,14 +7,14 @@ using UnityEngine.Tilemaps;
 public abstract class BaseCharacter : MonoBehaviour
 {
 	public string characterName;
-	public int maxHP;
-	public int currentHP;
+	[SerializeField]private int maxHP;
+	[SerializeField]private int currentHP;
 	public Sprite characterSprite;
 	public Sprite activeSkillIcon;
 
 	protected List<StatusData> activeStatus = new List<StatusData>();
 	private Dictionary<StatusType,int> tileDestroyedPreEffect = new Dictionary<StatusType,int>();
-	protected virtual void Start()
+	protected virtual void Awake()
 	{
 		currentHP = maxHP;
 	}
@@ -53,14 +53,12 @@ public abstract class BaseCharacter : MonoBehaviour
 		if (bloodLoss != null) 
 		{
 			int damage = bloodLoss.Stack * bloodLoss.EffectValue;
-			currentHP -= damage;
-			currentHP = Mathf.Max(currentHP, 0);
+			TakeDamamage(damage);
 			Debug.Log($"{characterName} takes {damage} damage from Bloodloss!");
 			Debug.Log(currentHP);
 			if (source != null)
 			{
-				source.currentHP += damage;
-				source.currentHP = Mathf.Min(source.currentHP, maxHP);
+				source.Heal(damage);
 				Debug.Log($"{source.characterName} recovers {damage} HP from Bloodloss!");
 				Debug.Log($"{source.currentHP}");
 			}
@@ -96,6 +94,7 @@ public abstract class BaseCharacter : MonoBehaviour
 			}
 			if (tilesCounted > 0)
 			{
+				Debug.Log(tilesCounted);
 				tileDestroyedPreEffect[effect.Type] += tilesCounted;
 
 				int cnt = tileDestroyedPreEffect[effect.Type] / effect.AmountOfTileRequired;
@@ -159,4 +158,16 @@ public abstract class BaseCharacter : MonoBehaviour
 	public abstract void Trigger(List<Vector3Int> triggerPosition, int amount);
 
 	public abstract void Active();
+	public void TakeDamamage(int amount)
+	{
+		currentHP = Mathf.Max(currentHP - amount,0);
+	}
+	public void Heal(int amount)
+	{
+		currentHP = Mathf.Min(currentHP + amount, maxHP);
+	}
+	public int GetCurrentHP()
+	{
+		return currentHP;
+	}
 }
