@@ -64,8 +64,8 @@ public class DiamondManager : MonoBehaviour
     void Start()
     {
         _bounds = GamePlayManager.Instance.BoardBounds;
-		//Debug.Log($"{_bounds.xMin}, {_bounds.yMin}, {_bounds.xMax}, {_bounds.yMax}");
-		_objectPool = new Queue<SpriteRenderer>(_initObjectPool.GetObjectPool());
+        //Debug.Log($"{_bounds.xMin}, {_bounds.yMin}, {_bounds.xMax}, {_bounds.yMax}");
+        _objectPool = new Queue<SpriteRenderer>(_initObjectPool.GetObjectPool());
         GenerateBoard();
     }
 
@@ -243,9 +243,9 @@ public class DiamondManager : MonoBehaviour
                 }
             }
 
-            Debug.Log($"before: {clearTiles.Count}");
+            //Debug.Log($"before: {clearTiles.Count}");
             clearTiles = new HashSet<Vector3Int>(clearTiles).ToList();
-            Debug.Log($"after: {clearTiles.Count}");
+            //Debug.Log($"after: {clearTiles.Count}");
             lockTiles = new HashSet<Vector3Int>(lockTiles).ToList();
             for(int i = 0; i < lockTiles.Count; i++)
             {
@@ -290,8 +290,16 @@ public class DiamondManager : MonoBehaviour
 				_tilemap.SetTile(tilePos, null);
 				++count;
 			}
+			//debug
+			Debug.Log("Destroyed Tiles Information:");
+			foreach (var pair in destroyedTiles)
+			{
+				string tileName = pair.Key != null ? pair.Key.name : "Unknown";
+				Debug.Log($"Tile Type: {tileName}, Count: {pair.Value}");
+			}
+			Debug.Log($"Total tiles destroyed: {destroyedTiles.Sum(x => x.Value)}");
 
-            if (_gameTurnController.GetTurn() == 0)
+			if (_gameTurnController.GetTurn() == 0)
 			{
 				var playerCharacter = GamePlayManager.Instance.PlayerCharacter;
 				if (playerCharacter != null)
@@ -467,11 +475,11 @@ public class DiamondManager : MonoBehaviour
         {
             case 0:
                 DataManager.Instance.PlayerScore += count;
-                MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+                //MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
                 break;
             case 1:
                 DataManager.Instance.OpponentScore += count;
-                MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+                //MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
                 break;
         }
     }

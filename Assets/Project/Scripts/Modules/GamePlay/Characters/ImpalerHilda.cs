@@ -13,13 +13,13 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 	private Tilemap tilemap;
 	public bool isReady = false;
 	private int threshHold = 0;
-	private void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
 		tilemap = GamePlayManager.Instance.Tilemap;
 	}
-	protected override void Start()
+	private void Start()
 	{
-		base.Start();
 		target = GamePlayManager.Instance.OpponentCharacter.GetComponent<BaseCharacter>();
 	}
 	public override void Active()
@@ -29,10 +29,13 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 
 	public void ActiveSkills()
 	{
-		if(threshHold >= 10)
+		if (!isReady)
+			return;
+		if (threshHold >= 10)
 		{
 			isReady = true;
-
+			TakeDamamage(10);
+			GamePlayManager.Instance.GameTurnController.AddExtraAction(1);
 		}
 	}
 
@@ -67,7 +70,7 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 			TileBase tile = tilemap.GetTile(position);
 			if(conditionTile.Contains(tile))
 			{
-				Debug.Log(tile.name);
+				//Debug.Log(tile.name);
 				indicator++;
 			}
 			if(indicator >= 5)

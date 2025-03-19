@@ -16,6 +16,34 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
             MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
         }
     }
+
+    public int PlayerHP
+    {
+        get => PlayerData.health;
+        set
+        {
+            PlayerData.health = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+        }
+    }
+    public int PlayerMaxHP
+    {
+        get => PlayerData.maxHealth;
+        set
+        {
+            PlayerData.maxHealth = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+        }
+    }
+    public int PlayerRemainActionPoints
+    {
+        get => PlayerData.actionPoint;
+        set
+        {
+            PlayerData.actionPoint = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+        }
+    }
     
     public OpponentData OpponentData;
 
@@ -28,7 +56,33 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
             MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
         }
     }
-    
+    public int OpponentHP
+    {
+        get => OpponentData.health;
+        set
+        {
+            OpponentData.health = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+        }
+    }
+    public int OpponentMaxHP
+    {
+        get => OpponentData.maxHealth;
+        set
+        {
+            OpponentData.maxHealth = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+        }
+    }
+    public int OpponentRemainActionPoints
+    {
+        get => OpponentData.actionPoint;
+        set
+        {
+            OpponentData.actionPoint= value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+        }
+    }
     public void Handle(Message message)
     {
         throw new System.NotImplementedException();

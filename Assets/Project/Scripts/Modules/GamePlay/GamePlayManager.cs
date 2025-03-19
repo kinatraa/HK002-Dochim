@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,7 +11,6 @@ using UnityEngine.Tilemaps;
 public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
 {
     [SerializeField] private GameTurnController _gameTurnController;
-
     public GameTurnController GameTurnController
     {
         get => _gameTurnController;
