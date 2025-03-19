@@ -115,7 +115,7 @@ public class GameTurnController : MonoBehaviour
 		else if (_turn == 1)
 		{
 			playerCharacter.ApplyBloodLoss(opponentCharacter);
-			DataManager.Instance.OpponentRemainActionPoints += remainingActions;
+			DataManager.Instance.OpponentRemainActionPoints = remainingActions;
 		}
 
 		PlayTurn();

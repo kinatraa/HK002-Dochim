@@ -18,6 +18,10 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     [SerializeField] private TextMeshProUGUI _opponentActionRemains;
     [SerializeField] private RectTransform _playerScoreFill;
     [SerializeField] private RectTransform _opponentScoreFill;
+    [SerializeField] private TextMeshProUGUI _playerCoolDownIndicatorText;
+    [SerializeField] private TextMeshProUGUI _opponentCoolDownIndicatorText;
+    [SerializeField] private RectTransform _playerCoolDownIndicator;
+    [SerializeField] private RectTransform _opponentCoolDownIndicator;
 
 	private float _opponentFillAmount;
 	private float _playerFillAmount;
@@ -29,6 +33,11 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     private float maxWidth = 1510;
     private float baseWidth = 755;
     private float differenceRatio;
+	private void Awake()
+	{
+		_playerRemainingActionsBoard = _playerActionRemains.GetComponentInParent<Image>();
+        _opponentRemainingActionsBoard = _opponentActionRemains.GetComponentInParent<Image>();
+	}
 	void OnEnable()
     {
         UpdateUI();
@@ -83,13 +92,17 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
         _opponentHPFill.DOFillAmount(_opponentFillAmount, _fillSpeed);
         if (GamePlayManager.Instance.GameTurnController.GetTurn() == 0) {
             _playerActionRemains.text = $"{DataManager.Instance.PlayerRemainActionPoints}";
+            _playerRemainingActionsBoard.enabled = true;
+            _opponentRemainingActionsBoard.enabled = false;
         }
         if (GamePlayManager.Instance.GameTurnController.GetTurn() == 1) {
             _opponentActionRemains.text = $"{DataManager.Instance.OpponentRemainActionPoints}";
-        }
-        Debug.Log(DataManager.Instance.PlayerRemainActionPoints);
+			_playerRemainingActionsBoard.enabled = false;
+			_opponentRemainingActionsBoard.enabled = true;
+		}
+        Debug.Log(DataManager.Instance.OpponentRemainActionPoints);
         _playerActionRemains.text = $"{DataManager.Instance.PlayerRemainActionPoints}";
-        Debug.Log(_playerActionRemains.text);
+        Debug.Log(_opponentActionRemains.text);
 		_opponentActionRemains.text = $"{DataManager.Instance.OpponentRemainActionPoints}";
 	}
     

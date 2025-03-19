@@ -9,9 +9,8 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 {
 	private BaseCharacter target;			
 	[SerializeField] private List<TileBase> conditionTile;
-	private int indicator;
+	//private int indicator;
 	private Tilemap tilemap;
-	public bool isReady = false;
 	private int threshHold = 0;
 	protected override void Awake()
 	{
@@ -48,7 +47,7 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 			Debug.Log($"ImpalerHilda: Applied Bloodloss to {target.characterName}");
 
 			// Reset indicator
-			indicator = 0;
+			activeConditionAmount = 0;
 			Debug.Log("ImpalerHilda: Indicator reset to 0");
 		}
 		else
@@ -58,7 +57,7 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 			Debug.Log($"ImpalerHilda: Applied Bloodloss to {target.characterName}");
 
 			// Reset indicator
-			indicator = 0;
+			activeConditionAmount = 0;
 			Debug.Log("ImpalerHilda: Indicator reset to 0");
 		}
 	}
@@ -70,13 +69,13 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 			TileBase tile = tilemap.GetTile(position);
 			if(conditionTile.Contains(tile))
 			{
-				//Debug.Log(tile.name);
-				indicator++;
+				activeConditionAmount++;
 			}
-			if(indicator >= 5)
+			if(activeConditionAmount >= 5)
 			{
 				PassiveSkills();
 			}
 		}
 	}
+	public bool IsReady { get { return isReady; } }
 }

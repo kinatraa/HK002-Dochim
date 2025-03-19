@@ -8,14 +8,14 @@ public class AuthenticItalian : BaseCharacter, IActiveSkill
 {
 	[SerializeField] private TileBase conditionTile;
 	[SerializeField] private TileBase fireTile;
-	private int yellowTileCount = 0;
-	public bool isReady = false;
+	//private int yellowTileCount = 0;
 	private Tilemap tileMap;
 	private BoundsInt bounds;
 	private Tilemap effectTileMap;
 	private List<Vector3Int> fireArea = new List<Vector3Int> ();
-	private void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
 		tileMap = GamePlayManager.Instance.Tilemap;
 		effectTileMap = GamePlayManager.Instance.EffectTileMap;
 		bounds = GamePlayManager.Instance.BoardBounds;
@@ -27,13 +27,14 @@ public class AuthenticItalian : BaseCharacter, IActiveSkill
 			TileBase tile = tileMap.GetTile(pos);
 			if (tile == conditionTile)
 			{
-				yellowTileCount++;
+				//yellowTileCount++;
+				activeConditionAmount++;
 			}
 		}
-		if(yellowTileCount >= 2)
+		if(activeConditionAmount >= 2)
 		{
 			isReady = true;
-			yellowTileCount = 0;
+			activeConditionAmount = 0;
 			return;
 		}
 	}

@@ -16,7 +16,7 @@ public class SkillButtonClick : MonoBehaviour, IPointerClickHandler
 		_spriteRenderer = GetComponent<SpriteRenderer>();
 		if (_character is IActiveSkill)
 		{
-			_spriteRenderer.sprite = _character.activeSkillIcon;
+			//_spriteRenderer.sprite = _character.activeSkillIcon;
 		}
 		else
 		{

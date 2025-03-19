@@ -5,9 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class ButcherLoren : BaseCharacter, IPassiveSkill
 {
-	private int tileCount = 0;
 	private int overflow = 0;
-	private bool isActive = false;
 	public bool IsActive {  get { return isActive; } }
 
 	public override void Active()
@@ -23,12 +21,12 @@ public class ButcherLoren : BaseCharacter, IPassiveSkill
 
 	public override void Trigger(List<Vector3Int> triggerPosition, int amount)
 	{
-		tileCount += amount;
-		if(tileCount >= 10)
+		activeConditionAmount += amount;
+		if(activeConditionAmount >= 10)
 		{
 			Active();
-			overflow = (int)(tileCount - 20) / 2;
-			tileCount = overflow;
+			overflow = (int)(activeConditionAmount - 20) / 2;
+			activeConditionAmount = overflow;
 		}
 	}
 }
