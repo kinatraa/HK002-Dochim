@@ -8,11 +8,11 @@ public class AuthenticItalian : BaseCharacter, IActiveSkill
 {
 	[SerializeField] private TileBase conditionTile;
 	[SerializeField] private TileBase fireTile;
-	//private int yellowTileCount = 0;
 	private Tilemap tileMap;
 	private BoundsInt bounds;
 	private Tilemap effectTileMap;
-	private List<Vector3Int> fireArea = new List<Vector3Int> ();
+	public Dictionary<Vector3Int, int> fireTileInField = new Dictionary<Vector3Int, int>();
+	public List<Vector3Int> fireTilePosition = new List<Vector3Int>();
 	protected override void Awake()
 	{
 		base.Awake();
@@ -27,14 +27,13 @@ public class AuthenticItalian : BaseCharacter, IActiveSkill
 			TileBase tile = tileMap.GetTile(pos);
 			if (tile == conditionTile)
 			{
-				//yellowTileCount++;
-				activeConditionAmount++;
+				currentConditionAmount++;
 			}
 		}
-		if(activeConditionAmount >= 2)
+		if(currentConditionAmount >= activeConditionAmount)
 		{
 			isReady = true;
-			activeConditionAmount = 0;
+			currentConditionAmount = activeConditionAmount;
 			return;
 		}
 	}
@@ -43,24 +42,46 @@ public class AuthenticItalian : BaseCharacter, IActiveSkill
 	{
 		if (!isReady)
 			return;
-		Vector3Int randomPos = new Vector3Int(Random.Range(bounds.xMin + 2, bounds.xMax - 2), Random.Range(bounds.yMin + 2, bounds.yMax - 2), 0);
-		/*for (int x = -1; x <= 1; x++)
+		Vector3Int tilePos;
+		do
 		{
-			for (int y = -1; y <= 1; y++)
-			{
-				Vector3Int tilePos = new Vector3Int(randomPos.x + x, randomPos.y + y, 0);
-				effectTileMap.SetTile(tilePos, fireTile);
-			}
-		}*/
-
-		Vector3Int tilePos = new Vector3Int(randomPos.x, randomPos.y, 0);
-		effectTileMap.SetTile(tilePos, fireTile);
-		isReady = false;
-
+			Vector3Int randomPos = new Vector3Int(Random.Range(bounds.xMin + 2, bounds.xMax - 2), Random.Range(bounds.yMin + 2, bounds.yMax - 2), 0);
+			tilePos = new Vector3Int(randomPos.x, randomPos.y, 0);
+		}
+		while (fireTilePosition.Contains(tilePos));
+		fireTileInField.Add(tilePos, activeSkillExistenceTurn);
+		fireTilePosition.Add(tilePos);
+		effectTileMap.SetTile(tilePos,fireTile);
+		isReady = false;	
+		currentConditionAmount = 0;
 	}
 
 	public override void Active()
 	{
 		ActiveSkills();
+	}
+
+	public override void RemoveActiveSkill()
+	{
+		ModifyExistenceSkillTurn();
+	}
+
+	public void ModifyExistenceSkillTurn()
+	{
+		List<Vector3Int> key = new List<Vector3Int>();
+		foreach (var item in fireTilePosition)
+		{
+			fireTileInField[item] -= 1;
+			if (fireTileInField[item] <= 0)
+			{
+				key.Add(item);
+			}
+		}
+		foreach(var item in key)
+		{
+			fireTilePosition.Remove(item);
+			fireTileInField.Remove(item);
+			effectTileMap.SetTile(item, null);
+		}
 	}
 }

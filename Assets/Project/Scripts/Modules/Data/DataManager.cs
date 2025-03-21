@@ -2,11 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using HaKien;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DataManager : Singleton<DataManager>, IMessageHandle
 {
     public PlayerData PlayerData;
 
+    public Sprite PlayerPortrait
+    {
+        get => PlayerData.portrait;
+        set
+        {
+            PlayerData.portrait = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
+        }
+    }
+    public Sprite PlayerSkillIcon
+    {
+        get => PlayerData.skillIcon;
+        set
+        {
+            PlayerData.skillIcon = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
+        }
+    }
+    public int PlayerSkillRequirementAmount
+    {
+        get => PlayerData.skillRequirementAmount;
+        set
+        {
+            PlayerData.skillRequirementAmount = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
+        }
+    }
+
+    public int PlayerCurrentTilesAcquired
+    {
+        get => PlayerData.currentTilesAcquired;
+        set
+        {
+            PlayerData.currentTilesAcquired = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+        }
+    }
     public int PlayerScore
     {
         get => PlayerData.score;
@@ -47,6 +85,42 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
     
     public OpponentData OpponentData;
 
+    public Sprite OpponentPortrait
+    {
+        get => OpponentData.portrait;
+        set
+        {
+            OpponentData.portrait = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
+        }
+    }
+    public Sprite OpponentSkillIcon
+    {
+        get => OpponentData.skillIcon;
+        set
+        {
+            OpponentData.skillIcon = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
+        }
+    }
+    public int OpponentSkillRequirementAmount
+    {
+        get => OpponentData.skillRequirementAmount;
+        set
+        {
+            OpponentData.skillRequirementAmount = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
+        }
+    }
+    public int OpponentCurrentTilesAcquired
+    {
+        get => OpponentData.currentTilesAcquired;
+        set
+        {
+            OpponentData.currentTilesAcquired = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+        }
+    }
     public int OpponentScore
     {
         get => OpponentData.score;

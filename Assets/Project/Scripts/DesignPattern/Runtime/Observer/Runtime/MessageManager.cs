@@ -13,6 +13,8 @@ namespace HaKien
         OnGameWin,
         OnButtonClick,
         OnDataChanged,
+        OnTimeChanged,
+        OnInitUI    
     }
     public class Message
     {

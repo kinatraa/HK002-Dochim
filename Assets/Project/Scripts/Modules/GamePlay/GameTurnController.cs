@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HaKien;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,22 @@ public class GameTurnController : MonoBehaviour
     private BaseCharacter playerCharacter;
     private BaseCharacter opponentCharacter;
     private int turnCounter = 0;
+    public float timer = 16;
 
-    void Start()
+	private void Update()
+	{
+		if (GamePlayManager.Instance.DiamondManager.IsDropping()) return;
+
+        timer -= Time.deltaTime;
+		
+		if (timer < 0)
+        {
+            UseAction();
+        }
+
+		MessageManager.Instance.SendMessage(new Message(MessageType.OnTimeChanged));
+	}
+	void Start()
     {
         playerCharacter = GamePlayManager.Instance.PlayerCharacter;
         opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
@@ -45,10 +60,12 @@ public class GameTurnController : MonoBehaviour
         if(_turn == 0)
         {
             DataManager.Instance.PlayerRemainActionPoints = remainingActions;
+            DataManager.Instance.PlayerCurrentTilesAcquired = playerCharacter.currentConditionAmount;
         }
         else
         {
 			DataManager.Instance.OpponentRemainActionPoints = remainingActions;
+            DataManager.Instance.OpponentCurrentTilesAcquired = opponentCharacter.currentConditionAmount;
 		}
         Debug.Log("Actions left: " + remainingActions);
         if (remainingActions == 0)
@@ -61,10 +78,6 @@ public class GameTurnController : MonoBehaviour
                 DataManager.Instance.OpponentScore = 0;
                 DataManager.Instance.PlayerHP = playerCharacter.GetCurrentHP();
                 DataManager.Instance.OpponentHP = opponentCharacter.GetCurrentHP();
-                Debug.Log(DataManager.Instance.PlayerHP);
-				Debug.Log(DataManager.Instance.PlayerMaxHP);
-				Debug.Log(DataManager.Instance.OpponentHP);
-				Debug.Log(DataManager.Instance.OpponentMaxHP);
 				turnCounter = 0;
             }
             EndOfRound();
@@ -74,13 +87,12 @@ public class GameTurnController : MonoBehaviour
         {
             PlayTurn();
         }
-    }
+
+		timer = 16f;
+	}
     public void CaculateDamage()
     {
 		int damage = Mathf.Abs(DataManager.Instance.PlayerScore - DataManager.Instance.OpponentScore);
-        Debug.Log(DataManager.Instance.PlayerScore);
-        Debug.Log(DataManager.Instance.OpponentScore);
-        Debug.Log(damage);
 		if (DataManager.Instance.PlayerScore > DataManager.Instance.OpponentScore)
         {
             opponentCharacter.TakeDamamage(damage);
@@ -92,6 +104,7 @@ public class GameTurnController : MonoBehaviour
 			Debug.Log(playerCharacter.GetCurrentHP());
 		}
     }
+
 	public void AddExtraAction(int extra)
 	{
 		remainingActions += extra;
@@ -105,15 +118,20 @@ public class GameTurnController : MonoBehaviour
             _turn = 1;
         }
 		_turn = 1 - _turn;
+
         remainingActions = maxActionPerTurn;
 		if (_turn == 0)
 		{
+            playerCharacter.RemoveActiveSkill();
+			//ModifyExistenceSkillTurn(playerCharacter);
 			opponentCharacter.ApplyBloodLoss(playerCharacter);
             DataManager.Instance.PlayerRemainActionPoints = remainingActions;
             DataManager.Instance.PlayerHP = playerCharacter.GetCurrentHP();
         }
 		else if (_turn == 1)
 		{
+			opponentCharacter.RemoveActiveSkill();
+			//ModifyExistenceSkillTurn(opponentCharacter);
 			playerCharacter.ApplyBloodLoss(opponentCharacter);
 			DataManager.Instance.OpponentRemainActionPoints = remainingActions;
 		}
@@ -121,7 +139,17 @@ public class GameTurnController : MonoBehaviour
 		PlayTurn();
     }
 
-    private void EndOfRound()
+    //private void ModifyExistenceSkillTurn(BaseCharacter currentCharacter)
+    //{
+    //    IActiveSkill activeSkill = currentCharacter.GetComponent<IActiveSkill>();
+    //    if (activeSkill != null)
+    //    {
+
+    //    }
+    //}
+
+
+	private void EndOfRound()
     {
     }
     public int GetTurn()

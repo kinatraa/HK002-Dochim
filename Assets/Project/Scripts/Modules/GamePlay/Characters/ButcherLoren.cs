@@ -19,14 +19,19 @@ public class ButcherLoren : BaseCharacter, IPassiveSkill
 		GamePlayManager.Instance.GameTurnController.AddExtraAction(1);
 	}
 
+	public override void RemoveActiveSkill()
+	{
+		
+	}
+
 	public override void Trigger(List<Vector3Int> triggerPosition, int amount)
 	{
-		activeConditionAmount += amount;
-		if(activeConditionAmount >= 10)
+		currentConditionAmount += amount;
+		if(currentConditionAmount >= activeConditionAmount)
 		{
 			Active();
-			overflow = (int)(activeConditionAmount - 20) / 2;
-			activeConditionAmount = overflow;
+			overflow = (int)(currentConditionAmount - activeConditionAmount) / 2;
+			currentConditionAmount = overflow;
 		}
 	}
 }

@@ -3,31 +3,24 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SkillButtonClick : MonoBehaviour, IPointerClickHandler
 {
 	public BaseCharacter _character;
 	private GameTurnController _gameTurnController;
-	private SpriteRenderer _spriteRenderer;
+	[SerializeField]private Image skillIndicator;
 	public void Init(GameTurnController gameTurnController)
 	{
 		_gameTurnController = gameTurnController;
 		_character = GamePlayManager.Instance.PlayerCharacter;
-		_spriteRenderer = GetComponent<SpriteRenderer>();
-		if (_character is IActiveSkill)
-		{
-			//_spriteRenderer.sprite = _character.activeSkillIcon;
-		}
-		else
-		{
-			Debug.Log("Passive");
-			_spriteRenderer.enabled = false;	
-		}
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		_character.Active();
+		//_character.currentConditionAmount = 0;
+		DataManager.Instance.PlayerCurrentTilesAcquired = 0;
 		Debug.Log("Click");
 	}
 }

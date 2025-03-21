@@ -480,7 +480,7 @@ public class DiamondManager : MonoBehaviour
 
 			UpdatePlayersScore(count, (int)Mathf.Ceil(bonus / 2.0f));
 
-			yield return new WaitForSeconds(1f); //wait for debug
+			//yield return new WaitForSeconds(1f); //wait for debug
             yield return StartCoroutine(DropTile());
             
             while (_dropping != 0)
@@ -663,6 +663,8 @@ public class DiamondManager : MonoBehaviour
     
     private bool SameTileColor(Vector3Int a, Vector3Int b)
     {
-	    return _tilesData[_tilemap.GetTile(a)].Color == _tilesData[_tilemap.GetTile(b)].Color;
+		//Debug.Log($"a : {_tilemap.GetTile(a)}");
+		//Debug.Log($"b : {_tilemap.GetTile(b)}");
+		return _tilesData[_tilemap.GetTile(a)].Color == _tilesData[_tilemap.GetTile(b)].Color;
     }
 }
