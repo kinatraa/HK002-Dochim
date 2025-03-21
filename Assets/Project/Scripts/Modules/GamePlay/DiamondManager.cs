@@ -477,8 +477,7 @@ public class DiamondManager : MonoBehaviour
 			}
 
 			UpdatePlayersScore(count, (int)Mathf.Ceil(bonus / 2.0f));
-
-			yield return new WaitForSeconds(1f); //wait for debug
+			
             yield return StartCoroutine(DropTile());
             
             while (_dropping != 0)
