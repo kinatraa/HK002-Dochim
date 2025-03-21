@@ -179,7 +179,7 @@ public class DiamondManager : MonoBehaviour
 	        if (cnt >= 3)
 	        {
 		        --pos.x;
-		        for (int i = 0; i < cnt; i++)
+		        for (int i = 0; i < cnt; i++,  --pos.x)
 		        {
 			        if(_visited.Contains(pos)) continue;
 			        _visited.Add(pos);
@@ -193,7 +193,6 @@ public class DiamondManager : MonoBehaviour
 			        {
 				        lockTiles.Add(pos);
 			        }
-			        --pos.x;
 		        }
 	        }
         }
@@ -221,7 +220,7 @@ public class DiamondManager : MonoBehaviour
 	        if (cnt >= 3)
 	        {
 		        --pos.y;
-		        for (int i = 0; i < cnt; i++)
+		        for (int i = 0; i < cnt; i++, --pos.y)
 		        {
 			        if(_visited.Contains(pos)) continue;
 			        _visited.Add(pos);
@@ -235,7 +234,6 @@ public class DiamondManager : MonoBehaviour
 			        {
 				        lockTiles.Add(pos);
 			        }
-			        --pos.y;
 		        }
 	        }
         }
