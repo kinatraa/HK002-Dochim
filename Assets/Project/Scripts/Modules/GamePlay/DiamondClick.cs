@@ -35,7 +35,7 @@ public class DiamondClick : MonoBehaviour
         {
             _selected = false;
             _bordermap.SetTile(_selectedTile, null);
-            if (ValidClick(selectedPos) && CheckAdjacentVector(_selectedTile, selectedPos))
+            if (GamePlayManager.Instance.IsInBound(selectedPos) && CheckAdjacentVector(_selectedTile, selectedPos))
             {
                 yield return StartCoroutine(_diamondManager.SwapTile(_selectedTile, selectedPos));
                 if (!CanSwap(_selectedTile, selectedPos, 0))
@@ -46,7 +46,7 @@ public class DiamondClick : MonoBehaviour
                 else
                 {
                     /*Debug.Log("Swap");*/
-                    yield return StartCoroutine(_diamondManager.ClearDiamond(0.5f));
+                    yield return StartCoroutine(_diamondManager.ClearDiamond(selectedPos, _selectedTile));
                     GamePlayManager.Instance.GameTurnController.UseAction();
                 }
                     
@@ -55,7 +55,8 @@ public class DiamondClick : MonoBehaviour
         }
         else
         {
-            if (ValidClick(selectedPos))
+            if(_diamondManager.IsLocked(selectedPos)) yield break;
+            if (GamePlayManager.Instance.IsInBound(selectedPos))
             {
                 _selected = true;
                 _selectedTile = selectedPos;
@@ -69,7 +70,7 @@ public class DiamondClick : MonoBehaviour
     public bool CanSwap(Vector3Int a, Vector3Int b, int rev)
     {
         if(_diamondManager.IsLocked(a) ||  _diamondManager.IsLocked(b)) { return false; }
-        TileBase[] checkTiles = {_tilemap.GetTile(a), _tilemap.GetTile(b)};
+        Vector3Int[] checkPoss = {a, b};
         
         int cnt = 1;
         Vector3Int pos = a;
@@ -77,7 +78,7 @@ public class DiamondClick : MonoBehaviour
         {
             --pos.x;
             if (rev == 1 && pos == b) break;
-            if (_tilemap.GetTile(pos) == checkTiles[rev]) ++cnt;
+            if (GamePlayManager.Instance.SameTileColor(pos, checkPoss[rev])) ++cnt;
             else break;
         }
         pos = a;
@@ -85,7 +86,7 @@ public class DiamondClick : MonoBehaviour
         {
             ++pos.x;
             if (rev == 1 && pos == b) break;
-            if (_tilemap.GetTile(pos) == checkTiles[rev]) ++cnt;
+            if (GamePlayManager.Instance.SameTileColor(pos, checkPoss[rev])) ++cnt;
             else break;
         }
 
@@ -100,7 +101,7 @@ public class DiamondClick : MonoBehaviour
         {
             --pos.y;
             if (rev == 1 && pos == b) break;
-            if (_tilemap.GetTile(pos) == checkTiles[rev]) ++cnt;
+            if (GamePlayManager.Instance.SameTileColor(pos, checkPoss[rev])) ++cnt;
             else break;
         }
         pos = a;
@@ -108,7 +109,7 @@ public class DiamondClick : MonoBehaviour
         {
             ++pos.y;
             if (rev == 1 && pos == b) break;
-            if (_tilemap.GetTile(pos) == checkTiles[rev]) ++cnt;
+            if (GamePlayManager.Instance.SameTileColor(pos, checkPoss[rev])) ++cnt;
             else break;
         }
         if (cnt >= 3)
@@ -122,7 +123,7 @@ public class DiamondClick : MonoBehaviour
         {
             --pos.x;
             if (rev == 1 && pos == a) break;
-            if (_tilemap.GetTile(pos) == checkTiles[1 - rev]) ++cnt;
+            if (GamePlayManager.Instance.SameTileColor(pos, checkPoss[1 - rev])) ++cnt;
             else break;
         }
         pos = b;
@@ -130,7 +131,7 @@ public class DiamondClick : MonoBehaviour
         {
             ++pos.x;
             if (rev == 1 && pos == a) break;
-            if (_tilemap.GetTile(pos) == checkTiles[1 - rev]) ++cnt;
+            if (GamePlayManager.Instance.SameTileColor(pos, checkPoss[1 - rev])) ++cnt;
             else break;
         }
         if (cnt >= 3)
@@ -144,7 +145,7 @@ public class DiamondClick : MonoBehaviour
         {
             --pos.y;
             if (rev == 1 && pos == a) break;
-            if (_tilemap.GetTile(pos) == checkTiles[1 - rev]) ++cnt;
+            if (GamePlayManager.Instance.SameTileColor(pos, checkPoss[1 - rev])) ++cnt;
             else break;
         }
         pos = b;
@@ -152,7 +153,7 @@ public class DiamondClick : MonoBehaviour
         {
             ++pos.y;
             if (rev == 1 && pos == a) break;
-            if (_tilemap.GetTile(pos) == checkTiles[1 - rev]) ++cnt;
+            if (GamePlayManager.Instance.SameTileColor(pos, checkPoss[1 - rev])) ++cnt;
             else break;
         }
         if (cnt >= 3)
@@ -174,8 +175,4 @@ public class DiamondClick : MonoBehaviour
         return !_diamondManager.IsDropping();
     }
     
-    public bool ValidClick(Vector3Int v)
-    {
-        return v.x >= _bounds.xMin && v.x < _bounds.xMax && v.y >= _bounds.yMin && v.y < _bounds.yMax;
-    }
 }

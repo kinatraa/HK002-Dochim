@@ -7,5 +7,7 @@ using UnityEngine;
 public class PlayerData
 {
     public int score = 0;
-    
+    public int health;
+    public int actionPoint;
+    public int maxHealth;
 }

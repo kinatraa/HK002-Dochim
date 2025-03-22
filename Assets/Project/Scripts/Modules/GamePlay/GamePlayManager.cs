@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,7 +19,6 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
     }
     
     [SerializeField] private GameTurnController _gameTurnController;
-
     public GameTurnController GameTurnController
     {
         get => _gameTurnController;
@@ -38,6 +37,14 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
 		get => _opponentCharacter;
 		set => _opponentCharacter = value;
 	}
+    
+    [SerializeField] private TilesData _tileData;
+
+    public Dictionary<TileBase, TileProperties> TilesData
+    {
+        get => _tileData.TilesDictionary;
+        set => _tileData.TilesDictionary = value;
+    }
 
 	[SerializeField] public int _rows = 8;
     [SerializeField] public int _columns = 8;
@@ -79,6 +86,21 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         _bounds.xMax = _columns / 2;
         _bounds.yMin = -_rows / 2;
         _bounds.yMax = _rows / 2;
+    }
+    
+    public bool IsInBound(Vector3Int v)
+    {
+        return v.x >= _bounds.xMin && v.x < _bounds.xMax && v.y >= _bounds.yMin && v.y < _bounds.yMax;
+    }
+    
+    public bool SameTileColor(Vector3Int a, Vector3Int b)
+    {
+        return TilesData[_tilemap.GetTile(a)].Color == TilesData[_tilemap.GetTile(b)].Color;
+    }
+    
+    public bool SameTileType(Vector3Int a, Vector3Int b)
+    {
+        return TilesData[_tilemap.GetTile(a)].Type == TilesData[_tilemap.GetTile(b)].Type;
     }
 
     private void OnDestroy()
