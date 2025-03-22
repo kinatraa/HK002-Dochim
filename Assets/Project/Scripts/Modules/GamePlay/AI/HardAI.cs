@@ -1,18 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class HardAI : MonoBehaviour
+public class HardAI : AIBehavior
 {
-    // Start is called before the first frame update
-    void Start()
+    public override IEnumerator SelectTile()
     {
+        yield return base.SelectTile();
+
+        _pretendDiamondManager.SetSwappableTiles(_swappableTiles);
+        List<Dictionary<TileColor, int>> colorCounter = _pretendDiamondManager.ColorCounter;
+        List<int> scoreCounter = _pretendDiamondManager.ScoreCounter;
+
+        int idx = 0;
+        for (int i = 0; i < scoreCounter.Count; i++)
+        {
+            Debug.Log(scoreCounter[i]);
+            if (scoreCounter[i] > scoreCounter[idx])
+            {
+                idx = i;
+            }
+        }
         
+        yield return new WaitForSeconds(0.5f);
+        yield return _diamondClick.SelectTile(_swappableTiles[idx].Item1);
+        yield return new WaitForSeconds(1f);
+        yield return _diamondClick.SelectTile(_swappableTiles[idx].Item2);
+        
+        yield return null;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

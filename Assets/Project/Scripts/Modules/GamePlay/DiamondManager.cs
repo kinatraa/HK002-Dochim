@@ -1,15 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using HaKien;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public class DiamondManager : MonoBehaviour
 {
-    [SerializeField] private TileBase[] _diamondTiles;
+    [SerializeField] private TileBase[] _normalTiles;
+    [SerializeField] private TileBase[] _columnTiles;
+    [SerializeField] private TileBase[] _rowTiles;
+    [SerializeField] private TileBase[] _areaTiles;
+    
     [SerializeField] private TileBase licoriceTile;
     [SerializeField] private Tilemap licoriceTileMap;
     [SerializeField] private Tilemap _tilemap;
@@ -26,11 +33,16 @@ public class DiamondManager : MonoBehaviour
 
     private int _dropping = 0;
     private bool _swapping = false;
+    
+    private Vector3Int _firstMousePos, _secondMousePos;
 
     private List<Vector3Int> clearTiles = new List<Vector3Int>();
     private List<Vector3Int> lockTiles = new List<Vector3Int>();
+    private List<(Vector3Int setPos, TileBase)> specialTiles = new List<(Vector3Int setPos, TileBase)>();
 
+    private Dictionary<TileBase, TileProperties> _tilesData;
 
+    private List<Vector3Int> _visited = new List<Vector3Int>();
 	private Vector3Int[] dir =
 		{
 			new Vector3Int(-1, 0, 0),
@@ -51,13 +63,14 @@ public class DiamondManager : MonoBehaviour
         _columns = GamePlayManager.Instance._columns;
         
         _gameTurnController = GamePlayManager.Instance.GameTurnController;
+        _tilesData = GamePlayManager.Instance.TilesData;
 	}
     
     void Start()
     {
         _bounds = GamePlayManager.Instance.BoardBounds;
-		//Debug.Log($"{_bounds.xMin}, {_bounds.yMin}, {_bounds.xMax}, {_bounds.yMax}");
-		_objectPool = new Queue<SpriteRenderer>(_initObjectPool.GetObjectPool());
+        //Debug.Log($"{_bounds.xMin}, {_bounds.yMin}, {_bounds.xMax}, {_bounds.yMax}");
+        _objectPool = new Queue<SpriteRenderer>(_initObjectPool.GetObjectPool());
         GenerateBoard();
     }
 
@@ -72,7 +85,7 @@ public class DiamondManager : MonoBehaviour
 				TileBase tile;
 				do
 				{
-					tile = _diamondTiles[Random.Range(0, _diamondTiles.Length)];
+					tile = _normalTiles[Random.Range(0, _normalTiles.Length)];
 				}
 				while (CheckMatch(i, j, tile));
 				_tilemap.SetTile(new Vector3Int(i, j, 0), tile);
@@ -89,7 +102,7 @@ public class DiamondManager : MonoBehaviour
         {
             for (int j = _bounds.yMax; j < _bounds.yMax + _rows; j++)
             {
-                _tilemap.SetTile(new Vector3Int(i, j, 0), _diamondTiles[Random.Range(0, _diamondTiles.Length)]);
+                _tilemap.SetTile(new Vector3Int(i, j, 0), _normalTiles[Random.Range(0, _normalTiles.Length)]);
             }
         }
 
@@ -117,7 +130,7 @@ public class DiamondManager : MonoBehaviour
                 Vector3Int position = new Vector3Int(i, j, 0);
                 if (_tilemap.GetTile(position) == null)
                 {
-                    _tilemap.SetTile(position, _diamondTiles[Random.Range(0, _diamondTiles.Length)]);
+                    _tilemap.SetTile(position, _normalTiles[Random.Range(0, _normalTiles.Length)]);
                 }
             }
         }
@@ -125,101 +138,285 @@ public class DiamondManager : MonoBehaviour
         yield return null;
     }
 
+	private List<Vector3Int> GetAdjacentTiles(Vector3Int curPos)
+	{
+		List<Vector3Int> adjacentTiles = new List<Vector3Int>();
+		adjacentTiles.AddRange(CheckAdjacentTiles(curPos, 0));
+		adjacentTiles.AddRange(CheckAdjacentTiles(curPos, 1));
+		
+		return adjacentTiles;
+	}
 
-    private List<Vector3Int> CheckAdjacentTiles(Vector3Int curPos)
+	//axis: 0 la ngang, 1 la doc
+	//chac la DFS
+    private List<Vector3Int> CheckAdjacentTiles(Vector3Int curPos, int axis)
     {
-        List<Vector3Int> adjTiles = new List<Vector3Int>();
+	    List<Vector3Int> adjacentTiles = new List<Vector3Int>();
+	    
+        int cnt; Vector3Int pos;
 
-        int cnt = 1;
-        Vector3Int pos = curPos;
-        --pos.x;
-        while (pos.x >= _bounds.xMin)
+        //check theo hang ngang
+        if (axis == 0)
         {
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
-            else break;
-            --pos.x;
-        }
+	        cnt = 1; pos = curPos;
+	        --pos.x;
+	        while (pos.x >= _bounds.xMin)
+	        {
+		        if (SameTileColor(pos, curPos)) ++cnt;
+		        else break;
+		        --pos.x;
+	        }
 
-        pos = curPos;
-        ++pos.x;
-        while (pos.x < _bounds.xMax)
+	        pos = curPos;
+	        ++pos.x;
+	        while (pos.x < _bounds.xMax)
+	        {
+		        if (SameTileColor(pos, curPos)) ++cnt;
+		        else break;
+		        ++pos.x;
+	        }
+
+	        if (cnt >= 3)
+	        {
+		        --pos.x;
+		        for (int i = 0; i < cnt; i++,  --pos.x)
+		        {
+			        if(_visited.Contains(pos)) continue;
+			        _visited.Add(pos);
+	            
+			        if (!IsLocked(pos))
+			        {
+				        adjacentTiles.Add(pos);
+				        adjacentTiles.AddRange(CheckAdjacentTiles(pos, 1 - axis));
+			        }
+			        else
+			        {
+				        lockTiles.Add(pos);
+			        }
+		        }
+	        }
+        }
+        //check theo hang doc
+        else
         {
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
-            else break;
-            ++pos.x;
-        }
+	        cnt = 1; pos = curPos;
+	        --pos.y;
+	        while (pos.y >= _bounds.yMin)
+	        {
+		        if (SameTileColor(pos, curPos)) ++cnt;
+		        else break;
+		        --pos.y;
+	        }
 
-        if (cnt >= 3)
-        {
-            --pos.x;
-            for (int i = 0; i < cnt; i++)
-            {
-				if (!IsLocked(pos))
-				{
-					adjTiles.Add(pos);
-				}
-                else
-                {
-					lockTiles.Add(pos);
-				}
-                --pos.x;
-            }
-        }
+	        pos = curPos;
+	        ++pos.y;
+	        while (pos.y < _bounds.yMax)
+	        {
+		        if (SameTileColor(pos, curPos)) ++cnt;
+		        else break;
+		        ++pos.y;
+	        }
 
-        cnt = 1;
-        pos = curPos;
-        --pos.y;
-        while (pos.y >= _bounds.yMin)
-        {
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
-            else break;
-            --pos.y;
+	        if (cnt >= 3)
+	        {
+		        --pos.y;
+		        for (int i = 0; i < cnt; i++, --pos.y)
+		        {
+			        if(_visited.Contains(pos)) continue;
+			        _visited.Add(pos);
+	            
+			        if (!IsLocked(pos))
+			        {
+				        adjacentTiles.Add(pos);
+				        adjacentTiles.AddRange(CheckAdjacentTiles(pos, 1 - axis));
+			        }
+			        else
+			        {
+				        lockTiles.Add(pos);
+			        }
+		        }
+	        }
         }
-
-        pos = curPos;
-        ++pos.y;
-        while (pos.y < _bounds.yMax)
-        {
-            if (_tilemap.GetTile(pos) == _tilemap.GetTile(curPos)) ++cnt;
-            else break;
-            ++pos.y;
-        }
-
-        if (cnt >= 3)
-        {
-            --pos.y;
-            for (int i = 0; i < cnt; i++)
-            {
-				if (!IsLocked(pos))
-				{
-					adjTiles.Add(pos);
-				}
-                else
-                {
-					lockTiles.Add(pos);
-				}
-				--pos.y;
-            }
-        }
-
-        adjTiles = new HashSet<Vector3Int>(adjTiles).ToList();
-        return adjTiles;
+        
+        return adjacentTiles;
     }
 
-    //private List<Vector3Int> CheckAdjacentTiles(Vector3Int curPos)
-    //{
-    //    List<>
-    //}
+    private void CheckForSpawnSpecialTile(List<Vector3Int> poss)
+    {
+	    if(poss.Count < 4) return;
 
+	    Vector3Int setPos = poss[Random.Range(0, poss.Count)];
+	    if (poss.Contains(_firstMousePos) || poss.Contains(_secondMousePos))
+	    {
+		    if (poss.Contains(_firstMousePos)) setPos = _firstMousePos;
+		    else setPos = _secondMousePos;
+		    
+		    _firstMousePos = _secondMousePos = new Vector3Int(-1000, -1000, 0);
+	    }
+	    
+	    if (poss.Count >= 5)
+	    {
+		    for (int i = 0; i < _areaTiles.Length; i++)
+		    {
+			    if (_tilesData[_tilemap.GetTile(setPos)].Color == _tilesData[_areaTiles[i]].Color)
+			    {
+				    specialTiles.Add((setPos, _areaTiles[i]));
+				    break;
+			    }
+		    }
+	    }
+	    else
+	    {
+		    if (poss.All(p => p.y == poss[0].y))
+		    {
+			    for (int i = 0; i < _rowTiles.Length; i++)
+			    {
+				    if (_tilesData[_tilemap.GetTile(setPos)].Color == _tilesData[_rowTiles[i]].Color)
+				    {
+					    specialTiles.Add((setPos, _rowTiles[i]));
+					    break;
+				    }
+			    }
+		    }
+		    else
+		    {
+			    for (int i = 0; i < _columnTiles.Length; i++)
+			    {
+				    if (_tilesData[_tilemap.GetTile(setPos)].Color == _tilesData[_columnTiles[i]].Color)
+				    {
+					    specialTiles.Add((setPos, _columnTiles[i]));
+					    break;
+				    }
+			    }
+		    }
+	    }
+    }
 
-    public IEnumerator ClearDiamond(float waitTime)
+    private void SetSpecialTile()
+    {
+	    for (int i = 0; i < specialTiles.Count; i++)
+	    {
+		    _tilemap.SetTile(specialTiles[i].Item1, specialTiles[i].Item2);
+	    }
+    }
+
+    private int ActiveSpecialTile(Vector3Int pos)
+    {
+	    int count = 0;
+	    
+	    TileBase tile = _tilemap.GetTile(pos);
+	    if (_tilesData[tile].Type == TileType.Column)
+	    {
+		    for (int y = _bounds.yMin; y < _bounds.yMax; y++)
+		    {
+			    pos.y = y;
+			    if(_visited.Contains(pos)) continue;
+			    _visited.Add(pos);
+			    if (!IsLocked(pos))
+			    {
+				    if (_tilesData[tile].Type != TileType.Normal) ActiveSpecialTile(pos);
+				    _tilemap.SetTile(pos, null);
+				    ++count;
+			    }
+			    else
+			    {
+				    lockTiles.Add(pos);
+			    }
+		    }
+	    }
+	    else if (_tilesData[tile].Type == TileType.Row)
+	    {
+		    for (int x = _bounds.xMin; x < _bounds.xMax; x++)
+		    {
+			    pos.x = x;
+			    if(_visited.Contains(pos)) continue;
+			    _visited.Add(pos);
+			    if (!IsLocked(pos))
+			    {
+				    if (_tilesData[tile].Type != TileType.Normal) ActiveSpecialTile(pos);
+				    _tilemap.SetTile(pos, null);
+				    ++count;
+			    }
+			    else
+			    {
+				    lockTiles.Add(pos);
+			    }
+		    }
+	    }
+	    else if (_tilesData[tile].Type == TileType.Area)
+	    {
+		    for (int i = 0; i < dir.Length; i++)
+		    {
+			    if(!GamePlayManager.Instance.IsInBound(pos + dir[i])) continue;
+			    if(_visited.Contains(pos + dir[i])) continue;
+			    _visited.Add(pos + dir[i]);
+			    if (!IsLocked(pos + dir[i]))
+			    {
+				    if (_tilesData[tile].Type != TileType.Normal) ActiveSpecialTile(pos + dir[i]);
+				    _tilemap.SetTile(pos + dir[i], null);
+				    ++count;
+			    }
+			    else
+			    {
+				    lockTiles.Add(pos + dir[i]);
+			    }
+		    }
+	    }
+	    
+	    return count;
+    }
+
+    private void CalculateScore(ref int count, ref int bonus, Dictionary<TileBase, int> destroyedTiles)
+    {
+	    foreach (Vector3Int tilePos in clearTiles)
+	    {
+		    TileBase tile = _tilemap.GetTile(tilePos);
+		    if (tile != null)
+		    {
+			    if (destroyedTiles.ContainsKey(tile))
+			    {
+				    destroyedTiles[tile]++;
+			    }
+			    else
+			    {
+				    destroyedTiles[tile] = 1;
+			    }
+		    }
+		    if (CheckTerrainEffect(tilePos))
+		    {
+			    bonus += 1;
+		    }
+
+		    if (_tilesData[tile].Type != TileType.Normal)
+		    {
+			    count += ActiveSpecialTile(tilePos);
+		    }
+		    
+		    _tilemap.SetTile(tilePos, null);
+		    ++count;
+	    }
+    }
+
+    private void UnlockTiles()
+    {
+	    for(int i = 0; i < lockTiles.Count; i++)
+	    {
+		    licoriceTileMap.SetTile(lockTiles[i], null);
+	    }
+    }
+
+    public IEnumerator ClearDiamond(Vector3Int firstPos, Vector3Int secondPos)
     {
         _dropping = 0;
+        _firstMousePos = firstPos;
+        _secondMousePos = secondPos;
         
         while (true)
         {
             clearTiles.Clear();
             lockTiles.Clear();
+            specialTiles.Clear();
+            _visited.Clear();
             
             for (int x = _bounds.xMin; x < _bounds.xMax; x++)
             {
@@ -227,19 +424,16 @@ public class DiamondManager : MonoBehaviour
                 {
                     Vector3Int curPos = new Vector3Int(x, y, 0);
                         
-                    if (_tilemap.GetTile(curPos) == null) continue;
-
-                    //khong toi uu (nhu c)
-                    clearTiles.AddRange(CheckAdjacentTiles(curPos));
+                    if (_tilemap.GetTile(curPos) == null || _visited.Contains(curPos)) continue;
+			
+                    //cung toi uu hon mot ti thi phai
+                    List<Vector3Int> adjacentTiles = GetAdjacentTiles(curPos);
+                    
+                    clearTiles.AddRange(adjacentTiles);
+					CheckForSpawnSpecialTile(adjacentTiles);
                 }
             }
-
-            clearTiles = new HashSet<Vector3Int>(clearTiles).ToList();
-            lockTiles = new HashSet<Vector3Int>(lockTiles).ToList();
-            for(int i = 0; i < lockTiles.Count; i++)
-            {
-                licoriceTileMap.SetTile(lockTiles[i], null);
-            }
+            
             if (clearTiles.Count == 0)
             {
                 break;
@@ -258,29 +452,13 @@ public class DiamondManager : MonoBehaviour
 
 			Dictionary<TileBase,int> destroyedTiles = new Dictionary<TileBase, int>();
             int bonus = 0, count = 0;
-            foreach (Vector3Int tilePos in clearTiles)
-            {
-				TileBase tile = _tilemap.GetTile(tilePos);
-				if (tile != null)
-				{
-					if (destroyedTiles.ContainsKey(tile))
-					{
-						destroyedTiles[tile]++;
-					}
-					else
-					{
-						destroyedTiles[tile] = 1;
-					}
-				}
-				if (CheckTerrainEffect(tilePos))
-				{
-					bonus += 1;
-				}
-				_tilemap.SetTile(tilePos, null);
-				++count;
-			}
+            CalculateScore(ref count, ref bonus, destroyedTiles);
+            
+            UnlockTiles();
+            
+            SetSpecialTile();
 
-            if (_gameTurnController.GetTurn() == 0)
+			if (_gameTurnController.GetTurn() == 0)
 			{
 				var playerCharacter = GamePlayManager.Instance.PlayerCharacter;
 				if (playerCharacter != null)
@@ -298,7 +476,7 @@ public class DiamondManager : MonoBehaviour
 			}
 
 			UpdatePlayersScore(count, (int)Mathf.Ceil(bonus / 2.0f));
-
+			
             yield return StartCoroutine(DropTile());
             
             while (_dropping != 0)
@@ -306,7 +484,7 @@ public class DiamondManager : MonoBehaviour
                 yield return null;
             }
 
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(0.5f);
 
             yield return StartCoroutine(SpawnBoard());
         }
@@ -456,11 +634,11 @@ public class DiamondManager : MonoBehaviour
         {
             case 0:
                 DataManager.Instance.PlayerScore += count;
-                MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+                //MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
                 break;
             case 1:
                 DataManager.Instance.OpponentScore += count;
-                MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+                //MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
                 break;
         }
     }
@@ -477,5 +655,10 @@ public class DiamondManager : MonoBehaviour
     public bool IsDropping()
     {
         return _dropping != 0;
+    }
+    
+    private bool SameTileColor(Vector3Int a, Vector3Int b)
+    {
+	    return _tilesData[_tilemap.GetTile(a)].Color == _tilesData[_tilemap.GetTile(b)].Color;
     }
 }

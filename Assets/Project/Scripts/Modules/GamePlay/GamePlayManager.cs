@@ -10,6 +10,14 @@ using UnityEngine.Tilemaps;
 
 public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
 {
+    [SerializeField] private PretendDiamondManager pretendDiamondManager;
+
+    public PretendDiamondManager PretendDiamondManager
+    {
+        get => pretendDiamondManager;
+        set => pretendDiamondManager = value;
+    }
+    
     [SerializeField] private GameTurnController _gameTurnController;
 
     public GameTurnController GameTurnController

@@ -10,7 +10,7 @@ public class AIController : MonoBehaviour
 
     [SerializeField] private GameObject _aiObject;
     [SerializeField] private BaseCharacter character;
-    private IAIBehavior _ai;
+    private AIBehavior _ai;
 
     private BoundsInt _bounds;
     
@@ -26,7 +26,7 @@ public class AIController : MonoBehaviour
 
     void OnEnable()
     {
-        _ai = _aiObject.GetComponent<IAIBehavior>();
+        _ai = _aiObject.GetComponent<AIBehavior>();
         _ai.SetDiamondClick(_diamondClick);
     }
 
