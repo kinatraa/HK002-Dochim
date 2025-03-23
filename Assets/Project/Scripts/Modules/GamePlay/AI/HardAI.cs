@@ -11,13 +11,13 @@ public class HardAI : AIBehavior
         yield return base.SelectTile();
 
         _pretendDiamondManager.SetSwappableTiles(_swappableTiles);
+        _pretendDiamondManager.CalculateAllCasesScore();
         List<Dictionary<TileColor, int>> colorCounter = _pretendDiamondManager.ColorCounter;
         List<int> scoreCounter = _pretendDiamondManager.ScoreCounter;
 
         int idx = 0;
         for (int i = 0; i < scoreCounter.Count; i++)
         {
-            Debug.Log(scoreCounter[i]);
             if (scoreCounter[i] > scoreCounter[idx])
             {
                 idx = i;

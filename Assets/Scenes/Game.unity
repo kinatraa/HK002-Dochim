@@ -1153,8 +1153,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tilemap: {fileID: 0}
   _bordermap: {fileID: 0}
-  _borderTile: {fileID: 0}
-  _diamondManager: {fileID: 0}
+  _borderTile: {fileID: 11400000, guid: da82e29da7df0c843967c6dad3b61ad5, type: 2}
+  _diamondManager: {fileID: 1811579190}
 --- !u!114 &399886578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2023,10 +2023,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8a0ad205aba734985849d91e5ab2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _normalTiles: []
-  _columnTiles: []
-  _rowTiles: []
-  _areaTiles: []
+  _normalTiles:
+  - {fileID: 11400000, guid: 173ea209e0bfffb4cafd0214a1dc81d7, type: 2}
+  - {fileID: 11400000, guid: 28f6b45d638dff04ca57c91c461a8f9a, type: 2}
+  - {fileID: 11400000, guid: 137ec4df6177c7e4a9a12181469b1836, type: 2}
+  - {fileID: 11400000, guid: baa58ff96767fe44c9eac5101dc2e7b1, type: 2}
+  - {fileID: 11400000, guid: 0f27ea289cff14d4a92d0769361ab68c, type: 2}
+  _columnTiles:
+  - {fileID: 11400000, guid: 0563b4bad4e1c974e93863bdd47cd5e4, type: 2}
+  - {fileID: 11400000, guid: 7d41eab0ce50657409f1731ec1be646b, type: 2}
+  - {fileID: 11400000, guid: 74609d024f20923469883fb5160510df, type: 2}
+  - {fileID: 11400000, guid: 6fe967233b9d0f243bd275840bcac98a, type: 2}
+  - {fileID: 11400000, guid: 8d1efb28ded231c48bab0510bc6c7299, type: 2}
+  _rowTiles:
+  - {fileID: 11400000, guid: 99c13f7490808c541bd51cd26eed1647, type: 2}
+  - {fileID: 11400000, guid: 5310b5ce3e3c1a949bf6093fb01d7dae, type: 2}
+  - {fileID: 11400000, guid: 08a6d3aa330e5fc419dc0ae6c06a98e2, type: 2}
+  - {fileID: 11400000, guid: ca9c9734355e2384d869e375f106777a, type: 2}
+  - {fileID: 11400000, guid: 66a0f9f8fbc8b9042aba355aff5cc2a5, type: 2}
+  _areaTiles:
+  - {fileID: 11400000, guid: 9b9fdbcf984b6c144b0c6c6400482225, type: 2}
+  - {fileID: 11400000, guid: fc16a05271a39224b99ffab237e7b1ca, type: 2}
+  - {fileID: 11400000, guid: 52d8e447e5463c24bb0e5a3cadc1e64f, type: 2}
+  - {fileID: 11400000, guid: 3931abd4a2e5736459bc6884ee7137ec, type: 2}
+  - {fileID: 11400000, guid: 780702d77c9c12249977884a0b4c7ce7, type: 2}
+  _copyTilemap: {fileID: 544769098}
+  _copyLicoriceTilemap: {fileID: 1542647533}
 --- !u!483693784 &544769097
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -9266,7 +9288,7 @@ TilemapRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542647530}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -9315,7 +9337,7 @@ Tilemap:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542647530}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Tiles: {}
   m_AnimatedTiles: {}
   m_TileAssetArray:

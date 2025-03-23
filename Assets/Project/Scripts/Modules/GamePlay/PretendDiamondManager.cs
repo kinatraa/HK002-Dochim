@@ -17,8 +17,8 @@ public class PretendDiamondManager : MonoBehaviour
 	
 	private Tilemap _tilemap;
 	private Tilemap _licoriceTilemap;
-	private Tilemap _copyTilemap;
-	private Tilemap _copyLicoriceTilemap;
+	[SerializeField] private Tilemap _copyTilemap;
+	[SerializeField] private Tilemap _copyLicoriceTilemap;
 	
 	private Dictionary<TileBase, TileProperties> _tilesData = new Dictionary<TileBase, TileProperties>();
 	
@@ -67,13 +67,20 @@ public class PretendDiamondManager : MonoBehaviour
 
 	public void CalculateAllCasesScore()
     {
+	    ResetCounter();
         for (int i = 0; i < _swappableTiles.Count; i++)
         {
             CopyTilemap();
-
+            
             _curId = i;
+            SwapTiles(_swappableTiles[i].Item1, _swappableTiles[i].Item2);
             PretendClearTile();
         }
+        
+        /*for (int i = 0; i < scoreCounter.Count; i++)
+        {
+	        Debug.Log($"{i} : {scoreCounter[i]}");
+        }*/
     }
 
     private void PretendClearTile()
@@ -110,6 +117,7 @@ public class PretendDiamondManager : MonoBehaviour
             int bonus = 0, count = 0;
             CalculateScore(ref count, ref bonus);
             scoreCounter[_curId] += count;
+            /*Debug.Log($"{_curId} : {scoreCounter[_curId]}");*/
             
             UnlockTiles();
             
@@ -158,7 +166,7 @@ public class PretendDiamondManager : MonoBehaviour
 		        else break;
 		        ++pos.x;
 	        }
-
+	        
 	        if (cnt >= 3)
 	        {
 		        --pos.x;
@@ -199,7 +207,7 @@ public class PretendDiamondManager : MonoBehaviour
 		        else break;
 		        ++pos.y;
 	        }
-
+	        
 	        if (cnt >= 3)
 	        {
 		        --pos.y;
@@ -496,6 +504,13 @@ public class PretendDiamondManager : MonoBehaviour
     private bool IsLocked(Vector3Int position)
     {
 	    return _copyLicoriceTilemap.GetTile(position) != null;
+    }
+
+    private void SwapTiles(Vector3Int a, Vector3Int b)
+    {
+	    TileBase tile = _copyTilemap.GetTile(a);
+	    _copyTilemap.SetTile(a, _copyTilemap.GetTile(b));
+	    _copyTilemap.SetTile(b, tile);
     }
 
     public void SetSwappableTiles(List<(Vector3Int, Vector3Int)> swappableTiles)
