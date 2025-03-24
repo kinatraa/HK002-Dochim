@@ -21,11 +21,10 @@ public class DiamondManager : MonoBehaviour
     [SerializeField] private Tilemap licoriceTileMap;
     [SerializeField] private Tilemap _tilemap;
     [SerializeField] private Tilemap _terrainTile;
-    [SerializeField] private InitObjectPool _initObjectPool;
-
+    
     private GameTurnController _gameTurnController;
     
-    private Queue<SpriteRenderer> _objectPool;
+    private Queue<SpriteRenderer> _tilePool;
 
     private BoundsInt _bounds;
     private int _rows;
@@ -70,7 +69,7 @@ public class DiamondManager : MonoBehaviour
     {
         _bounds = GamePlayManager.Instance.BoardBounds;
         //Debug.Log($"{_bounds.xMin}, {_bounds.yMin}, {_bounds.xMax}, {_bounds.yMax}");
-        _objectPool = new Queue<SpriteRenderer>(_initObjectPool.GetObjectPool());
+        _tilePool = GamePlayManager.Instance.TilePool;
         GenerateBoard();
     }
 
@@ -572,9 +571,9 @@ public class DiamondManager : MonoBehaviour
 
         SpriteRenderer tempTile = null;
 
-        if (_objectPool.Count > 0)
+        if (_tilePool.Count > 0)
         {
-            tempTile = _objectPool.Dequeue();
+            tempTile = _tilePool.Dequeue();
             tempTile.gameObject.SetActive(true);
         }
 
@@ -596,7 +595,7 @@ public class DiamondManager : MonoBehaviour
 
         _tilemap.SetTile(toPos, tile);
         tempTile.gameObject.SetActive(false);
-        _objectPool.Enqueue(tempTile);
+        _tilePool.Enqueue(tempTile);
         --_dropping;
     }
 

@@ -9,14 +9,19 @@ public class EasyAI : AIBehavior
     public override IEnumerator SelectTile()
     {
         yield return base.SelectTile();
-        
-        int randomIdx = Random.Range(0, _swappableTiles.Count);
+
+        int idx = GetMove();
 
         yield return new WaitForSeconds(0.5f);
-        yield return _diamondClick.SelectTile(_swappableTiles[randomIdx].Item1);
+        yield return _diamondClick.SelectTile(_possibleMoves[idx].Item1);
         yield return new WaitForSeconds(1f);
-        yield return _diamondClick.SelectTile(_swappableTiles[randomIdx].Item2);
+        yield return _diamondClick.SelectTile(_possibleMoves[idx].Item2);
         
         yield return null;
+    }
+
+    protected override int GetMove()
+    {
+        return Random.Range(0, _possibleMoves.Count);
     }
 }

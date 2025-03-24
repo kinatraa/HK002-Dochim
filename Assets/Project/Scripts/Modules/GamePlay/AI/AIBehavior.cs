@@ -10,15 +10,11 @@ public abstract class AIBehavior : MonoBehaviour
     protected DiamondClick _diamondClick;
     protected BoundsInt _bounds;
     
-    protected Vector3Int[] directions = new Vector3Int[]
-    {
-        new Vector3Int(1, 0, 0),
-        new Vector3Int(0, 1, 0),
-    };
-    
     private Dictionary<TileBase, TileProperties> _tilesData = new Dictionary<TileBase, TileProperties>();
-    protected List<(Vector3Int, Vector3Int)> _swappableTiles = new List<(Vector3Int, Vector3Int)>();
+    protected List<(Vector3Int, Vector3Int)> _possibleMoves = new List<(Vector3Int, Vector3Int)>();
     protected List<Dictionary<TileColor, int>> colorCounter = new List<Dictionary<TileColor, int>>();
+    
+    private Queue<Tilemap> _tilemapPool = new Queue<Tilemap>();
     
     void Start()
     {
@@ -26,6 +22,7 @@ public abstract class AIBehavior : MonoBehaviour
         _bounds = GamePlayManager.Instance.BoardBounds;
         
         _tilesData = GamePlayManager.Instance.TilesData;
+        _tilemapPool = GamePlayManager.Instance.TilemapPool;
     }
     
     public void SetDiamondClick(DiamondClick diamondClick)
@@ -35,36 +32,14 @@ public abstract class AIBehavior : MonoBehaviour
 
     public virtual IEnumerator SelectTile()
     {
-        _swappableTiles.Clear();
-        _swappableTiles = GetSwappableTiles();
+        _possibleMoves.Clear();
+        _possibleMoves = Utils.GetAllPossibleMoves(GamePlayManager.Instance.Tilemap);
         
         yield return null;
     }
-    
-    private List<(Vector3Int, Vector3Int)> GetSwappableTiles()
+
+    protected virtual int GetMove()
     {
-        List<(Vector3Int, Vector3Int)> list = new List<(Vector3Int, Vector3Int)>();
-        Vector3Int curTile = Vector3Int.zero;
-        
-        for (int x = _bounds.xMin; x < _bounds.xMax; x++)
-        {
-            for (int y = _bounds.yMin; y < _bounds.yMax; y++)
-            {
-                curTile.x = x;
-                curTile.y = y;
-                
-                foreach (Vector3Int dir in directions)
-                {
-                    if(!GamePlayManager.Instance.IsInBound(curTile + dir)) continue;
-                    if(!_diamondClick.CanSwap(curTile, curTile + dir, 1)) continue;
-                    
-                    list.Add((curTile, curTile + dir));
-                }
-            }
-        }
-        
-        return list;
+        return 0;
     }
-    
-    
 }

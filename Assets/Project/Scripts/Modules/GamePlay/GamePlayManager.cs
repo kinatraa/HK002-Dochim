@@ -50,6 +50,18 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         get => _opponentCharacter;
         set => _opponentCharacter = value;
     }
+    
+    [SerializeField] private InitObjectPool _objectPool;
+
+    public Queue<SpriteRenderer> TilePool
+    {
+        get => _objectPool.GetTilePool();
+    }
+
+    public Queue<Tilemap> TilemapPool
+    {
+        get => _objectPool.GetTilemapPool();
+    }
 
     [SerializeField] private TilesData _tileData;
 
@@ -118,9 +130,9 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         return v.x >= _bounds.xMin && v.x < _bounds.xMax && v.y >= _bounds.yMin && v.y < _bounds.yMax;
     }
 
-    public bool SameTileColor(Vector3Int a, Vector3Int b)
+    public bool SameTileColor(Vector3Int a, Vector3Int b, Tilemap tilemap)
     {
-        return TilesData[_tilemap.GetTile(a)].Color == TilesData[_tilemap.GetTile(b)].Color;
+        return TilesData[tilemap.GetTile(a)].Color == TilesData[tilemap.GetTile(b)].Color;
     }
 
     public bool SameTileType(Vector3Int a, Vector3Int b)

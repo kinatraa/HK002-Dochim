@@ -42,7 +42,7 @@ public class PretendDiamondManager : MonoBehaviour
 		new Vector3Int(-1, 1, 0),
 	};
 	
-	private List<(Vector3Int, Vector3Int)> _swappableTiles = new List<(Vector3Int, Vector3Int)>();
+	private List<(Vector3Int, Vector3Int)> _possibleMoves = new List<(Vector3Int, Vector3Int)>();
 	private List<Dictionary<TileColor, int>> colorCounter = new List<Dictionary<TileColor, int>>();
 	public List<Dictionary<TileColor, int>> ColorCounter
 	{
@@ -68,12 +68,13 @@ public class PretendDiamondManager : MonoBehaviour
 	public void CalculateAllCasesScore()
     {
 	    ResetCounter();
-        for (int i = 0; i < _swappableTiles.Count; i++)
+        for (int i = 0; i < _possibleMoves.Count; i++)
         {
-            CopyTilemap();
+            CopyTilemap(_tilemap, _copyTilemap);
+            CopyTilemap(_licoriceTilemap, _copyLicoriceTilemap);
             
             _curId = i;
-            SwapTiles(_swappableTiles[i].Item1, _swappableTiles[i].Item2);
+            SwapTiles(_possibleMoves[i].Item1, _possibleMoves[i].Item2);
             PretendClearTile();
         }
         
@@ -85,8 +86,8 @@ public class PretendDiamondManager : MonoBehaviour
 
     private void PretendClearTile()
     {
-        _firstMousePos = _swappableTiles[_curId].Item2;
-        _secondMousePos = _swappableTiles[_curId].Item1;
+        _firstMousePos = _possibleMoves[_curId].Item2;
+        _secondMousePos = _possibleMoves[_curId].Item1;
         
         while (true)
         {
@@ -456,26 +457,15 @@ public class PretendDiamondManager : MonoBehaviour
 	    }
     }
 
-    private void CopyTilemap()
+    private void CopyTilemap(Tilemap originalTilemap, Tilemap copyTilemap)
     {
-	    //tilemap
         for (int i = _bounds.xMin; i < _bounds.xMax; i++)
         {
             for (int j = _bounds.yMin; j < _bounds.yMax + GamePlayManager.Instance._rows; j++)
             {
                 Vector3Int pos = new Vector3Int(i, j, 0);
-                _copyTilemap.SetTile(pos, _tilemap.GetTile(pos));
+                copyTilemap.SetTile(pos, originalTilemap.GetTile(pos));
             }
-        }
-        
-        //licoriceTilemap
-        for (int i = _bounds.xMin; i < _bounds.xMax; i++)
-        {
-	        for (int j = _bounds.yMin; j < _bounds.yMax; j++)
-	        {
-		        Vector3Int pos = new Vector3Int(i, j, 0);
-		        _copyLicoriceTilemap.SetTile(pos, _licoriceTilemap.GetTile(pos));
-	        }
         }
     }
 
@@ -489,7 +479,7 @@ public class PretendDiamondManager : MonoBehaviour
 	    
 	    colorCounter.Clear();
 	    scoreCounter.Clear();
-	    for (int i = 0; i < _swappableTiles.Count; i++)
+	    for (int i = 0; i < _possibleMoves.Count; i++)
 	    {
 		    colorCounter.Add(tmpDict);
 		    scoreCounter.Add(0);
@@ -513,8 +503,8 @@ public class PretendDiamondManager : MonoBehaviour
 	    _copyTilemap.SetTile(b, tile);
     }
 
-    public void SetSwappableTiles(List<(Vector3Int, Vector3Int)> swappableTiles)
+    public void SetPossibleMoves(List<(Vector3Int, Vector3Int)> possibleMoves)
     {
-	    _swappableTiles = swappableTiles;
+	    _possibleMoves = possibleMoves;
     }
 }
