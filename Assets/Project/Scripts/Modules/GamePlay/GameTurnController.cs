@@ -29,15 +29,25 @@ public class GameTurnController : MonoBehaviour
 
 		MessageManager.Instance.SendMessage(new Message(MessageType.OnTimeChanged));
 	}
+	private void Awake()
+	{
+		playerCharacter = GamePlayManager.Instance.PlayerCharacter;
+		opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
+		_turn = -1;
+		remainingActions = maxActionPerTurn;
+		DataManager.Instance.PlayerRemainActionPoints = remainingActions;
+		DataManager.Instance.OpponentRemainActionPoints = remainingActions;
+		ChangeTurn();
+	}
 	void Start()
     {
-        playerCharacter = GamePlayManager.Instance.PlayerCharacter;
-        opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
-        _turn = -1;
-        remainingActions = maxActionPerTurn;
-		DataManager.Instance.PlayerRemainActionPoints = remainingActions;
-        DataManager.Instance.OpponentRemainActionPoints = remainingActions;
-		ChangeTurn();
+  //      playerCharacter = GamePlayManager.Instance.PlayerCharacter;
+  //      opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
+  //      _turn = -1;
+  //      remainingActions = maxActionPerTurn;
+		//DataManager.Instance.PlayerRemainActionPoints = remainingActions;
+  //      DataManager.Instance.OpponentRemainActionPoints = remainingActions;
+		//ChangeTurn();
 	}
 
     public void PlayTurn()
@@ -74,10 +84,18 @@ public class GameTurnController : MonoBehaviour
             if (turnCounter == 2)
             {
                 CaculateDamage();
-                DataManager.Instance.PlayerScore = 0;
-                DataManager.Instance.OpponentScore = 0;
+                int previousPlayerHP = DataManager.Instance.PlayerHP;
+                int previousOpponentHP = DataManager.Instance.OpponentHP;
                 DataManager.Instance.PlayerHP = playerCharacter.GetCurrentHP();
                 DataManager.Instance.OpponentHP = opponentCharacter.GetCurrentHP();
+				UIManager.Instance.PlayBattleCollisionAnimation(
+							DataManager.Instance.PlayerScore,
+							DataManager.Instance.OpponentScore,
+							previousPlayerHP,
+							previousOpponentHP
+						);
+				DataManager.Instance.PlayerScore = 0;
+				DataManager.Instance.OpponentScore = 0;
 				turnCounter = 0;
             }
             EndOfRound();

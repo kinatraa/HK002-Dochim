@@ -25,8 +25,6 @@ public abstract class BaseCharacter : MonoBehaviour
 		currentHP = maxHP;
 	}
 
-	//public int currentActiveSkillExistenceTurn = 0;
-
 	//status
 	public bool IsReady {  get { return isReady; } }
 	public bool IsActive {  get { return isActive; } }
@@ -40,6 +38,7 @@ public abstract class BaseCharacter : MonoBehaviour
 
 	public abstract void RemoveActiveSkill();
 
+	public event System.Action<List<StatusData>> OnStatusChanged;
 	public void ApplyStatus(StatusData status)
 	{
 		var existingStatus = activeStatus.Find(e => e.Type == status.Type);
@@ -56,7 +55,7 @@ public abstract class BaseCharacter : MonoBehaviour
 				Debug.Log($"{characterName} started tracking tiles for {status.Type}.");
 			}
 		}
-		Debug.Log($"{characterName} applied {status.Type} with {status.Stack} stacks. Tiles required to remove: {status.AmountOfTileRequired}");
+		OnStatusChanged?.Invoke(activeStatus);
 	}
 
 	public void ApplyBloodLoss(BaseCharacter source)
@@ -156,15 +155,13 @@ public abstract class BaseCharacter : MonoBehaviour
 		var effect = activeStatus.Find(e => e.Type == status);
 		if(effect != null)
 		{
-			if(effect.Stack >= 1)
-			{
-				effect.AddStack(-1);
-			}
-			else
+			effect.AddStack(-1);
+			if (effect.Stack == 0)
 			{
 				activeStatus.Remove(effect);
 				Debug.Log("No longer in status effect");
 			}
+			OnStatusChanged?.Invoke(activeStatus);
 		}
 	}
 	public abstract void Trigger(List<Vector3Int> triggerPosition, int amount);

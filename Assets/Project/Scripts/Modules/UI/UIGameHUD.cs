@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,9 +15,24 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     [SerializeField] private TextMeshProUGUI _playerSkillDescription;
     [SerializeField] private TextMeshProUGUI _opponentSkillDescription;
 
-    //[SerializeField] private float holdThreshold = 0.5f;
-    //private float pointerDownTime;
-    //private bool isHolding;
+    [Header("Player Status")]
+    [SerializeField] CanvasGroup _playerStatusCanvasGroup;
+    [SerializeField] Image[] _playersCurrentStatusIconList;
+    [SerializeField] TextMeshProUGUI[] _playersCurrentStatusTextList;
+
+    [Header("Opponent Status")]
+    [SerializeField] CanvasGroup _opponentStatusCanvasGroup;
+    [SerializeField] Image[] _opponentCurrentStatusIconList;
+    [SerializeField] TextMeshProUGUI[] _opponentCurrentStatusTextList;
+
+    [SerializeField] Sprite defaultStatusIcon;
+
+    [Header("AnimationBullShit")]
+    private Vector2 _playerPortraitInitPos;
+    private Vector2 _opponentPortraitInitPos;
+    [SerializeField] float _animationDurationTime;
+    [SerializeField] RectTransform _collisionPosition;
+
     private BaseCharacter playerCharacter;
     private BaseCharacter opponentCharacter;
     private GameObject currentIcon;
@@ -56,9 +70,71 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     private float differenceRatio;
 	private void Awake()
 	{
+        _playerPortraitInitPos = _playerPortrait.rectTransform.anchoredPosition;
+        _opponentPortraitInitPos = _opponentPortrait.rectTransform.anchoredPosition;
 		_playerRemainingActionsBoard = _playerActionRemains.GetComponentInParent<Image>();
         _opponentRemainingActionsBoard = _opponentActionRemains.GetComponentInParent<Image>();
 	}
+
+    //animation 
+    public void BattleAnimation(int playerScore,int opponentScore,int playerHP,int opponentHP)
+    {
+		_playerPortrait.rectTransform.anchoredPosition = _playerPortraitInitPos;
+		_opponentPortrait.rectTransform.anchoredPosition = _opponentPortraitInitPos;
+
+        Vector2 collisionPoint = (_playerPortraitInitPos + _opponentPortraitInitPos) / 2f;
+        Sequence battleSequence = DOTween.Sequence();
+        battleSequence.Append(_playerPortrait.rectTransform.DOAnchorPos(collisionPoint, _animationDurationTime).SetEase(Ease.InOutQuad));
+        battleSequence.Join(_opponentPortrait.rectTransform.DOAnchorPos(collisionPoint, _animationDurationTime).SetEase(Ease.InOutQuad));
+        battleSequence.AppendCallback(() =>
+        {
+            Vector2 playerKnockbackPos = collisionPoint - new Vector2(200f, 0f);
+            Vector2 opponentKnockbackPos = collisionPoint + new Vector2(200f, 0f);
+			if (playerScore > opponentScore)
+			{
+				_opponentPortrait.rectTransform.DOAnchorPos(opponentKnockbackPos, _animationDurationTime).SetEase(Ease.OutBack);
+			}
+			else if (playerScore < opponentScore)
+			{
+				_playerPortrait.rectTransform.DOAnchorPos(playerKnockbackPos, _animationDurationTime).SetEase(Ease.OutBack);
+			}
+			else
+			{
+				_playerPortrait.rectTransform.DOShakeAnchorPos(_animationDurationTime, 10f);
+				_opponentPortrait.rectTransform.DOShakeAnchorPos(_animationDurationTime, 10f);
+			}
+		});
+        battleSequence.AppendCallback(() =>
+        {
+            StartCoroutine(UpdateHP(playerHP, opponentHP));
+        });
+        battleSequence.AppendInterval(_fillSpeed);
+		battleSequence.AppendCallback(() =>
+		{
+			_playerPortrait.rectTransform.DOAnchorPos(_playerPortraitInitPos, _animationDurationTime).SetEase(Ease.InOutQuad);
+			_opponentPortrait.rectTransform.DOAnchorPos(_opponentPortraitInitPos, _animationDurationTime).SetEase(Ease.InOutQuad);
+		});
+	}
+    private IEnumerator UpdateHP(int previousPlayerHP,int previousOpponentHP)
+    {
+        _playerHP.text = $"{previousPlayerHP}";
+        _playerFillAmount = (DataManager.Instance.PlayerMaxHP == 0) ? 1 : ((float)previousPlayerHP/ (float)DataManager.Instance.PlayerMaxHP);
+        _playerHPFill.DOFillAmount(_playerFillAmount, _fillSpeed);
+		_opponentHP.text = $"{previousOpponentHP}";
+		_opponentFillAmount = (DataManager.Instance.OpponentMaxHP == 0) ? 1 : ((float)previousOpponentHP / (float)DataManager.Instance.OpponentMaxHP);
+        _opponentHPFill.DOFillAmount(_opponentFillAmount, _fillSpeed);
+
+		yield return new WaitForSeconds(_fillSpeed);
+
+		_playerHP.text = $"{DataManager.Instance.PlayerHP}";
+		_playerFillAmount = (DataManager.Instance.PlayerMaxHP == 0) ? 1 : ((float)DataManager.Instance.PlayerHP / (float)DataManager.Instance.PlayerMaxHP);
+		_playerHPFill.DOFillAmount(_playerFillAmount, _fillSpeed);
+
+		_opponentHP.text = $"{DataManager.Instance.OpponentHP}";
+		_opponentFillAmount = (DataManager.Instance.OpponentMaxHP == 0) ? 1 : ((float)DataManager.Instance.OpponentHP / (float)DataManager.Instance.OpponentMaxHP);
+		_opponentHPFill.DOFillAmount(_opponentFillAmount, _fillSpeed);
+	}
+
 	void OnEnable()
     {
         UpdateUI();
@@ -127,12 +203,12 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 			_playerScoreFill.DOSizeDelta(new Vector2(baseWidth, _playerScoreFill.sizeDelta.y), _fillSpeed);
 			_opponentScoreFill.DOSizeDelta(new Vector2(baseWidth, _opponentScoreFill.sizeDelta.y), _fillSpeed);
 		}
-		_playerHP.text = $"{DataManager.Instance.PlayerHP}";
-		_playerFillAmount = (DataManager.Instance.PlayerMaxHP == 0) ? 1 : ((float)DataManager.Instance.PlayerHP / (float)DataManager.Instance.PlayerMaxHP);
-		_playerHPFill.DOFillAmount(_playerFillAmount, _fillSpeed);
-		_opponentFillAmount = (DataManager.Instance.OpponentMaxHP == 0) ? 1 : ((float)DataManager.Instance.OpponentHP / (float)DataManager.Instance.OpponentMaxHP);
-		_opponentHP.text = $"{DataManager.Instance.OpponentHP}";
-        _opponentHPFill.DOFillAmount(_opponentFillAmount, _fillSpeed);
+		//_playerHP.text = $"{DataManager.Instance.PlayerHP}";
+		//_playerFillAmount = (DataManager.Instance.PlayerMaxHP == 0) ? 1 : ((float)DataManager.Instance.PlayerHP / (float)DataManager.Instance.PlayerMaxHP);
+		//_playerHPFill.DOFillAmount(_playerFillAmount, _fillSpeed);
+		//_opponentFillAmount = (DataManager.Instance.OpponentMaxHP == 0) ? 1 : ((float)DataManager.Instance.OpponentHP / (float)DataManager.Instance.OpponentMaxHP);
+		//_opponentHP.text = $"{DataManager.Instance.OpponentHP}";
+  //      _opponentHPFill.DOFillAmount(_opponentFillAmount, _fillSpeed);
         if (GamePlayManager.Instance.GameTurnController.GetTurn() == 0) {
             _playerActionRemains.text = $"{DataManager.Instance.PlayerRemainActionPoints}";
             _playerRemainingActionsBoard.enabled = true;
@@ -146,6 +222,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
         _playerActionRemains.text = $"{DataManager.Instance.PlayerRemainActionPoints}";
 		_opponentActionRemains.text = $"{DataManager.Instance.OpponentRemainActionPoints}";
         SkillUpdate();
+        UpdateStatus();
 	}
 
 	public void SkillUpdate()
@@ -160,6 +237,39 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
         _opponentCoolDownIndicator.DOFillAmount(opponentProgress, _fillSpeed);
 
 	}
+    public void UpdateStatus()
+    {
+  //      Debug.Log(DataManager.Instance.PlayerCurrentActiveStatus[0].Stack);
+		//Debug.Log(DataManager.Instance.OpponentCurrentActiveStatus);
+		UpdateCharacterEffect(DataManager.Instance.PlayerCurrentActiveStatus,_playerStatusCanvasGroup,_playersCurrentStatusIconList,_playersCurrentStatusTextList);
+        UpdateCharacterEffect(DataManager.Instance.OpponentCurrentActiveStatus, _opponentStatusCanvasGroup, _opponentCurrentStatusIconList, _opponentCurrentStatusTextList);
+    }
+    private void UpdateCharacterEffect(List<StatusData> statusList,CanvasGroup canvasGroup, Image[] statusImages, TextMeshProUGUI[] stackTexts)
+    {
+		if (statusList == null || statusList.Count == 0)
+        {
+			//Debug.Log("A");
+			canvasGroup.alpha = 0f;
+            return;
+        }
+		//Debug.Log("B");
+		canvasGroup.alpha = 1f;
+        for (int i = 0; i < statusImages.Length; i++) 
+        {
+            if (i < statusList.Count)
+            {
+                statusImages[i].gameObject.SetActive(true);
+                statusImages[i].sprite = defaultStatusIcon;
+                if (stackTexts[i] != null)
+                    stackTexts[i].text = statusList[i].Stack.ToString();
+            }
+            else
+            {
+                statusImages[i].gameObject.SetActive(false);
+				if (stackTexts[i] != null) stackTexts[i].text = "";
+			}
+        }
+    }
     
     public void Show()
     {
