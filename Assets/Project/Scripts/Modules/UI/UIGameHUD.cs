@@ -1,14 +1,28 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIGameHUD : MonoBehaviour, IUIGameBase
 {
     [SerializeField] private TextMeshProUGUI _currentPlayerTurnScoreText;
     [SerializeField] private TextMeshProUGUI _currentOpponentTurnScoreText;
+
+    [SerializeField] private TextMeshProUGUI _playerSkillDescription;
+    [SerializeField] private TextMeshProUGUI _opponentSkillDescription;
+
+    //[SerializeField] private float holdThreshold = 0.5f;
+    //private float pointerDownTime;
+    //private bool isHolding;
+    private BaseCharacter playerCharacter;
+    private BaseCharacter opponentCharacter;
+    private GameObject currentIcon;
+
     [SerializeField] private TextMeshProUGUI _playerHP;
     [SerializeField] private Image _playerHPFill;
     [SerializeField] private Image _opponentHPFill;
@@ -18,6 +32,16 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     [SerializeField] private TextMeshProUGUI _opponentActionRemains;
     [SerializeField] private RectTransform _playerScoreFill;
     [SerializeField] private RectTransform _opponentScoreFill;
+    [SerializeField] private Image _playerCoolDownIndicator;
+    [SerializeField] private Image _opponentCoolDownIndicator;
+    [SerializeField] private TextMeshProUGUI _timer;
+    //init UI 
+    [SerializeField] private TextMeshProUGUI _playerSkillIndicator;
+    [SerializeField] private Image _playerSkillIcon;
+    [SerializeField] private Image _playerPortrait;
+    [SerializeField] private TextMeshProUGUI _opponentSkillIndicator;
+    [SerializeField] private Image _opponentSkillIcon;
+    [SerializeField] private Image _opponentPortrait;
 
 	private float _opponentFillAmount;
 	private float _playerFillAmount;
@@ -28,7 +52,13 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     private Image _opponentRemainingActionsBoard;
     private float maxWidth = 1510;
     private float baseWidth = 755;
+
     private float differenceRatio;
+	private void Awake()
+	{
+		_playerRemainingActionsBoard = _playerActionRemains.GetComponentInParent<Image>();
+        _opponentRemainingActionsBoard = _opponentActionRemains.GetComponentInParent<Image>();
+	}
 	void OnEnable()
     {
         UpdateUI();
@@ -38,7 +68,29 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     {
         
     }
+    public void UpdateTimer()
+    {
+        int t = (int)GamePlayManager.Instance.Timer;
 
+		_timer.text = t.ToString();
+    }
+    public void Init()
+    {
+        _playerPortrait.sprite = DataManager.Instance.PlayerPortrait;
+        _playerSkillIcon.sprite = DataManager.Instance.PlayerSkillIcon;
+        _playerSkillIndicator.text = $"/{DataManager.Instance.PlayerSkillRequirementAmount}";
+        _opponentPortrait.sprite = DataManager.Instance.OpponentPortrait;
+        _opponentSkillIcon.sprite = DataManager.Instance.OpponentSkillIcon;
+        _opponentSkillIndicator.text = $"/{DataManager.Instance.OpponentSkillRequirementAmount}";
+
+        _playerCoolDownIndicator.fillAmount = 0;
+        _opponentCoolDownIndicator.fillAmount = 0;
+
+		playerCharacter = GamePlayManager.Instance.PlayerCharacter;
+		opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
+		_playerSkillDescription.text = playerCharacter.skillDescriptions;
+
+	}
     public void UpdateUI()
     {
 
@@ -83,14 +135,30 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
         _opponentHPFill.DOFillAmount(_opponentFillAmount, _fillSpeed);
         if (GamePlayManager.Instance.GameTurnController.GetTurn() == 0) {
             _playerActionRemains.text = $"{DataManager.Instance.PlayerRemainActionPoints}";
+            _playerRemainingActionsBoard.enabled = true;
+            _opponentRemainingActionsBoard.enabled = false;
         }
         if (GamePlayManager.Instance.GameTurnController.GetTurn() == 1) {
             _opponentActionRemains.text = $"{DataManager.Instance.OpponentRemainActionPoints}";
-        }
-        Debug.Log(DataManager.Instance.PlayerRemainActionPoints);
+			_playerRemainingActionsBoard.enabled = false;
+			_opponentRemainingActionsBoard.enabled = true;
+		}
         _playerActionRemains.text = $"{DataManager.Instance.PlayerRemainActionPoints}";
-        Debug.Log(_playerActionRemains.text);
 		_opponentActionRemains.text = $"{DataManager.Instance.OpponentRemainActionPoints}";
+        SkillUpdate();
+	}
+
+	public void SkillUpdate()
+	{
+		_playerSkillIndicator.text = $"{DataManager.Instance.PlayerCurrentTilesAcquired}/{DataManager.Instance.PlayerSkillRequirementAmount}";
+		_opponentSkillIndicator.text = $"{DataManager.Instance.OpponentCurrentTilesAcquired}/{DataManager.Instance.OpponentSkillRequirementAmount}";
+
+		float playerProgress = (DataManager.Instance.PlayerSkillRequirementAmount == 0) ? 1 : (float)DataManager.Instance.PlayerCurrentTilesAcquired / DataManager.Instance.PlayerSkillRequirementAmount;
+		float opponentProgress = (DataManager.Instance.OpponentSkillRequirementAmount == 0) ? 1 :  (float)DataManager.Instance.OpponentCurrentTilesAcquired / DataManager.Instance.OpponentSkillRequirementAmount;
+
+		_playerCoolDownIndicator.DOFillAmount(playerProgress, _fillSpeed);
+        _opponentCoolDownIndicator.DOFillAmount(opponentProgress, _fillSpeed);
+
 	}
     
     public void Show()
@@ -102,4 +170,5 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     {
         gameObject.SetActive(false);
     }
+
 }

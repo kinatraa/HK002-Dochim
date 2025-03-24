@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HaKien;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -58,6 +59,10 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         get => _tilemap;
         set => _tilemap = value;
     }
+    public float Timer
+    {
+        get => _gameTurnController.timer;
+    }
     
     [SerializeField] private Tilemap _borderTilemap;
     public Tilemap BorderTilemap
@@ -87,7 +92,7 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         _bounds.yMin = -_rows / 2;
         _bounds.yMax = _rows / 2;
     }
-    
+        
     public bool IsInBound(Vector3Int v)
     {
         return v.x >= _bounds.xMin && v.x < _bounds.xMax && v.y >= _bounds.yMin && v.y < _bounds.yMax;

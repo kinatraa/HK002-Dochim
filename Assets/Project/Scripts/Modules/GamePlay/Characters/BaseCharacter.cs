@@ -3,30 +3,42 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public abstract class BaseCharacter : MonoBehaviour
 {
 	public string characterName;
 	[SerializeField]private int maxHP;
 	[SerializeField]private int currentHP;
-	public Sprite characterSprite;
-	public Sprite activeSkillIcon;
-
+	public string skillDescriptions;
+	public Sprite characterPortrait;
+	public Sprite SkillIcon;
+	protected bool isReady = false;
+	protected bool isActive = false;
+	public int activeConditionAmount = 0;
+	public int currentConditionAmount = 0;
 	protected List<StatusData> activeStatus = new List<StatusData>();
 	private Dictionary<StatusType,int> tileDestroyedPreEffect = new Dictionary<StatusType,int>();
+	public int activeSkillExistenceTurn = 0;
 	protected virtual void Awake()
 	{
 		currentHP = maxHP;
 	}
 
-	public void Initialize(string name, int health,Sprite sprite)
-	{
-		characterName = name;
-		maxHP = health;
-		health = maxHP;
-		characterSprite = sprite;
-	}
+	//public int currentActiveSkillExistenceTurn = 0;
+
 	//status
+	public bool IsReady {  get { return isReady; } }
+	public bool IsActive {  get { return isActive; } }
+	public int ActiveConditionAmount {  get { return activeConditionAmount; } }
+
+
+	public int CurrentActiveSkillExistenceTurn
+	{
+		get { return activeSkillExistenceTurn; }
+	}
+
+	public abstract void RemoveActiveSkill();
 
 	public void ApplyStatus(StatusData status)
 	{

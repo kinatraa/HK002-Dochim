@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class AIController : MonoBehaviour
 {
@@ -22,7 +23,14 @@ public class AIController : MonoBehaviour
         _diamondClick = GetComponent<DiamondClick>();
         _bounds = GamePlayManager.Instance.BoardBounds;
         GamePlayManager.Instance.OpponentCharacter = character;
-        DataManager.Instance.OpponentHP = character.GetCurrentHP();
+		//send message for init 
+        if(character.characterPortrait != null)
+        {
+        }
+		DataManager.Instance.OpponentPortrait = character.characterPortrait;
+		DataManager.Instance.OpponentSkillIcon = character.SkillIcon;
+		DataManager.Instance.OpponentSkillRequirementAmount = character.activeConditionAmount;
+		DataManager.Instance.OpponentHP = character.GetCurrentHP();
         DataManager.Instance.OpponentMaxHP = character.GetCurrentHP();
     }
 

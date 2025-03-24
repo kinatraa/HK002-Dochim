@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IActiveSkill
 {
     public void ActiveSkills();
+
+    public void ModifyExistenceSkillTurn();
 }
