@@ -19,13 +19,13 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         set => diamondManager = value;
     }
 
-    /*[SerializeField] private PretendDiamondManager pretendDiamondManager;
+    [SerializeField] private PretendDiamondManager pretendDiamondManager;
 
     public PretendDiamondManager PretendDiamondManager
     {
-        get => diamondManager;
-        set => diamondManager = value;
-    }*/
+        get => pretendDiamondManager;
+        set => pretendDiamondManager = value;
+    }
 
     [SerializeField] private GameTurnController _gameTurnController;
 

@@ -548,7 +548,6 @@ RectTransform:
   - {fileID: 528833928}
   - {fileID: 1195762358}
   - {fileID: 1558269963}
-  - {fileID: 1537175864}
   - {fileID: 674440625}
   - {fileID: 1246476896}
   m_Father: {fileID: 1645693749}
@@ -2589,6 +2588,7 @@ MonoBehaviour:
   activeSkillExistenceTurn: 0
   conditionTile: {fileID: 11400000, guid: baa58ff96767fe44c9eac5101dc2e7b1, type: 2}
   fireTile: {fileID: 11400000, guid: 3dffb469411c46d4fb029db377774696, type: 2}
+  fireTilePosition: []
 --- !u!1 &701566221
 GameObject:
   m_ObjectHideFlags: 0
@@ -2619,7 +2619,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1537175864}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2753,7 +2753,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1537175864}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3123,7 +3123,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1537175864}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3198,7 +3198,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1456388045}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4529,7 +4529,6 @@ RectTransform:
   - {fileID: 833146912}
   - {fileID: 1920910557}
   - {fileID: 918441291}
-  - {fileID: 1456388045}
   m_Father: {fileID: 305395600}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
@@ -10122,7 +10121,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1456388045}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -10745,7 +10744,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1456388045}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -10895,6 +10894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a3b0fbe98ba654988aac57f96737c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diamondManager: {fileID: 1811579190}
   pretendDiamondManager: {fileID: 544769096}
   _gameTurnController: {fileID: 1618832790}
   _playerCharacter: {fileID: 0}
@@ -11462,3 +11462,9 @@ SceneRoots:
   - {fileID: 1377086447}
   - {fileID: 1626240386}
   - {fileID: 1108005141}
+  - {fileID: 701566222}
+  - {fileID: 708373376}
+  - {fileID: 818110134}
+  - {fileID: 830391396}
+  - {fileID: 1632987971}
+  - {fileID: 1836672248}
