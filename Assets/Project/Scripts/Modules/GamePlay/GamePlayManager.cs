@@ -12,13 +12,23 @@ using UnityEngine.Tilemaps;
 public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
 {
     [SerializeField] private DiamondManager diamondManager;
+
     public DiamondManager DiamondManager
     {
         get => diamondManager;
         set => diamondManager = value;
     }
 
+    /*[SerializeField] private PretendDiamondManager pretendDiamondManager;
+
+    public PretendDiamondManager PretendDiamondManager
+    {
+        get => diamondManager;
+        set => diamondManager = value;
+    }*/
+
     [SerializeField] private GameTurnController _gameTurnController;
+
     public GameTurnController GameTurnController
     {
         get => _gameTurnController;
@@ -26,18 +36,21 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
     }
 
     [SerializeField] private BaseCharacter _playerCharacter;
+
     public BaseCharacter PlayerCharacter
     {
         get => _playerCharacter;
         set => _playerCharacter = value;
     }
-	[SerializeField] private BaseCharacter _opponentCharacter;
-	public BaseCharacter OpponentCharacter
-	{
-		get => _opponentCharacter;
-		set => _opponentCharacter = value;
-	}
-    
+
+    [SerializeField] private BaseCharacter _opponentCharacter;
+
+    public BaseCharacter OpponentCharacter
+    {
+        get => _opponentCharacter;
+        set => _opponentCharacter = value;
+    }
+
     [SerializeField] private TilesData _tileData;
 
     public Dictionary<TileBase, TileProperties> TilesData
@@ -46,9 +59,9 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         set => _tileData.TilesDictionary = value;
     }
 
-	[SerializeField] public int _rows = 8;
+    [SerializeField] public int _rows = 8;
     [SerializeField] public int _columns = 8;
-    
+
     [SerializeField] private Tilemap _tilemap;
     [SerializeField] private Tilemap _licoriceTileMap;
     [SerializeField] private Tilemap _effectTileMap;
@@ -58,50 +71,58 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         get => _tilemap;
         set => _tilemap = value;
     }
+
     public float Timer
     {
         get => _gameTurnController.timer;
     }
-    
+
     [SerializeField] private Tilemap _borderTilemap;
+
     public Tilemap BorderTilemap
     {
         get => _borderTilemap;
         set => _borderTilemap = value;
     }
+
     public Tilemap LicoriceTileMap
     {
         get => _licoriceTileMap;
         set => _licoriceTileMap = value;
     }
 
-	public Tilemap EffectTileMap { get => _effectTileMap; set => _effectTileMap = value; }
+    public Tilemap EffectTileMap
+    {
+        get => _effectTileMap;
+        set => _effectTileMap = value;
+    }
 
-	public BoundsInt _bounds;
+    public BoundsInt _bounds;
+
     public BoundsInt BoardBounds
     {
         get => _bounds;
         set => _bounds = value;
     }
 
-	private void Awake()
+    private void Awake()
     {
         _bounds.xMin = -_columns / 2;
         _bounds.xMax = _columns / 2;
         _bounds.yMin = -_rows / 2;
         _bounds.yMax = _rows / 2;
     }
-        
+
     public bool IsInBound(Vector3Int v)
     {
         return v.x >= _bounds.xMin && v.x < _bounds.xMax && v.y >= _bounds.yMin && v.y < _bounds.yMax;
     }
-    
+
     public bool SameTileColor(Vector3Int a, Vector3Int b)
     {
         return TilesData[_tilemap.GetTile(a)].Color == TilesData[_tilemap.GetTile(b)].Color;
     }
-    
+
     public bool SameTileType(Vector3Int a, Vector3Int b)
     {
         return TilesData[_tilemap.GetTile(a)].Type == TilesData[_tilemap.GetTile(b)].Type;
@@ -109,17 +130,14 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
 
     private void OnDestroy()
     {
-        
     }
 
     private void OnEnable()
     {
-        
     }
 
     private void OnDisable()
     {
-        
     }
 
     public void Handle(Message message)
