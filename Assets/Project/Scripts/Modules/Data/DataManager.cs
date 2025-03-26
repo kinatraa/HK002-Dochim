@@ -10,16 +10,26 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
 	{
 		if (GamePlayManager.Instance.PlayerCharacter != null)
 		{
-			Debug.Log("A");
 			GamePlayManager.Instance.PlayerCharacter.OnStatusChanged += UpdatePlayerStatus;
+            GamePlayManager.Instance.PlayerCharacter.OnHPChangedDuringTurn += UpdatePlayerHPDuringTurn;
 		}
 		if (GamePlayManager.Instance.OpponentCharacter != null)
 		{
-			Debug.Log("B");
 			GamePlayManager.Instance.OpponentCharacter.OnStatusChanged += UpdateOpponentStatus;
+            GamePlayManager.Instance.OpponentCharacter.OnHPChangedDuringTurn += UpdateOpponentHPDuringTurn;
 		}
 	}
 
+    private void UpdatePlayerHPDuringTurn(int currentHP)
+    {
+        PlayerHP = currentHP;
+        MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChangedDuringTurn));
+    }
+    private void UpdateOpponentHPDuringTurn(int currentHP)
+    {
+        OpponentHP = currentHP;
+        MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChangedDuringTurn));
+    }
 	private void OnDestroy()
 	{
 		if (GamePlayManager.Instance.PlayerCharacter != null)
@@ -51,6 +61,7 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
         {
             PlayerData.portrait = value;
             MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
+            Debug.Log(PlayerPortrait.name);
         }
     }
     public Sprite PlayerSkillIcon
@@ -137,6 +148,7 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
         {
             OpponentData.portrait = value;
             MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
+            Debug.Log("B");
         }
     }
     public Sprite OpponentSkillIcon

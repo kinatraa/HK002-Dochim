@@ -450,7 +450,8 @@ public class DiamondManager : MonoBehaviour
 			}
 			else if (GamePlayManager.Instance.GameTurnController.GetTurn() == 1)
 			{
-
+				var opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
+				opponentCharacter.Trigger(clearTiles, clearTiles.Count);
 			}
 
 			Dictionary<TileBase,int> destroyedTiles = new Dictionary<TileBase, int>();

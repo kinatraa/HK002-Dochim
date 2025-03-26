@@ -19,7 +19,6 @@ public class SkillButtonClick : MonoBehaviour, IPointerClickHandler
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		_character.Active();
-		//_character.currentConditionAmount = 0;
 		DataManager.Instance.PlayerCurrentTilesAcquired = 0;
 		Debug.Log("Click");
 	}

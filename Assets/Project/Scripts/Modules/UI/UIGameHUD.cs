@@ -12,9 +12,6 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     [SerializeField] private TextMeshProUGUI _currentPlayerTurnScoreText;
     [SerializeField] private TextMeshProUGUI _currentOpponentTurnScoreText;
 
-    [SerializeField] private TextMeshProUGUI _playerSkillDescription;
-    [SerializeField] private TextMeshProUGUI _opponentSkillDescription;
-
     [Header("Player Status")]
     [SerializeField] CanvasGroup _playerStatusCanvasGroup;
     [SerializeField] Image[] _playersCurrentStatusIconList;
@@ -36,26 +33,39 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     private BaseCharacter playerCharacter;
     private BaseCharacter opponentCharacter;
     private GameObject currentIcon;
+	[SerializeField] private float _fillSpeed;
 
+    [SerializeField] private TextMeshProUGUI _timer;
+
+    [Header("Player")]    
+    //init UI 
     [SerializeField] private TextMeshProUGUI _playerHP;
     [SerializeField] private Image _playerHPFill;
-    [SerializeField] private Image _opponentHPFill;
-    [SerializeField] private float  _fillSpeed;
-    [SerializeField] private TextMeshProUGUI _opponentHP;
     [SerializeField] private TextMeshProUGUI _playerActionRemains;
-    [SerializeField] private TextMeshProUGUI _opponentActionRemains;
-    [SerializeField] private RectTransform _playerScoreFill;
-    [SerializeField] private RectTransform _opponentScoreFill;
-    [SerializeField] private Image _playerCoolDownIndicator;
-    [SerializeField] private Image _opponentCoolDownIndicator;
-    [SerializeField] private TextMeshProUGUI _timer;
-    //init UI 
-    [SerializeField] private TextMeshProUGUI _playerSkillIndicator;
+    [SerializeField] private TextMeshProUGUI _playerPassiveSkillIndicator;
+    [SerializeField] private TextMeshProUGUI _playerActiveSkillIndicator;
     [SerializeField] private Image _playerSkillIcon;
     [SerializeField] private Image _playerPortrait;
-    [SerializeField] private TextMeshProUGUI _opponentSkillIndicator;
+    [SerializeField] private Image _playerCoolDownIndicator;
+    [SerializeField] private RectTransform _playerScoreFill;
+	[SerializeField] private TextMeshProUGUI _playerSkillDescription;
+	[Header("Opponent")]
+	//init UI 
+	[SerializeField] private TextMeshProUGUI _opponentActiveSkillIndicator;
+    [SerializeField] private TextMeshProUGUI _opponentPassiveSkillIndicator;
     [SerializeField] private Image _opponentSkillIcon;
     [SerializeField] private Image _opponentPortrait;
+
+	[SerializeField] private Image _opponentHPFill;
+    [SerializeField] private TextMeshProUGUI _opponentHP;
+    
+    [SerializeField] private TextMeshProUGUI _opponentActionRemains;
+    
+    [SerializeField] private RectTransform _opponentScoreFill;
+    
+    [SerializeField] private Image _opponentCoolDownIndicator;
+
+	[SerializeField] private TextMeshProUGUI _opponentSkillDescription;
 
 	private float _opponentFillAmount;
 	private float _playerFillAmount;
@@ -154,12 +164,14 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     {
         _playerPortrait.sprite = DataManager.Instance.PlayerPortrait;
         _playerSkillIcon.sprite = DataManager.Instance.PlayerSkillIcon;
-        _playerSkillIndicator.text = $"/{DataManager.Instance.PlayerSkillRequirementAmount}";
+        _playerActiveSkillIndicator.text = $"/{DataManager.Instance.PlayerSkillRequirementAmount}";
         _opponentPortrait.sprite = DataManager.Instance.OpponentPortrait;
         _opponentSkillIcon.sprite = DataManager.Instance.OpponentSkillIcon;
-        _opponentSkillIndicator.text = $"/{DataManager.Instance.OpponentSkillRequirementAmount}";
-
-        _playerCoolDownIndicator.fillAmount = 0;
+        _opponentActiveSkillIndicator.text = $"/{DataManager.Instance.OpponentSkillRequirementAmount}";
+        _playerHP.text = $"{DataManager.Instance.PlayerHP}";
+        _opponentHP.text = $"{DataManager.Instance.OpponentHP}";
+		Debug.Log(_opponentHP.text);
+		_playerCoolDownIndicator.fillAmount = 0;
         _opponentCoolDownIndicator.fillAmount = 0;
 
 		playerCharacter = GamePlayManager.Instance.PlayerCharacter;
@@ -203,12 +215,6 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 			_playerScoreFill.DOSizeDelta(new Vector2(baseWidth, _playerScoreFill.sizeDelta.y), _fillSpeed);
 			_opponentScoreFill.DOSizeDelta(new Vector2(baseWidth, _opponentScoreFill.sizeDelta.y), _fillSpeed);
 		}
-		//_playerHP.text = $"{DataManager.Instance.PlayerHP}";
-		//_playerFillAmount = (DataManager.Instance.PlayerMaxHP == 0) ? 1 : ((float)DataManager.Instance.PlayerHP / (float)DataManager.Instance.PlayerMaxHP);
-		//_playerHPFill.DOFillAmount(_playerFillAmount, _fillSpeed);
-		//_opponentFillAmount = (DataManager.Instance.OpponentMaxHP == 0) ? 1 : ((float)DataManager.Instance.OpponentHP / (float)DataManager.Instance.OpponentMaxHP);
-		//_opponentHP.text = $"{DataManager.Instance.OpponentHP}";
-  //      _opponentHPFill.DOFillAmount(_opponentFillAmount, _fillSpeed);
         if (GamePlayManager.Instance.GameTurnController.GetTurn() == 0) {
             _playerActionRemains.text = $"{DataManager.Instance.PlayerRemainActionPoints}";
             _playerRemainingActionsBoard.enabled = true;
@@ -227,9 +233,8 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 
 	public void SkillUpdate()
 	{
-		_playerSkillIndicator.text = $"{DataManager.Instance.PlayerCurrentTilesAcquired}/{DataManager.Instance.PlayerSkillRequirementAmount}";
-		_opponentSkillIndicator.text = $"{DataManager.Instance.OpponentCurrentTilesAcquired}/{DataManager.Instance.OpponentSkillRequirementAmount}";
-
+		_playerActiveSkillIndicator.text = $"{DataManager.Instance.PlayerCurrentTilesAcquired}/{DataManager.Instance.PlayerSkillRequirementAmount}";
+		_opponentActiveSkillIndicator.text = $"{DataManager.Instance.OpponentCurrentTilesAcquired}/{DataManager.Instance.OpponentSkillRequirementAmount}";
 		float playerProgress = (DataManager.Instance.PlayerSkillRequirementAmount == 0) ? 1 : (float)DataManager.Instance.PlayerCurrentTilesAcquired / DataManager.Instance.PlayerSkillRequirementAmount;
 		float opponentProgress = (DataManager.Instance.OpponentSkillRequirementAmount == 0) ? 1 :  (float)DataManager.Instance.OpponentCurrentTilesAcquired / DataManager.Instance.OpponentSkillRequirementAmount;
 
@@ -239,8 +244,6 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 	}
     public void UpdateStatus()
     {
-  //      Debug.Log(DataManager.Instance.PlayerCurrentActiveStatus[0].Stack);
-		//Debug.Log(DataManager.Instance.OpponentCurrentActiveStatus);
 		UpdateCharacterEffect(DataManager.Instance.PlayerCurrentActiveStatus,_playerStatusCanvasGroup,_playersCurrentStatusIconList,_playersCurrentStatusTextList);
         UpdateCharacterEffect(DataManager.Instance.OpponentCurrentActiveStatus, _opponentStatusCanvasGroup, _opponentCurrentStatusIconList, _opponentCurrentStatusTextList);
     }
@@ -248,11 +251,9 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     {
 		if (statusList == null || statusList.Count == 0)
         {
-			//Debug.Log("A");
 			canvasGroup.alpha = 0f;
             return;
         }
-		//Debug.Log("B");
 		canvasGroup.alpha = 1f;
         for (int i = 0; i < statusImages.Length; i++) 
         {
@@ -270,7 +271,16 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 			}
         }
     }
-    
+
+    public void HPChangedBySkill()
+    {
+        _playerHP.text = $"{DataManager.Instance.PlayerHP}";
+        _playerFillAmount = (DataManager.Instance.PlayerMaxHP == 0) ? 1 : ((float)DataManager.Instance.PlayerHP / (float)DataManager.Instance.PlayerMaxHP);
+        _playerHPFill.DOFillAmount(_playerFillAmount, _fillSpeed);
+        _opponentFillAmount = (DataManager.Instance.OpponentMaxHP == 0) ? 1 : ((float)DataManager.Instance.OpponentHP / (float)DataManager.Instance.OpponentMaxHP);
+        _opponentHP.text = $"{DataManager.Instance.OpponentHP}";
+        _opponentHPFill.DOFillAmount(_opponentFillAmount, _fillSpeed);
+    }
     public void Show()
     {
         gameObject.SetActive(true);

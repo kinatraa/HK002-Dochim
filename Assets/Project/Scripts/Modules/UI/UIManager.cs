@@ -40,6 +40,9 @@ public class UIManager : Singleton<UIManager>, IMessageHandle
             case MessageType.OnStatusChange:
                 UIGameHUD.UpdateStatus();
                 break;
+            case MessageType.OnDataChangedDuringTurn:
+                UIGameHUD.HPChangedBySkill();
+                break;
         }
     }
     public void PlayBattleCollisionAnimation(int playerScore, int opponentScore,int playerHP,int opponentHP)

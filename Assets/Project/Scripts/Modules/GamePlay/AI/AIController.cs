@@ -24,15 +24,12 @@ public class AIController : MonoBehaviour
         _bounds = GamePlayManager.Instance.BoardBounds;
         GamePlayManager.Instance.OpponentCharacter = character;
 		//send message for init 
-        if(character.characterPortrait != null)
-        {
-        }
+		DataManager.Instance.OpponentHP = character.GetCurrentHP();
+		DataManager.Instance.OpponentMaxHP = character.GetCurrentHP();
 		DataManager.Instance.OpponentPortrait = character.characterPortrait;
 		DataManager.Instance.OpponentSkillIcon = character.SkillIcon;
 		DataManager.Instance.OpponentSkillRequirementAmount = character.activeConditionAmount;
-		DataManager.Instance.OpponentHP = character.GetCurrentHP();
-        DataManager.Instance.OpponentMaxHP = character.GetCurrentHP();
-    }
+	}
 
     void OnEnable()
     {
