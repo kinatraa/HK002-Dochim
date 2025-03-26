@@ -20,22 +20,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private int _score = 0;
     [SerializeField] private List<GameObject> characterPool;
-    void Start()
-    {
-        _tilemap = GamePlayManager.Instance.Tilemap;
-        _camera = Camera.main;
-        _diamondClick = GetComponent<DiamondClick>();
-
-        _character = characterPool.First().GetComponent<BaseCharacter>();
-        GamePlayManager.Instance.PlayerCharacter = _character;
+	private void Awake()
+	{
+		_tilemap = GamePlayManager.Instance.Tilemap;
+		_camera = Camera.main;
+		_diamondClick = GetComponent<DiamondClick>();
+		_character = characterPool.First().GetComponent<BaseCharacter>();
+		GamePlayManager.Instance.PlayerCharacter = _character;
         //send message for init 
-        DataManager.Instance.PlayerPortrait  = _character.characterPortrait;
-        DataManager.Instance.PlayerSkillIcon = _character.SkillIcon;
-        DataManager.Instance.PlayerSkillRequirementAmount = _character.activeConditionAmount;
-
-        DataManager.Instance.PlayerMaxHP = _character.GetCurrentHP();
-        DataManager.Instance.PlayerHP = _character.GetCurrentHP();
-        SkillButtonClick skillButton = FindObjectOfType<SkillButtonClick>();
+		DataManager.Instance.PlayerPortrait = _character.characterPortrait;
+		DataManager.Instance.PlayerSkillIcon = _character.SkillIcon;
+		DataManager.Instance.PlayerSkillRequirementAmount = _character.activeConditionAmount;
+		DataManager.Instance.PlayerMaxHP = _character.GetCurrentHP();
+		DataManager.Instance.PlayerHP = _character.GetCurrentHP();
+		SkillButtonClick skillButton = FindObjectOfType<SkillButtonClick>();
 		if (skillButton != null)
 		{
 			skillButton.Init(GamePlayManager.Instance.GameTurnController);

@@ -15,12 +15,14 @@ public class GameTurnController : MonoBehaviour
     private BaseCharacter opponentCharacter;
     private int turnCounter = 0;
     public float timer = 16;
-
+    private bool isInAnimation = false;
 	private void Update()
 	{
 		if (GamePlayManager.Instance.DiamondManager.IsDropping()) return;
-
-        timer -= Time.deltaTime;
+        if (!isInAnimation)
+        {
+            timer -= Time.deltaTime;
+        }
 		
 		if (timer < 0)
         {
@@ -29,14 +31,14 @@ public class GameTurnController : MonoBehaviour
 
 		MessageManager.Instance.SendMessage(new Message(MessageType.OnTimeChanged));
 	}
-	void Start()
-    {
-        playerCharacter = GamePlayManager.Instance.PlayerCharacter;
-        opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
-        _turn = -1;
-        remainingActions = maxActionPerTurn;
+	private void Awake()
+	{
+		playerCharacter = GamePlayManager.Instance.PlayerCharacter;
+		opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
+		_turn = -1;
+		remainingActions = maxActionPerTurn;
 		DataManager.Instance.PlayerRemainActionPoints = remainingActions;
-        DataManager.Instance.OpponentRemainActionPoints = remainingActions;
+		DataManager.Instance.OpponentRemainActionPoints = remainingActions;
 		ChangeTurn();
 	}
 
@@ -74,14 +76,16 @@ public class GameTurnController : MonoBehaviour
             if (turnCounter == 2)
             {
                 CaculateDamage();
-                DataManager.Instance.PlayerScore = 0;
-                DataManager.Instance.OpponentScore = 0;
+                int previousPlayerHP = DataManager.Instance.PlayerHP;
+                int previousOpponentHP = DataManager.Instance.OpponentHP;
                 DataManager.Instance.PlayerHP = playerCharacter.GetCurrentHP();
                 DataManager.Instance.OpponentHP = opponentCharacter.GetCurrentHP();
-				turnCounter = 0;
+                StartCoroutine(HandleBattleAnimation(previousPlayerHP, previousOpponentHP));
             }
-            EndOfRound();
-            ChangeTurn();
+            else
+            {
+                ChangeTurn();
+            }
         }
         else
         {
@@ -89,6 +93,16 @@ public class GameTurnController : MonoBehaviour
         }
 
 		timer = 16f;
+	}
+    private IEnumerator HandleBattleAnimation(int previousPlayerHP,int previousOpponentHP)
+    {
+		isInAnimation = true;
+		UIManager.Instance.PlayBattleCollisionAnimation(DataManager.Instance.PlayerScore,DataManager.Instance.OpponentScore, previousPlayerHP, previousOpponentHP);
+        yield return new WaitForSeconds(2f);
+        DataManager.Instance.PlayerScore = 0;
+		DataManager.Instance.OpponentScore = 0;
+		turnCounter = 0;
+		ChangeTurn();
 	}
     public void CaculateDamage()
     {
@@ -135,22 +149,8 @@ public class GameTurnController : MonoBehaviour
 			playerCharacter.ApplyBloodLoss(opponentCharacter);
 			DataManager.Instance.OpponentRemainActionPoints = remainingActions;
 		}
-
+		isInAnimation = false;
 		PlayTurn();
-    }
-
-    //private void ModifyExistenceSkillTurn(BaseCharacter currentCharacter)
-    //{
-    //    IActiveSkill activeSkill = currentCharacter.GetComponent<IActiveSkill>();
-    //    if (activeSkill != null)
-    //    {
-
-    //    }
-    //}
-
-
-	private void EndOfRound()
-    {
     }
     public int GetTurn()
     {

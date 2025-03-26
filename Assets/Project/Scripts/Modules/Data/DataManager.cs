@@ -6,7 +6,53 @@ using UnityEngine.UI;
 
 public class DataManager : Singleton<DataManager>, IMessageHandle
 {
-    public PlayerData PlayerData;
+	private void Start()
+	{
+		if (GamePlayManager.Instance.PlayerCharacter != null)
+		{
+			GamePlayManager.Instance.PlayerCharacter.OnStatusChanged += UpdatePlayerStatus;
+            GamePlayManager.Instance.PlayerCharacter.OnHPChangedDuringTurn += UpdatePlayerHPDuringTurn;
+		}
+		if (GamePlayManager.Instance.OpponentCharacter != null)
+		{
+			GamePlayManager.Instance.OpponentCharacter.OnStatusChanged += UpdateOpponentStatus;
+            GamePlayManager.Instance.OpponentCharacter.OnHPChangedDuringTurn += UpdateOpponentHPDuringTurn;
+		}
+	}
+
+    private void UpdatePlayerHPDuringTurn(int currentHP)
+    {
+        PlayerHP = currentHP;
+        MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChangedDuringTurn));
+    }
+    private void UpdateOpponentHPDuringTurn(int currentHP)
+    {
+        OpponentHP = currentHP;
+        MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChangedDuringTurn));
+    }
+	private void OnDestroy()
+	{
+		if (GamePlayManager.Instance.PlayerCharacter != null)
+		{
+			GamePlayManager.Instance.PlayerCharacter.OnStatusChanged -= UpdatePlayerStatus;
+		}
+		if (GamePlayManager.Instance.OpponentCharacter != null)
+		{
+			GamePlayManager.Instance.OpponentCharacter.OnStatusChanged -= UpdateOpponentStatus;
+		}
+	}
+
+    private void UpdatePlayerStatus(List<StatusData> statusList)
+    {
+        PlayerCurrentActiveStatus = new List<StatusData>(statusList);
+        MessageManager.Instance.SendMessage(new Message(MessageType.OnStatusChange));
+    }
+    private void UpdateOpponentStatus(List<StatusData> statusList)
+    {
+        OpponentCurrentActiveStatus = new List<StatusData>(statusList);
+        MessageManager.Instance.SendMessage(new Message(MessageType.OnStatusChange));
+    }
+	public PlayerData PlayerData;
 
     public Sprite PlayerPortrait
     {
@@ -15,6 +61,7 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
         {
             PlayerData.portrait = value;
             MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
+            Debug.Log(PlayerPortrait.name);
         }
     }
     public Sprite PlayerSkillIcon
@@ -82,6 +129,15 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
             MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
         }
     }
+    public List<StatusData> PlayerCurrentActiveStatus
+    {
+        get => PlayerData.currentActiveStatus;
+        set
+        {
+            PlayerData.currentActiveStatus = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnStatusChange));
+        }
+    }
     
     public OpponentData OpponentData;
 
@@ -92,6 +148,7 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
         {
             OpponentData.portrait = value;
             MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
+            Debug.Log("B");
         }
     }
     public Sprite OpponentSkillIcon
@@ -155,6 +212,15 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
         {
             OpponentData.actionPoint= value;
             MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+        }
+    }
+    public List<StatusData> OpponentCurrentActiveStatus
+    {
+        get => OpponentData.currentActiveStatus;
+        set
+        {
+            OpponentData.currentActiveStatus = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnStatusChange));
         }
     }
     public void Handle(Message message)

@@ -18,46 +18,51 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 	}
 	private void Start()
 	{
-		target = GamePlayManager.Instance.OpponentCharacter.GetComponent<BaseCharacter>();
+		if (GamePlayManager.Instance.PlayerCharacter is ImpalerHilda)
+		{
+			target = GamePlayManager.Instance.OpponentCharacter.GetComponent<BaseCharacter>();
+		}
+		else
+		{
+			target = GamePlayManager.Instance.PlayerCharacter.GetComponent<BaseCharacter>();
+		}
 	}
 	public override void Active()
 	{
+		if (!isReady)
+			return;
 		ActiveSkills();
 	}
 
 	public void ActiveSkills()
 	{
-		if (!isReady)
-			return;
-		if (threshHold >= 10)
-		{
+			Debug.Log("UseSkill");
 			isReady = true;
-			TakeDamamage(10);
+			TakeDamageDuringTurn(10);
 			GamePlayManager.Instance.GameTurnController.AddExtraAction(1);
-		}
 	}
 
 	public void PassiveSkills()
 	{
 		if (threshHold <= 20)
 		{
-			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 1, -1, true, 1, 10, null);
+			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 1, -1, true, 1, 100, null);
 			target.ApplyStatus(bloodLoss);
-			Debug.Log($"ImpalerHilda: Applied Bloodloss to {target.characterName}");
+			//Debug.Log($"ImpalerHilda: Applied Bloodloss to {target.characterName}");
 
 			// Reset indicator
 			currentConditionAmount = 0;
-			Debug.Log("ImpalerHilda: Indicator reset to 0");
+			//Debug.Log("ImpalerHilda: Indicator reset to 0");
 		}
 		else
 		{
-			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 2, -1, true, 1, 10, null);
+			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 2, -1, true, 1, 100, null);
 			target.ApplyStatus(bloodLoss);
-			Debug.Log($"ImpalerHilda: Applied Bloodloss to {target.characterName}");
+			//Debug.Log($"ImpalerHilda: Applied Bloodloss to {target.characterName}");
 
 			// Reset indicator
 			currentConditionAmount = 0;
-			Debug.Log("ImpalerHilda: Indicator reset to 0");
+			//Debug.Log("ImpalerHilda: Indicator reset to 0");
 		}
 	}
 	 
@@ -76,7 +81,16 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 			}
 		}
 	}
-
+	public override void Heal(int amount)
+	{
+		base.Heal(amount);
+		threshHold += amount;
+		Debug.Log(threshHold);
+		if(threshHold >= 2)
+		{
+			isReady = true;
+		}
+	}
 	public override void RemoveActiveSkill()
 	{
 		
