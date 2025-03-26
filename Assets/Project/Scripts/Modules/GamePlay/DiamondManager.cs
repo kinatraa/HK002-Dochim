@@ -30,7 +30,7 @@ public class DiamondManager : MonoBehaviour
     private int _rows;
     private int _columns;
 
-    private int _dropping = 0;
+    private int _dropping = -1;
     private bool _swapping = false;
     
     private Vector3Int _firstMousePos, _secondMousePos;
@@ -435,6 +435,7 @@ public class DiamondManager : MonoBehaviour
             
             if (clearTiles.Count == 0)
             {
+	            _dropping = -1;
                 break;
             }
 
@@ -478,7 +479,7 @@ public class DiamondManager : MonoBehaviour
 			
             yield return StartCoroutine(DropTile());
             
-            while (_dropping != 0)
+            while (_dropping > 0)
             {
                 yield return null;
             }
@@ -611,7 +612,7 @@ public class DiamondManager : MonoBehaviour
         StartCoroutine(MoveTileCoroutine(b, a, _tilemap.GetTile(b)));
         StartCoroutine(MoveTileCoroutine(a, b, saveTile));
 
-        while (_dropping != 0)
+        while (_dropping > 0)
         {
             yield return null;
         }
@@ -653,7 +654,7 @@ public class DiamondManager : MonoBehaviour
     }
     public bool IsDropping()
     {
-        return _dropping != 0;
+        return _dropping != -1;
     }
     
     private bool SameTileColor(Vector3Int a, Vector3Int b)
