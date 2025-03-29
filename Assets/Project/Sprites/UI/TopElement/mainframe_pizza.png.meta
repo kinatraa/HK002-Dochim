@@ -1,0 +1,3845 @@
+fileFormatVersion: 2
+guid: 5d6c3ecb6472bd1488893e9ed4c20067
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mainframe_pizza_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1572
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cafc46267eaa0014f940147e6b503c77
+      internalID: 666560310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 1572
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c128bdcbf8b64f46b5bccefc32ca988
+      internalID: -511066831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1572
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4b71aa58ef614f4da64b0d143d5d02a
+      internalID: -614606316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1572
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43ea91d72cb95ef4ea9d917265be974b
+      internalID: 2406358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1572
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 051481b2dd5b90143a07de03a9c08420
+      internalID: -2015290536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 1572
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9a2f253e550b4640879f3ef86aed01c
+      internalID: -1188791999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1572
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67a5749d3f5bd444d864fc2ca16e36eb
+      internalID: 1330072398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1572
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d41d1f76a10dc24b826ba460e97c4f3
+      internalID: -647560422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_8
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1572
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 258a90f0af10a6345a39b8291cb1e4f8
+      internalID: -328211728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_9
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1572
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2b82bd9ab2389447b0a24d29234a6ae
+      internalID: 801005603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_10
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1572
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b954481fd483b9a41b2f42558c259eb1
+      internalID: 584127959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_11
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1572
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2327ab359b8d784a8588fe1ea4609fb
+      internalID: -2106674614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_12
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1572
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c17b050ea1a1754db995294d9ae45ab
+      internalID: 318109898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1444
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2afd8d52fa425b34f9154558083af91e
+      internalID: -39241802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_14
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 1444
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 558555be9878c514aaf91d9d2a41698d
+      internalID: -1827438584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_15
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1444
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91076d454906def4fae8134edea16021
+      internalID: 1274111079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_16
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1444
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5e1b4967fd86c141abbc4931c94338b
+      internalID: -1890203372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_17
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1444
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf38cd37d63715c428e51a9f7b96829d
+      internalID: -1667118785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_18
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 1444
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c76f5c900b49a3408c22b24d6e83a58
+      internalID: -1840716144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_19
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1444
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40e8195aa63286a43bc46c295cdcea82
+      internalID: 1448718516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_20
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1444
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1fda854cf5167d48811f981c6609f11
+      internalID: 1556092271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_21
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1444
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5187ae597865df44592f4b0f626af8a9
+      internalID: 179650473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_22
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1444
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d55b51095c174846933f49f3afdac60
+      internalID: -1109913088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_23
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1444
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caafa6c09255f59489cf053759edabc6
+      internalID: 478628576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_24
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1444
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1cafe5004f95e842a2f4fbcb68f2948
+      internalID: -166955664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_25
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1444
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c1203e4cfbe45e4aa67e5a7beda6137
+      internalID: -1333424768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1316
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3724d3ec9e2a2842bdec7cd27d6c945
+      internalID: -1821850429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_27
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 1316
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ab392c7fc337e146a92206212062905
+      internalID: 1641114336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_28
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1316
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f29d30340286764e9e24b9c4e2f25e5
+      internalID: -1871074211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_29
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1316
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79ec564de89550c4e8cd0d938f5971f9
+      internalID: 1235259867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_30
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1316
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3390e456c3c701d47b37a4c4214f6572
+      internalID: -1884746198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_31
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 1316
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91cf9aa45baf16e4dadb3e1829d6e799
+      internalID: 2077153643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_32
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1316
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c94e35bd8a56f94dbfb4217db439218
+      internalID: 1647640186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_33
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1316
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a327ad1ad1b6d847a4e7a79d7fd5948
+      internalID: 1505754689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_34
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1316
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12ee689deb6cdf14cb6be693852bf025
+      internalID: 1794700823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_35
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1316
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e1c577171efe4f40ad69430b1b50a6b
+      internalID: -745411764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_36
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1316
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85611f5a9e97788458b04f6fd6257438
+      internalID: -498290155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_37
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1316
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ae7ee9fbd2c1e140ba577d573714650
+      internalID: -679500517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_38
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1316
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3829b6ab10394e64a8ddf303c2e1ec44
+      internalID: -1376251336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1188
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 654f3ee9aafb9e84281d300c392cd967
+      internalID: -949642435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_40
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 1188
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a304ef2928ff41c46bee1da85fc25362
+      internalID: 630527675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_41
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1188
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c94ee6c0e50bc314fb6718b76a20772b
+      internalID: 1177103639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_42
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1188
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f0d0464f770b484cb51d1fcdb0e2ba3
+      internalID: 1631736890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_43
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1188
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d64e57891484524baab1524da6e2328
+      internalID: 2123865536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_44
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 1188
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68fbfd1b06acc2342a4f9a1880d3d248
+      internalID: -1108394516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_45
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1188
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e4739533e88b6842a34ad9bacdfefdd
+      internalID: 1595219953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_46
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1188
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 542906b3f14af594baf9135b109613f3
+      internalID: -552681272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_47
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1188
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 664bb7676310f224284ea6fd386780cb
+      internalID: 1376722673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_48
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1188
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69523f608c14eb0439e501113bbe155b
+      internalID: 811089754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_49
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1188
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a23a87597cb31f64a874e65a9930edc0
+      internalID: -390094410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_50
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1188
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fbea5258f65c2747b4167a9614709b6
+      internalID: -1637356718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_51
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1188
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95c316219b4bd854eb0938e60fa4e687
+      internalID: 750845050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_52
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1060
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba83373a0038f0f45b63da226cc340ca
+      internalID: -1770498664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_53
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 1060
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 417c7036274964b49ae938b919786fa5
+      internalID: -1908508806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_54
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1060
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 767a94dce274b0648987e1bc188f751f
+      internalID: -1180158732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_55
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1060
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47a80569c11c4b04892506abf6d311fb
+      internalID: -392723601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_56
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1060
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 906de68481198bf4ca814d5dcfb4dcd4
+      internalID: 638014877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_57
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 1060
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc9c25f1ffc24e8438d350168e840eff
+      internalID: 1781797739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_58
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1060
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 748f1be4b77709f4d858ead118bb7eee
+      internalID: -1374267768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_59
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1060
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 583cf2cdda4a62e4cb1d0cc61d8c0ee9
+      internalID: -258078063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_60
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1060
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a31d14685c036443b18ada3fba85cfc
+      internalID: -96603361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_61
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1060
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb98d7bfdff5de04fb57c0b367a3a591
+      internalID: 1601360535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_62
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1060
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63bf6a56bc99da444b9d0b8d76d7767e
+      internalID: 1150179302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_63
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1060
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e8861943f41ee840a7d117065ef17ae
+      internalID: 1953590816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_64
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1060
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8fe9dc35f94c8e488b272440a645209
+      internalID: -1598162553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_65
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 932
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43102263c9b16a94097545b9f50c5a6e
+      internalID: 516048631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_66
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 932
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70b235198abab3a439774390af814d07
+      internalID: 76776974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_67
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 932
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02ab618284ff7bd4f9d8d2ef568f868b
+      internalID: 798323854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_68
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 932
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 687c05d3c791b3140812b8e8273c2b5b
+      internalID: -1167107216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_69
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 932
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 709f90bfac98d6e44883e06f14dd2e99
+      internalID: -39215676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_70
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 932
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c85c181c8b5458348af253f94a606c52
+      internalID: 1530505832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_71
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 932
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6effceab74753b46bc5370db8c323f0
+      internalID: -1059165241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_72
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 932
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71a5d09b8c8f8c84fb56cc8059c5ff41
+      internalID: 720850253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_73
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 932
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa49ee167b264174da2509bda8ceb0f5
+      internalID: -538877601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_74
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 932
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ec1172c856a91e4797470bf3aea0f34
+      internalID: -639295155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_75
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 932
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5b55f5b1422b7f46aa67817d23f0001
+      internalID: -1872875827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_76
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 932
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16a72260c6c7e3f44a142fde029cf08f
+      internalID: -1773233483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_77
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 932
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2d15721cb0ff4649940b1634a28f32c
+      internalID: -2122662990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_78
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 804
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65cb14673745d3b4ba26457ec5ab5e81
+      internalID: -1278553690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_79
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 804
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78c61d96ecb446b46b77307ade3ea9f7
+      internalID: -1273905386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_80
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 804
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b011e126116c16b41888c8443ef192cd
+      internalID: -1104138440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_81
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 804
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db0b08c813d318c49a0c93faed19fa4a
+      internalID: 407066227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_82
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 804
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54319f02fdb90694aa89786f5398a102
+      internalID: 4294601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_83
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 804
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a4126b8e4c239f4aa80eb5462f539ae
+      internalID: -333990253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_84
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 804
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 297619f12eaac0e43b152f70a418a764
+      internalID: -1030100907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_85
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 804
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e12e7320e01108f4781cdc84f8768f5a
+      internalID: 514117036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_86
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 804
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee941fb6d3bd253479eb00dd5b13bbd9
+      internalID: 1742997101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_87
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 804
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a71a432272eb56642b72c1cb351a9fa0
+      internalID: -1569440748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_88
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 804
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ba4157df256e3d4c99c169adbc579d3
+      internalID: 1873404117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_89
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 804
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d3b1e67b0d630d4c97a947006d7a54a
+      internalID: 669628423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_90
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 804
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f9df137d00a0cc4fbd9743d00f258c0
+      internalID: 547583572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_91
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 676
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42418d71010052d4c810b89c7cd7e894
+      internalID: -1902681889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_92
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 676
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85d30d42ce002604f945e44afc611492
+      internalID: -115171056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_93
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 676
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0d05b90bc414064faeac113bf05d97f
+      internalID: 2078578400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_94
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 676
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95c52ef5e03a8944883ad1277b896439
+      internalID: -1995749652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_95
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 676
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6963c2a4c476fcd4d80555eac18ba16d
+      internalID: 2102767207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_96
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 676
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84da924b6cdb2f540925692e6f098f29
+      internalID: 1343618744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_97
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 676
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2da19778296423a4ca161fa6afc440e9
+      internalID: -1123167970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_98
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 676
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d96aa994a4b85dd4abaecb62e9cbbc94
+      internalID: 1845696471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_99
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 676
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b39b1ddf1d791174d8ec1536d65da96a
+      internalID: 1982996082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_100
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 676
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4d84b66d39b776449486135e3224010
+      internalID: 176174072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_101
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 676
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7c0f9e9fcda70440a040ac5035dccb6
+      internalID: 1625736598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_102
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 676
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c70ca68e2945544d9ce208300092691
+      internalID: -1462567387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_103
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 676
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a8f5b73850bdd84080f80274b0718fd
+      internalID: 1356683145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_104
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 548
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 858f8d77daa591349906d2948dbdddfb
+      internalID: -165774864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_105
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 548
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b9f822626ce37b4cb069d9199fe5763
+      internalID: 105833494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_106
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 548
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 357b06e4791898d47b7668f9ba280bee
+      internalID: -1913936640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_107
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 548
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e641b77298a58f64f9ed4d5c62d37f10
+      internalID: 67675706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_108
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 548
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8ad18d443815dd4d955583aef9c86b8
+      internalID: -735908113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_109
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 548
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c79a8d3f8b2456044ae187ae6c7638e9
+      internalID: -1590800634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_110
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 548
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f25f09d143fcf3a45a041cf05da2e333
+      internalID: 2137187491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_111
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 548
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf58194e09becf5419222e3bb392a2b5
+      internalID: 813891697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_112
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 548
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c68c6ac4b1b146f4b9468be8c41dc825
+      internalID: -1308303892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_113
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 548
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 027be9acee2273c4d96b06333a3e8994
+      internalID: -1884033460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_114
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 548
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a4756edbb48a344f9d37826722988b9
+      internalID: 1755505938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_115
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 548
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bad9904e23640854c9afb38ee769c773
+      internalID: -1694222113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_116
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 548
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4367d78e445fd7f409f80da24ab26954
+      internalID: 620883604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_117
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 420
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20ff2f2db6d46f346b412ac200300012
+      internalID: -437794161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_118
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 420
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76b71dc7458c7344fb9bf35f0f192333
+      internalID: -1610165860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_119
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 420
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c684ee759dddbd74f838a4bc4d7a5b48
+      internalID: 24914754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_120
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 420
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db809a2df9dc3ac4182ae340c81cfb1a
+      internalID: 1781531151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_121
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 420
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f09da6ba390dc6049b56a158ac74f7c9
+      internalID: -1798915745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_122
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 420
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59a0b9dab1025644389f71216a162c42
+      internalID: 813398827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_123
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 420
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d73eaa78c84fb54c8ac10f39f7a6e22
+      internalID: -1496234339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_124
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 420
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04ec29a1b4b20f64b95179e021d2d7a2
+      internalID: 1117124246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_125
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 420
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a18adb7ad876d74e8e151afed37686c
+      internalID: -25250934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_126
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 420
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80a9b3c6c3e2c0b46afac3f7988af83a
+      internalID: -1335296013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_127
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 420
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b46d402a91985d24794831934c80e057
+      internalID: -1866899599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_128
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 420
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f34c41849a4764e45b60a1cb04e262d7
+      internalID: 1033581435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_129
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 420
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f57048d22b9cb3f4f858de73969c0f7c
+      internalID: -1964537709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_130
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 292
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94557d7072830b9419d9aeb5e1f6c528
+      internalID: -1800855135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_131
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 292
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 625dbcd4f0d7cb445aeccbe9101a92b0
+      internalID: 454021801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_132
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 292
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e1afcb9467157144b284aaf89f7646b
+      internalID: -220220372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_133
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 292
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61a5750a7d18e6f4ca5007f8112eed79
+      internalID: -399061548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_134
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 292
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 360269a3f88550d4ba3a206be034ee19
+      internalID: 1520042857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_135
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 292
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6187e86f200eef478de960c86de225a
+      internalID: -1430481225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_136
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 292
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 675973c6b6987874e8ad42b678975a08
+      internalID: 1650763796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_137
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 292
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd3659da26bce2c42b7fa8eacde254ce
+      internalID: 2074674088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_138
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 292
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa8c192d2e3100643803021981d931dd
+      internalID: 1215437951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_139
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 292
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82c63d71446844e4eb84530aaba43558
+      internalID: 1306068544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_140
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 292
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb3e3636ec81b95489d2d0d3dd73832e
+      internalID: -627890544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_141
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 292
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57668be0a39abe342b9465b4b29901a5
+      internalID: 1118364274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_142
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 292
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdcf2530b30bb714d8d84c6ea7d634a6
+      internalID: 1640116603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_143
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 164
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e280db6844963c04484fd19f361dd80c
+      internalID: -1985039627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_144
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 164
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdfdddaea3522584985b409453338d85
+      internalID: -1184172263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_145
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 164
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2049cebf5e72894cba9530d08c7b48e
+      internalID: -1807837284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_146
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 164
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 972d8513587540142bd263834de14b41
+      internalID: -387340482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_147
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 164
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c7c745d9a702244d91ce8dd3667c18b
+      internalID: 1457846494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_148
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 164
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acda2cca2b2d0f949beedd2cbe8fbc16
+      internalID: 727568030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_149
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 164
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ffbd20e28b840a469da005baac74134
+      internalID: 963358183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_150
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 164
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8803c1eeda98ae04e957b274bbe8c208
+      internalID: 417527592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_151
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 164
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e49502a46381cb94492b59e93ccd8bc7
+      internalID: -2044180857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_152
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 164
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 751ee96221d67654392b3d43db688325
+      internalID: 634653315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_153
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 164
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78bf324277f514b4982db422ad59af4c
+      internalID: 287325291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_154
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 164
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 900cf1ad17dfdb84792d36f07ef18fd8
+      internalID: -653765728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_155
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 164
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 448c9386644b710498dd9ef7cfc16e6f
+      internalID: -2603173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_156
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fa51a3679351fe43b0c6a195575f7f4
+      internalID: -1458576645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_157
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 448fc06f601277f46a822a52b412f404
+      internalID: 741842487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_158
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93e90d6bcad73334eb1762225d8a51c4
+      internalID: 316407002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_159
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb0c297ccf2110e4d87e82823ff5fe32
+      internalID: -1981476143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_160
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fc8dbf72fd6d4b44b3e28bab0655472
+      internalID: -820071978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_161
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e689b1149c99bc4e975a16343d0e4bf
+      internalID: -746603330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_162
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4954b2286e93bf45a49894f26a25b76
+      internalID: 1710688288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_163
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42f1b58c6eaf8c043b107d0ec2fb65b5
+      internalID: 839572297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_164
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dd0b03130d6a2d4e84baf2fd3830a7c
+      internalID: -1084977822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_165
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e5d8542dc782f34b9201546119289d5
+      internalID: 933512362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_166
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9534b0d094463f44894cf70d70810d9e
+      internalID: 1797217139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_167
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a431f46193a00f34fb31cc1a805f05cc
+      internalID: -213865336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainframe_pizza_168
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 36
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56de15bca59fa914aaea976fd53a9d96
+      internalID: 286349644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      mainframe_pizza_0: 666560310
+      mainframe_pizza_1: -511066831
+      mainframe_pizza_10: 584127959
+      mainframe_pizza_100: 176174072
+      mainframe_pizza_101: 1625736598
+      mainframe_pizza_102: -1462567387
+      mainframe_pizza_103: 1356683145
+      mainframe_pizza_104: -165774864
+      mainframe_pizza_105: 105833494
+      mainframe_pizza_106: -1913936640
+      mainframe_pizza_107: 67675706
+      mainframe_pizza_108: -735908113
+      mainframe_pizza_109: -1590800634
+      mainframe_pizza_11: -2106674614
+      mainframe_pizza_110: 2137187491
+      mainframe_pizza_111: 813891697
+      mainframe_pizza_112: -1308303892
+      mainframe_pizza_113: -1884033460
+      mainframe_pizza_114: 1755505938
+      mainframe_pizza_115: -1694222113
+      mainframe_pizza_116: 620883604
+      mainframe_pizza_117: -437794161
+      mainframe_pizza_118: -1610165860
+      mainframe_pizza_119: 24914754
+      mainframe_pizza_12: 318109898
+      mainframe_pizza_120: 1781531151
+      mainframe_pizza_121: -1798915745
+      mainframe_pizza_122: 813398827
+      mainframe_pizza_123: -1496234339
+      mainframe_pizza_124: 1117124246
+      mainframe_pizza_125: -25250934
+      mainframe_pizza_126: -1335296013
+      mainframe_pizza_127: -1866899599
+      mainframe_pizza_128: 1033581435
+      mainframe_pizza_129: -1964537709
+      mainframe_pizza_13: -39241802
+      mainframe_pizza_130: -1800855135
+      mainframe_pizza_131: 454021801
+      mainframe_pizza_132: -220220372
+      mainframe_pizza_133: -399061548
+      mainframe_pizza_134: 1520042857
+      mainframe_pizza_135: -1430481225
+      mainframe_pizza_136: 1650763796
+      mainframe_pizza_137: 2074674088
+      mainframe_pizza_138: 1215437951
+      mainframe_pizza_139: 1306068544
+      mainframe_pizza_14: -1827438584
+      mainframe_pizza_140: -627890544
+      mainframe_pizza_141: 1118364274
+      mainframe_pizza_142: 1640116603
+      mainframe_pizza_143: -1985039627
+      mainframe_pizza_144: -1184172263
+      mainframe_pizza_145: -1807837284
+      mainframe_pizza_146: -387340482
+      mainframe_pizza_147: 1457846494
+      mainframe_pizza_148: 727568030
+      mainframe_pizza_149: 963358183
+      mainframe_pizza_15: 1274111079
+      mainframe_pizza_150: 417527592
+      mainframe_pizza_151: -2044180857
+      mainframe_pizza_152: 634653315
+      mainframe_pizza_153: 287325291
+      mainframe_pizza_154: -653765728
+      mainframe_pizza_155: -2603173
+      mainframe_pizza_156: -1458576645
+      mainframe_pizza_157: 741842487
+      mainframe_pizza_158: 316407002
+      mainframe_pizza_159: -1981476143
+      mainframe_pizza_16: -1890203372
+      mainframe_pizza_160: -820071978
+      mainframe_pizza_161: -746603330
+      mainframe_pizza_162: 1710688288
+      mainframe_pizza_163: 839572297
+      mainframe_pizza_164: -1084977822
+      mainframe_pizza_165: 933512362
+      mainframe_pizza_166: 1797217139
+      mainframe_pizza_167: -213865336
+      mainframe_pizza_168: 286349644
+      mainframe_pizza_17: -1667118785
+      mainframe_pizza_18: -1840716144
+      mainframe_pizza_19: 1448718516
+      mainframe_pizza_2: -614606316
+      mainframe_pizza_20: 1556092271
+      mainframe_pizza_21: 179650473
+      mainframe_pizza_22: -1109913088
+      mainframe_pizza_23: 478628576
+      mainframe_pizza_24: -166955664
+      mainframe_pizza_25: -1333424768
+      mainframe_pizza_26: -1821850429
+      mainframe_pizza_27: 1641114336
+      mainframe_pizza_28: -1871074211
+      mainframe_pizza_29: 1235259867
+      mainframe_pizza_3: 2406358
+      mainframe_pizza_30: -1884746198
+      mainframe_pizza_31: 2077153643
+      mainframe_pizza_32: 1647640186
+      mainframe_pizza_33: 1505754689
+      mainframe_pizza_34: 1794700823
+      mainframe_pizza_35: -745411764
+      mainframe_pizza_36: -498290155
+      mainframe_pizza_37: -679500517
+      mainframe_pizza_38: -1376251336
+      mainframe_pizza_39: -949642435
+      mainframe_pizza_4: -2015290536
+      mainframe_pizza_40: 630527675
+      mainframe_pizza_41: 1177103639
+      mainframe_pizza_42: 1631736890
+      mainframe_pizza_43: 2123865536
+      mainframe_pizza_44: -1108394516
+      mainframe_pizza_45: 1595219953
+      mainframe_pizza_46: -552681272
+      mainframe_pizza_47: 1376722673
+      mainframe_pizza_48: 811089754
+      mainframe_pizza_49: -390094410
+      mainframe_pizza_5: -1188791999
+      mainframe_pizza_50: -1637356718
+      mainframe_pizza_51: 750845050
+      mainframe_pizza_52: -1770498664
+      mainframe_pizza_53: -1908508806
+      mainframe_pizza_54: -1180158732
+      mainframe_pizza_55: -392723601
+      mainframe_pizza_56: 638014877
+      mainframe_pizza_57: 1781797739
+      mainframe_pizza_58: -1374267768
+      mainframe_pizza_59: -258078063
+      mainframe_pizza_6: 1330072398
+      mainframe_pizza_60: -96603361
+      mainframe_pizza_61: 1601360535
+      mainframe_pizza_62: 1150179302
+      mainframe_pizza_63: 1953590816
+      mainframe_pizza_64: -1598162553
+      mainframe_pizza_65: 516048631
+      mainframe_pizza_66: 76776974
+      mainframe_pizza_67: 798323854
+      mainframe_pizza_68: -1167107216
+      mainframe_pizza_69: -39215676
+      mainframe_pizza_7: -647560422
+      mainframe_pizza_70: 1530505832
+      mainframe_pizza_71: -1059165241
+      mainframe_pizza_72: 720850253
+      mainframe_pizza_73: -538877601
+      mainframe_pizza_74: -639295155
+      mainframe_pizza_75: -1872875827
+      mainframe_pizza_76: -1773233483
+      mainframe_pizza_77: -2122662990
+      mainframe_pizza_78: -1278553690
+      mainframe_pizza_79: -1273905386
+      mainframe_pizza_8: -328211728
+      mainframe_pizza_80: -1104138440
+      mainframe_pizza_81: 407066227
+      mainframe_pizza_82: 4294601
+      mainframe_pizza_83: -333990253
+      mainframe_pizza_84: -1030100907
+      mainframe_pizza_85: 514117036
+      mainframe_pizza_86: 1742997101
+      mainframe_pizza_87: -1569440748
+      mainframe_pizza_88: 1873404117
+      mainframe_pizza_89: 669628423
+      mainframe_pizza_9: 801005603
+      mainframe_pizza_90: 547583572
+      mainframe_pizza_91: -1902681889
+      mainframe_pizza_92: -115171056
+      mainframe_pizza_93: 2078578400
+      mainframe_pizza_94: -1995749652
+      mainframe_pizza_95: 2102767207
+      mainframe_pizza_96: 1343618744
+      mainframe_pizza_97: -1123167970
+      mainframe_pizza_98: 1845696471
+      mainframe_pizza_99: 1982996082
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

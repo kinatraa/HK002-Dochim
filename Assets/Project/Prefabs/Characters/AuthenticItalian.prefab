@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3515367090325466432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5616418549037290360}
+  - component: {fileID: 3838431962462747341}
+  m_Layer: 0
+  m_Name: AuthenticItalian
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5616418549037290360
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515367090325466432}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3838431962462747341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515367090325466432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c4487a73bcc2d42b58b7b7844e1408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Italian
+  maxHP: 100
+  currentHP: 0
+  skillDescriptions: "Khi \u0103n \u0111\u1EE7 8 \xF4 m\xE0u v\xE0ng, s\u1EBD c\xF3
+    th\u1EC3 k\xEDch ho\u1EA1t k\u0129 n\u0103ng \u0111\u1EC3 t\u1EA1o 1 th\u1EA3m
+    l\u1EEDa c\xF3 k\xEDch c\u1EE1 3x3 \u1EDF v\u1ECB tr\xED ng\u1EABu nhi\xEAn.
+    M\u1ED7i khi c\xF3 s\u1EF1 ki\u1EC7n ghi \u0111i\u1EC3m \u1EDF trong ph\u1EA1m
+    vi c\u1EE7a l\u1EEDa, ng\u01B0\u1EDDi k\xEDch ho\u1EA1t s\u1EBD nh\u1EADn \u0111\u01B0\u1EE3c
+    n\u1EEDa t\u1ED5ng s\u1ED1 \xF4 b\u1ECB ph\xE1 h\u1EE7y trong ph\u1EA1m v\u1ECB
+    l\u1EEDa."
+  characterPortrait: {fileID: 21300000, guid: 006ceb19a3d62e44c956c3f1ed457d5d, type: 3}
+  SkillIcon: {fileID: 21300000, guid: 2706d375352041649b91d0562ddad4bb, type: 3}
+  activeConditionAmount: 5
+  currentConditionAmount: 0
+  activeSkillExistenceTurn: 0
+  conditionTile: {fileID: 11400000, guid: baa58ff96767fe44c9eac5101dc2e7b1, type: 2}
+  fireTile: {fileID: 11400000, guid: 3dffb469411c46d4fb029db377774696, type: 2}
+  fireTilePosition: []

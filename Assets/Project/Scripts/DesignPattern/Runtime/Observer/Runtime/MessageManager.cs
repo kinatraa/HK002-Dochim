@@ -16,7 +16,9 @@ namespace HaKien
         OnTimeChanged,
         OnInitUI,
         OnStatusChange,
-        OnDataChangedDuringTurn
+        OnDataChangedDuringTurn,
+        OnSkillHover,
+        EndOfHover
     }
     public class Message
     {
