@@ -219,12 +219,16 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
         if (GamePlayManager.Instance.GameTurnController.GetTurn() == 0) {
             _playerActionRemains.text = $"{DataManager.Instance.PlayerRemainActionPoints}";
             _playerRemainingActionsBoard.enabled = true;
+            _playerActionRemains.enabled = true;
             _opponentRemainingActionsBoard.enabled = false;
+            _opponentActionRemains.enabled = false;
         }
         if (GamePlayManager.Instance.GameTurnController.GetTurn() == 1) {
             _opponentActionRemains.text = $"{DataManager.Instance.OpponentRemainActionPoints}";
 			_playerRemainingActionsBoard.enabled = false;
+			_playerActionRemains.enabled = false;
 			_opponentRemainingActionsBoard.enabled = true;
+			_opponentActionRemains.enabled = true;
 		}
         _playerActionRemains.text = $"{DataManager.Instance.PlayerRemainActionPoints}";
 		_opponentActionRemains.text = $"{DataManager.Instance.OpponentRemainActionPoints}";
