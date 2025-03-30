@@ -21,6 +21,7 @@ public abstract class BaseCharacter : MonoBehaviour
 	protected List<StatusData> activeStatus = new List<StatusData>();
 	private Dictionary<StatusType,int> tileDestroyedPreEffect = new Dictionary<StatusType,int>();
 	public int activeSkillExistenceTurn = 0;
+
 	protected virtual void Awake()
 	{
 		currentHP = maxHP;

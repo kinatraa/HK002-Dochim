@@ -48,6 +48,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     [SerializeField] private Image _playerPortrait;
     [SerializeField] private Image _playerCoolDownIndicator;
     [SerializeField] private RectTransform _playerScoreFill;
+    [SerializeField] private RectTransform _playerSkillDesContainer;
 	[SerializeField] private TextMeshProUGUI _playerSkillDescription;
 	[Header("Opponent")]
 	//init UI 
@@ -64,7 +65,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     [SerializeField] private RectTransform _opponentScoreFill;
     
     [SerializeField] private Image _opponentCoolDownIndicator;
-
+    [SerializeField] private RectTransform _opponentSkillDesContainer;
 	[SerializeField] private TextMeshProUGUI _opponentSkillDescription;
 
 	private float _opponentFillAmount;
@@ -230,7 +231,16 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
         SkillUpdate();
         UpdateStatus();
 	}
-
+    public void SkillHover()
+    {
+        Debug.Log("B");
+        _playerSkillDesContainer.gameObject.SetActive(true);
+    }
+    public void EndOfSkillHover()
+    {
+        Debug.Log("A");
+        _playerSkillDesContainer.gameObject.SetActive(false);
+    }
 	public void SkillUpdate()
 	{
 		_playerActiveSkillIndicator.text = $"{DataManager.Instance.PlayerCurrentTilesAcquired}/{DataManager.Instance.PlayerSkillRequirementAmount}";
