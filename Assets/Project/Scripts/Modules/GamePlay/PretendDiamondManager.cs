@@ -11,7 +11,7 @@ public class PretendDiamondManager : MonoBehaviour
 	[SerializeField] private TileBase[] _normalTiles;
 	[SerializeField] private TileBase[] _columnTiles;
 	[SerializeField] private TileBase[] _rowTiles;
-	[SerializeField] private TileBase[] _areaTiles;
+	[SerializeField] private TileBase _areaTile;
 	
 	private BoundsInt _bounds;
 	
@@ -133,6 +133,14 @@ public class PretendDiamondManager : MonoBehaviour
     private List<Vector3Int> GetAdjacentTiles(Vector3Int curPos)
     {
 	    List<Vector3Int> adjacentTiles = new List<Vector3Int>();
+	    
+	    if (_tilesData[_tilemap.GetTile(curPos)].Type == TileType.Area)
+	    {
+		    _visited.Add(curPos);
+		    adjacentTiles.Add(curPos);
+		    return adjacentTiles;
+	    }
+	    
 	    adjacentTiles.AddRange(CheckAdjacentTiles(curPos, 0));
 	    adjacentTiles.AddRange(CheckAdjacentTiles(curPos, 1));
 		
@@ -249,14 +257,7 @@ public class PretendDiamondManager : MonoBehaviour
 	    
 	    if (poss.Count >= 5)
 	    {
-		    for (int i = 0; i < _areaTiles.Length; i++)
-		    {
-			    if (_tilesData[_copyTilemap.GetTile(setPos)].Color == _tilesData[_areaTiles[i]].Color)
-			    {
-				    _specialTiles.Add((setPos, _areaTiles[i]));
-				    break;
-			    }
-		    }
+		    _specialTiles.Add((setPos, _areaTile));
 	    }
 	    else
 	    {
@@ -488,7 +489,13 @@ public class PretendDiamondManager : MonoBehaviour
     
     private bool SameTileColor(Vector3Int a, Vector3Int b)
     {
-	    return _tilesData[_copyTilemap.GetTile(a)].Color == _tilesData[_copyTilemap.GetTile(b)].Color;
+	    TileBase aTile = _copyTilemap.GetTile(a);
+	    TileBase bTile = _copyTilemap.GetTile(b);
+	    bool res = (_tilesData[aTile].Color == _tilesData[bTile].Color) ||
+	               _tilesData[aTile].Color == TileColor.All ||
+	               _tilesData[bTile].Color == TileColor.All;
+	    
+	    return res;
     }
     
     private bool IsLocked(Vector3Int position)

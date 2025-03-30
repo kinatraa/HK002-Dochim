@@ -26,4 +26,6 @@ public enum TileColor
     Cyan,
     Yellow,
     Purple,
+    All,
+    White,
 }

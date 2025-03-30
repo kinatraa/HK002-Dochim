@@ -132,7 +132,13 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
 
     public bool SameTileColor(Vector3Int a, Vector3Int b, Tilemap tilemap)
     {
-        return TilesData[tilemap.GetTile(a)].Color == TilesData[tilemap.GetTile(b)].Color;
+        TileBase aTile = tilemap.GetTile(a);
+        TileBase bTile = tilemap.GetTile(b);
+        bool res = (TilesData[aTile].Color == TilesData[bTile].Color) ||
+                   TilesData[aTile].Color == TileColor.All ||
+                   TilesData[bTile].Color == TileColor.All;
+	    
+        return res;
     }
 
     public bool SameTileType(Vector3Int a, Vector3Int b)
