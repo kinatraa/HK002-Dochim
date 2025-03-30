@@ -15,7 +15,7 @@ public class DiamondManager : MonoBehaviour
     [SerializeField] private TileBase[] _normalTiles;
     [SerializeField] private TileBase[] _columnTiles;
     [SerializeField] private TileBase[] _rowTiles;
-    [SerializeField] private TileBase[] _areaTiles;
+    [SerializeField] private TileBase _areaTile;
     
     [SerializeField] private TileBase licoriceTile;
     [SerializeField] private Tilemap licoriceTileMap;
@@ -140,6 +140,14 @@ public class DiamondManager : MonoBehaviour
 	private List<Vector3Int> GetAdjacentTiles(Vector3Int curPos)
 	{
 		List<Vector3Int> adjacentTiles = new List<Vector3Int>();
+		
+		if (_tilesData[_tilemap.GetTile(curPos)].Type == TileType.Area)
+		{
+			_visited.Add(curPos);
+			adjacentTiles.Add(curPos);
+			return adjacentTiles;
+		}
+		
 		adjacentTiles.AddRange(CheckAdjacentTiles(curPos, 0));
 		adjacentTiles.AddRange(CheckAdjacentTiles(curPos, 1));
 		
@@ -255,14 +263,7 @@ public class DiamondManager : MonoBehaviour
 	    
 	    if (poss.Count >= 5)
 	    {
-		    for (int i = 0; i < _areaTiles.Length; i++)
-		    {
-			    if (_tilesData[_tilemap.GetTile(setPos)].Color == _tilesData[_areaTiles[i]].Color)
-			    {
-				    specialTiles.Add((setPos, _areaTiles[i]));
-				    break;
-			    }
-		    }
+		    specialTiles.Add((setPos, _areaTile));
 	    }
 	    else
 	    {
@@ -428,8 +429,8 @@ public class DiamondManager : MonoBehaviour
                     //cung toi uu hon mot ti thi phai
                     List<Vector3Int> adjacentTiles = GetAdjacentTiles(curPos);
                     
-                    clearTiles.AddRange(adjacentTiles);
 					CheckForSpawnSpecialTile(adjacentTiles);
+                    clearTiles.AddRange(adjacentTiles);
                 }
             }
             
@@ -660,8 +661,12 @@ public class DiamondManager : MonoBehaviour
     
     private bool SameTileColor(Vector3Int a, Vector3Int b)
     {
-		//Debug.Log($"a : {_tilemap.GetTile(a)}");
-		//Debug.Log($"b : {_tilemap.GetTile(b)}");
-		return _tilesData[_tilemap.GetTile(a)].Color == _tilesData[_tilemap.GetTile(b)].Color;
+	    TileBase aTile = _tilemap.GetTile(a);
+	    TileBase bTile = _tilemap.GetTile(b);
+	    bool res = (_tilesData[aTile].Color == _tilesData[bTile].Color) ||
+	               _tilesData[aTile].Color == TileColor.All ||
+	               _tilesData[bTile].Color == TileColor.All;
+	    
+	    return res;
     }
 }
