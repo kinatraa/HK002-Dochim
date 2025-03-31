@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -24,15 +24,18 @@ public class AIController : MonoBehaviour
         _diamondClick = GetComponent<DiamondClick>();
         _bounds = GamePlayManager.Instance.BoardBounds;
 		int index = PlayerPrefs.GetInt("OpponentSelection");
-		Debug.Log(index);
 		character = characterPool[index].GetComponent<BaseCharacter>();
         GamePlayManager.Instance.OpponentCharacter = character;
-		//send message for init 
-		DataManager.Instance.OpponentHP = character.GetCurrentHP();
+        //send message for init 
+        Debug.Log(character.GetCurrentHP());
+        Debug.Log(character.currentConditionAmount);
+        Debug.Log(character.activeConditionAmount);
 		DataManager.Instance.OpponentMaxHP = character.GetCurrentHP();
+		DataManager.Instance.OpponentHP = character.GetCurrentHP();
 		DataManager.Instance.OpponentPortrait = character.characterPortrait;
 		DataManager.Instance.OpponentSkillIcon = character.SkillIcon;
 		DataManager.Instance.OpponentSkillRequirementAmount = character.activeConditionAmount;
+		DataManager.Instance.OpponentCurrentTilesAcquired = 0;
 	}
 
     void OnEnable()

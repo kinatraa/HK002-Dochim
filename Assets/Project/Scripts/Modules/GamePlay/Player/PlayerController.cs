@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
 		_camera = Camera.main;
 		_diamondClick = GetComponent<DiamondClick>();
 		int index = PlayerPrefs.GetInt("PlayerSelection");
-		Debug.Log(index);
 		_character = characterPool[index].GetComponent<BaseCharacter>();
 		//_character = characterPool.First().GetComponent<BaseCharacter>();
 		GamePlayManager.Instance.PlayerCharacter = _character;

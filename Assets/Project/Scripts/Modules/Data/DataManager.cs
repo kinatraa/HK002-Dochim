@@ -116,7 +116,7 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
         set
         {
             PlayerData.maxHealth = value;
-            MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
         }
     }
     public int PlayerRemainActionPoints
@@ -201,7 +201,7 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
         set
         {
             OpponentData.maxHealth = value;
-            MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChanged));
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
         }
     }
     public int OpponentRemainActionPoints

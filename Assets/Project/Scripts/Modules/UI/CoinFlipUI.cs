@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,14 @@ public class CoinFlipUI : MonoBehaviour
 	{
 		isFlipping = true;
 		float elapsedTime = 0f;
+		Vector3 originalPos = coinImage.transform.localPosition;
+		coinImage.transform.DORotate(new Vector3(0, 1080f, 0), flipTime, RotateMode.FastBeyond360)
+			.SetEase(Ease.InOutQuad);
+
+
+		coinImage.transform.DOLocalMoveY(originalPos.y + 100f, flipTime / 2)
+			.SetLoops(2, LoopType.Yoyo)
+			.SetEase(Ease.OutBounce);
 
 		while (elapsedTime < flipTime)
 		{
@@ -38,18 +47,13 @@ public class CoinFlipUI : MonoBehaviour
 
 		bool isHeads = Random.value > 0.5f;
 		coinImage.sprite = isHeads ? headsSprite : tailsSprite;
+		flippingOutcome = isHeads ? 0 : 1;
 
 		Debug.Log(isHeads ? "Player 1 go first!" : "Player 2 go first!");
-		if (isHeads)
-		{
-			flippingOutcome = 0;
-			Debug.Log(flippingOutcome);
-		}
-		else
-		{
-			flippingOutcome = 1;
-			Debug.Log(flippingOutcome);
-		}
+		Debug.Log("Flip outcome: " + flippingOutcome);
+
+		yield return new WaitForSeconds(1f);
+
 		GamePlayManager.Instance.SetCoinFlipOutcome(flippingOutcome);
 		isFlipping = false;
 		CoinflipBackground.SetActive(false);

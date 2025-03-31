@@ -40,7 +40,7 @@ public class CharacterSelectionManager : MonoBehaviour
 			pointerEnter.callback.AddListener((data) => { OnPointerEnter(index); });
 			trigger.triggers.Add(pointerEnter);
 			EventTrigger.Entry pointerExit = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
-			pointerExit.callback.AddListener((data) => { OnPointerExit(); });
+			pointerExit.callback.AddListener((data) => { OnPointerExit(index); });
 			trigger.triggers.Add(pointerExit);
 			EventTrigger.Entry pointerClick = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
 			pointerClick.callback.AddListener((data) => { OnPointerClick(index); });
@@ -49,12 +49,20 @@ public class CharacterSelectionManager : MonoBehaviour
 	}
 	private void OnPointerEnter(int index)
 	{
+		//DOTween.Rewind(2, true);
+		characterSkillInfoContainers[index].enabled = true;
 		characterSkillInfos[index].enabled = true;
-
+		characterSkillInfoContainers[index].DOFade(1f, 2f).SetId(1);
+		characterSkillInfos[index].DOFade(1f, 2f).SetId(1);
+		characterSkillInfoContainers[index].rectTransform.DOAnchorPosY(-782, 1f).SetEase(Ease.OutQuad);
 	}
-	private void OnPointerExit()
+	private void OnPointerExit(int index)
 	{
-	
+		//DOTween.Rewind(1,true);
+		//skillInfoContainerRect.DOLocalMove(new Vector3(0, 210, 0), 1f).SetEase(Ease.OutQuad).SetId(2);
+		characterSkillInfoContainers[index].enabled = false;
+		characterSkillInfos[index].enabled = false;
+		characterSkillInfoContainers[index].rectTransform.DOAnchorPosY(-246, 1f).SetEase(Ease.OutQuad);
 	}
 	private void OnPointerClick(int index)
 	{
