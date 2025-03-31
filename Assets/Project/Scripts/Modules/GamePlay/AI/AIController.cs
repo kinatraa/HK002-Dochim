@@ -17,13 +17,16 @@ public class AIController : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private int _score = 0;
+	[SerializeField] private List<GameObject> characterPool;
 
-    void Awake()
+	void Awake()
     {
         _diamondClick = GetComponent<DiamondClick>();
         _bounds = GamePlayManager.Instance.BoardBounds;
-        character = GamePlayManager.Instance.OpponentCharacter;
-        Debug.Log(character.name);
+		int index = PlayerPrefs.GetInt("OpponentSelection");
+		Debug.Log(index);
+		character = characterPool[index].GetComponent<BaseCharacter>();
+        GamePlayManager.Instance.OpponentCharacter = character;
 		//send message for init 
 		DataManager.Instance.OpponentHP = character.GetCurrentHP();
 		DataManager.Instance.OpponentMaxHP = character.GetCurrentHP();

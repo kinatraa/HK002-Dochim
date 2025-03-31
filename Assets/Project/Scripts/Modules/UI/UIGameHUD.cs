@@ -235,16 +235,6 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
         SkillUpdate();
         UpdateStatus();
 	}
-    public void SkillHover()
-    {
-        Debug.Log("B");
-        _playerSkillDesContainer.gameObject.SetActive(true);
-    }
-    public void EndOfSkillHover()
-    {
-        Debug.Log("A");
-        _playerSkillDesContainer.gameObject.SetActive(false);
-    }
 	public void SkillUpdate()
 	{
 		_playerActiveSkillIndicator.text = $"{DataManager.Instance.PlayerCurrentTilesAcquired}/{DataManager.Instance.PlayerSkillRequirementAmount}";

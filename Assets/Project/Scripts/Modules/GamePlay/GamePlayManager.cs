@@ -77,7 +77,11 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
     [SerializeField] private Tilemap _tilemap;
     [SerializeField] private Tilemap _licoriceTileMap;
     [SerializeField] private Tilemap _effectTileMap;
-
+    private int _coinFlipOutcome = -1;
+    public int CoinFlipOutCome
+    {
+        get => _coinFlipOutcome;
+    }
     public Tilemap Tilemap
     {
         get => _tilemap;
@@ -123,9 +127,14 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         _bounds.xMax = _columns / 2;
         _bounds.yMin = -_rows / 2;
         _bounds.yMax = _rows / 2;
-
 	}
-    public bool IsInBound(Vector3Int v)
+    public void SetCoinFlipOutcome(int outcome)
+    {
+        _coinFlipOutcome = outcome;
+        _gameTurnController.InitTurn();
+    }
+
+	public bool IsInBound(Vector3Int v)
     {
         return v.x >= _bounds.xMin && v.x < _bounds.xMax && v.y >= _bounds.yMin && v.y < _bounds.yMax;
     }

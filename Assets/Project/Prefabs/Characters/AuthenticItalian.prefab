@@ -54,7 +54,7 @@ MonoBehaviour:
     vi c\u1EE7a l\u1EEDa, ng\u01B0\u1EDDi k\xEDch ho\u1EA1t s\u1EBD nh\u1EADn \u0111\u01B0\u1EE3c
     n\u1EEDa t\u1ED5ng s\u1ED1 \xF4 b\u1ECB ph\xE1 h\u1EE7y trong ph\u1EA1m v\u1ECB
     l\u1EEDa."
-  characterPortrait: {fileID: 21300000, guid: 006ceb19a3d62e44c956c3f1ed457d5d, type: 3}
+  characterPortrait: {fileID: 21300000, guid: 23f0a9910bb1def4299bf40ff2ca8e5f, type: 3}
   SkillIcon: {fileID: 21300000, guid: 2706d375352041649b91d0562ddad4bb, type: 3}
   activeConditionAmount: 5
   currentConditionAmount: 0

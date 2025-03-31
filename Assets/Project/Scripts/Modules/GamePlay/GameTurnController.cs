@@ -35,7 +35,17 @@ public class GameTurnController : MonoBehaviour
 	{
 		playerCharacter = GamePlayManager.Instance.PlayerCharacter;
 		opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
-		_turn = -1;
+    }
+    public void InitTurn()
+    {
+		if (GamePlayManager.Instance.CoinFlipOutCome == 0)
+		{
+			_turn = -1;
+		}
+		else
+		{
+			_turn = 0;
+		}
 		remainingActions = maxActionPerTurn;
 		DataManager.Instance.PlayerRemainActionPoints = remainingActions;
 		DataManager.Instance.OpponentRemainActionPoints = remainingActions;
@@ -160,5 +170,7 @@ public class GameTurnController : MonoBehaviour
     public void SetTurn(int turn)
     {
         _turn = turn;
+        //Debug.Log(_turn);
+        //PlayTurn();
     }
 }

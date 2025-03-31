@@ -343,7 +343,7 @@ MonoBehaviour:
     vi c\u1EE7a l\u1EEDa, ng\u01B0\u1EDDi k\xEDch ho\u1EA1t s\u1EBD nh\u1EADn \u0111\u01B0\u1EE3c
     n\u1EEDa t\u1ED5ng s\u1ED1 \xF4 b\u1ECB ph\xE1 h\u1EE7y trong ph\u1EA1m v\u1ECB
     l\u1EEDa."
-  characterPortrait: {fileID: 21300000, guid: 006ceb19a3d62e44c956c3f1ed457d5d, type: 3}
+  characterPortrait: {fileID: 21300000, guid: 23f0a9910bb1def4299bf40ff2ca8e5f, type: 3}
   SkillIcon: {fileID: 21300000, guid: 2706d375352041649b91d0562ddad4bb, type: 3}
   activeConditionAmount: 5
   currentConditionAmount: 0
@@ -534,6 +534,14 @@ PrefabInstance:
     - target: {fileID: 4694293854610946249, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531549704084493688, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2878542ada9aea343a531b3caa67eec1, type: 3}
+    - target: {fileID: 5531549704084493688, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5928154595021138111, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -750,11 +758,19 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1068139340127649264, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       insertIndex: 0
       addedObject: {fileID: 167502402}
+    - targetCorrespondingSourceObject: {fileID: 4570753996381597670, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1883648778}
     - targetCorrespondingSourceObject: {fileID: 1293941901659449427, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       insertIndex: 1
       addedObject: {fileID: 133270640}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+--- !u!224 &720662107 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4570753996381597670, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+  m_PrefabInstance: {fileID: 720662106}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &773205572
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,13 +949,105 @@ MonoBehaviour:
     t\u1EEB hi\u1EC7u \u1EE9ng BloodLoss, k\u0129 n\u0103ng s\u1EBD \u0111\u01B0\u1EE3c
     n\xE2ng c\u1EA5p v\xE0 nh\u1EADn k\u0129 n\u0103ng ch\u1EE7 \u0111\u1ED9ng,"
   characterPortrait: {fileID: 21300000, guid: 6b511c3c5317b9440bb9482e53e40c78, type: 3}
-  SkillIcon: {fileID: 21300000, guid: 2706d375352041649b91d0562ddad4bb, type: 3}
+  SkillIcon: {fileID: 21300000, guid: ff87d7d6f254952459bf39ec7a6a70dc, type: 3}
   activeConditionAmount: 5
   currentConditionAmount: 0
   activeSkillExistenceTurn: 0
   conditionTile:
   - {fileID: 11400000, guid: 173ea209e0bfffb4cafd0214a1dc81d7, type: 2}
   - {fileID: 11400000, guid: baa58ff96767fe44c9eac5101dc2e7b1, type: 2}
+--- !u!1 &895768914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 895768915}
+  - component: {fileID: 895768917}
+  - component: {fileID: 895768916}
+  - component: {fileID: 895768918}
+  m_Layer: 5
+  m_Name: Coin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &895768915
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895768914}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1883648778}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &895768916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895768914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 939325225, guid: 3a2179b5e1f70b142b9681eeaaab28f5, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &895768917
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895768914}
+  m_CullTransparentMesh: 1
+--- !u!114 &895768918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895768914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28d9d36d420389e40a5e61ea4e116836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headsSprite: {fileID: -939622403, guid: 3a2179b5e1f70b142b9681eeaaab28f5, type: 3}
+  tailsSprite: {fileID: 78518601, guid: 3a2179b5e1f70b142b9681eeaaab28f5, type: 3}
+  coinImage: {fileID: 895768916}
+  flipTime: 1
 --- !u!224 &962142955 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1293941901659449427, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
@@ -1414,6 +1522,82 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735573096}
+  m_CullTransparentMesh: 1
+--- !u!1 &1883648777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1883648778}
+  - component: {fileID: 1883648780}
+  - component: {fileID: 1883648779}
+  m_Layer: 5
+  m_Name: CoinFlipBackground
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1883648778
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883648777}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 895768915}
+  m_Father: {fileID: 720662107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1883648779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883648777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.01886791, g: 0.017621916, b: 0.017621916, a: 0.73333335}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1883648780
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883648777}
   m_CullTransparentMesh: 1
 --- !u!114 &237369475926413445
 MonoBehaviour:
@@ -2219,6 +2403,10 @@ MonoBehaviour:
   character: {fileID: 0}
   _scoreText: {fileID: 0}
   _score: 0
+  characterPool:
+  - {fileID: 696961908}
+  - {fileID: 773205572}
+  - {fileID: 869116742}
 --- !u!4 &3979427813999761276
 Transform:
   m_ObjectHideFlags: 0
@@ -2901,12 +3089,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08a6d3aa330e5fc419dc0ae6c06a98e2, type: 2}
   - {fileID: 11400000, guid: ca9c9734355e2384d869e375f106777a, type: 2}
   - {fileID: 11400000, guid: 66a0f9f8fbc8b9042aba355aff5cc2a5, type: 2}
-  _areaTiles:
-  - {fileID: 11400000, guid: 9b9fdbcf984b6c144b0c6c6400482225, type: 2}
-  - {fileID: 11400000, guid: fc16a05271a39224b99ffab237e7b1ca, type: 2}
-  - {fileID: 11400000, guid: 52d8e447e5463c24bb0e5a3cadc1e64f, type: 2}
-  - {fileID: 11400000, guid: 3931abd4a2e5736459bc6884ee7137ec, type: 2}
-  - {fileID: 11400000, guid: 780702d77c9c12249977884a0b4c7ce7, type: 2}
+  _areaTile: {fileID: 0}
   licoriceTile: {fileID: 11400000, guid: f9e8cc91bca33c8419292d75ecc4ed03, type: 2}
   licoriceTileMap: {fileID: 8306408377868479986}
   _tilemap: {fileID: 4542738521370706139}
@@ -2971,12 +3154,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08a6d3aa330e5fc419dc0ae6c06a98e2, type: 2}
   - {fileID: 11400000, guid: ca9c9734355e2384d869e375f106777a, type: 2}
   - {fileID: 11400000, guid: 66a0f9f8fbc8b9042aba355aff5cc2a5, type: 2}
-  _areaTiles:
-  - {fileID: 11400000, guid: 9b9fdbcf984b6c144b0c6c6400482225, type: 2}
-  - {fileID: 11400000, guid: fc16a05271a39224b99ffab237e7b1ca, type: 2}
-  - {fileID: 11400000, guid: 52d8e447e5463c24bb0e5a3cadc1e64f, type: 2}
-  - {fileID: 11400000, guid: 3931abd4a2e5736459bc6884ee7137ec, type: 2}
-  - {fileID: 11400000, guid: 780702d77c9c12249977884a0b4c7ce7, type: 2}
+  _areaTile: {fileID: 0}
   _copyTilemap: {fileID: 4716116981649300520}
   _copyLicoriceTilemap: {fileID: 7962427166879762705}
 --- !u!1839735485 &7962427166879762705

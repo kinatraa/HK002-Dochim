@@ -61,7 +61,6 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
         {
             PlayerData.portrait = value;
             MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
-            Debug.Log(PlayerPortrait.name);
         }
     }
     public Sprite PlayerSkillIcon

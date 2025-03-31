@@ -1,3 +1,4 @@
+﻿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.WebSockets;
@@ -25,6 +26,8 @@ public class CharacterSelectionManager : MonoBehaviour
 		for (int i = 0; i < characterPortraits.Count; i++) 
 		{
 			characterPortraits[i].sprite = characterPrefabs[i].characterPortrait;
+			characterSkillInfoContainers[i].enabled = false;
+			characterSkillInfos[i].enabled = false;
 		}
 	}
 	private void Start()
@@ -46,39 +49,23 @@ public class CharacterSelectionManager : MonoBehaviour
 	}
 	private void OnPointerEnter(int index)
 	{
-		skillInfoContainerRect.localPosition = new Vector3(0, -260, 0);
 		characterSkillInfos[index].enabled = true;
-		characterSkillInfos[index].text = characterPrefabs[index].skillDescriptions;
-		if (index == 0)
-		{
-			characterSkillInfoContainers[index].enabled = true;
-			//characterSkillInfos[index].text = characterPrefabs[index].skillDescriptions;
-		}
-		else if (index == 1) 
-		{
-			characterSkillInfoContainers[index].enabled = true;
-		}
-		else
-		{
-			characterSkillInfoContainers[index].enabled = true;
-		}
+
 	}
 	private void OnPointerExit()
 	{
-		skillInfoContainerRect = initInfoContainerRect;
-		//for (int i = 0; i < characterPrefabs.Count; i++) 
-		//{
-		//	characterSkillInfos[i]
-		//}
+	
 	}
 	private void OnPointerClick(int index)
 	{
 		_selectedCharacter = characterPrefabs[index];
 		PlayerPrefs.SetInt("PlayerSelection", index);
-		characterPrefabs.RemoveAt(index);
-		var opponentCharacter =characterPrefabs[Random.Range(0, characterPrefabs.Count)];
-		CharacterSelectionData.SelectedPlayerCharacter = _selectedCharacter;
-		CharacterSelectionData.SelectedOpponentCharacter = opponentCharacter;
+		int opponentIndex;
+		do
+		{
+			opponentIndex = Random.Range(0, characterPrefabs.Count);
+		} while (opponentIndex == index);
+		PlayerPrefs.SetInt("OpponentSelection", opponentIndex);
 		SceneManager.LoadScene("Game");
 	}
 }
