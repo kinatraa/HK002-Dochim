@@ -27,41 +27,53 @@ public class PopupManager : MonoBehaviour,IMessageHandle
 
 	private void Awake()
 	{
-		soundOptions[1].enabled = false;
+		SetAlpha(soundOptions[1], 0);
 		soundSelectOptions[1].color = Color.black;
-		musicOptions[1].enabled = false;
+		SetAlpha(musicOptions[1], 0);
 		musicSelectOptions[1].color = Color.black;
 	}
 	public void ChangeSoundOption()
 	{
-		if (soundOptions[0].enabled)
+		Debug.Log("Click");
+		if (isOn(soundOptions[0]))
 		{
-			soundOptions[1].enabled = true;
-			soundOptions[0].enabled = false;
+			SetAlpha(soundOptions[1], 255);
+			SetAlpha(soundOptions[0], 0);
 			soundSelectOptions[0].color = Color.black;
 			soundSelectOptions[1].color= Color.white;
 		}
 		else
 		{
-			soundOptions[1].enabled = false;
-			soundOptions[0].enabled = true;
+			SetAlpha(soundOptions[1], 0);
+			SetAlpha(soundOptions[0], 255);
 			soundSelectOptions[0].color = Color.white;
 			soundSelectOptions[1].color = Color.black;
 		}
 	}
+	private bool isOn(Image img)
+	{
+		Color color = img.color;
+		return color.a == 255;
+	}
+	private void SetAlpha(Image img,float alpha)
+	{
+		Color color = img.color;
+		color.a = alpha;
+		img.color = color;
+	}
 	public void ChangeMusicOption()
 	{
-		if (musicOptions[0].enabled) 
+		if (isOn(musicOptions[0])) 
 		{
-			musicOptions[1].enabled = true;
-			musicOptions[0].enabled = false;
+			SetAlpha(musicOptions[1], 255);
+			SetAlpha(musicOptions[0], 0);
 			musicSelectOptions[0].color= Color.black;
 			musicSelectOptions[1].color =Color.white;
 		}
 		else
 		{
-			musicOptions[1].enabled = false;
-			musicOptions[0].enabled = true;
+			SetAlpha(musicOptions[1], 0);
+			SetAlpha(musicOptions[0], 255);
 			musicSelectOptions[0].color =Color.white;
 			musicSelectOptions[1].color = Color.black;	
 		}

@@ -10,19 +10,32 @@ public class CoinFlipUI : MonoBehaviour
 	public Sprite tailsSprite;
 	public Image coinImage;
 	public float flipTime = 1f;
+	[SerializeField] private Button headButton;
+	[SerializeField] private Button tailButton;
 	[SerializeField] private GameObject CoinflipBackground;
+	[SerializeField] private GameObject playerChooseBackground;
+
 	private int flippingOutcome;
 	private bool isFlipping = false;
+	private int playerChoice = -1;
 	private void Awake()
 	{
-		FlipCoin();
+		headButton.onClick.AddListener(() => SetPlayerChoice(0));
+		tailButton.onClick.AddListener(() => SetPlayerChoice(1));
 	}
 	public void FlipCoin()
 	{
-		if (!isFlipping)
+		playerChooseBackground.GetComponent<CanvasGroup>().alpha = 0;
+
+		if (!isFlipping && playerChoice != -1)
 		{
 			StartCoroutine(FlipAnimation());
 		}
+	}
+	private void SetPlayerChoice(int choice)
+	{
+		playerChoice = choice;
+		FlipCoin();
 	}
 
 	IEnumerator FlipAnimation()
@@ -47,9 +60,19 @@ public class CoinFlipUI : MonoBehaviour
 
 		bool isHeads = Random.value > 0.5f;
 		coinImage.sprite = isHeads ? headsSprite : tailsSprite;
-		flippingOutcome = isHeads ? 0 : 1;
-
-		Debug.Log(isHeads ? "Player 1 go first!" : "Player 2 go first!");
+		if (playerChoice == 0 && isHeads)
+		{
+			//flippingOutcome = isHeads ? 0 : 1;
+			flippingOutcome = 0;
+		}
+		else if(playerChoice == 1 && !isHeads)
+		{
+			flippingOutcome = 0;
+		}
+		else
+		{
+			flippingOutcome = 1;
+		}
 		Debug.Log("Flip outcome: " + flippingOutcome);
 
 		yield return new WaitForSeconds(1f);
