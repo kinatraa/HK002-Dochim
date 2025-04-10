@@ -11,7 +11,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 {
     [SerializeField] private TextMeshProUGUI _currentPlayerTurnScoreText;
     [SerializeField] private TextMeshProUGUI _currentOpponentTurnScoreText;
-
+    [SerializeField] private Sprite[] _turnState;
     [Header("Player Status")]
     [SerializeField] CanvasGroup _playerStatusCanvasGroup;
     [SerializeField] Image[] _playersCurrentStatusIconList;
@@ -28,7 +28,6 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     private Vector2 _playerPortraitInitPos;
     private Vector2 _opponentPortraitInitPos;
     [SerializeField] float _animationDurationTime;
-    [SerializeField] RectTransform _collisionPosition;
 
     private BaseCharacter playerCharacter;
     private BaseCharacter opponentCharacter;
@@ -47,9 +46,9 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     [SerializeField] private Image _playerSkillIcon;
     [SerializeField] private Image _playerPortrait;
     [SerializeField] private Image _playerCoolDownIndicator;
-    [SerializeField] private RectTransform _playerScoreFill;
-    [SerializeField] private RectTransform _playerSkillDesContainer;
-	[SerializeField] private TextMeshProUGUI _playerSkillDescription;
+    [SerializeField] private Image _playerScoreFill;
+    [SerializeField] private Image _playerRemainingActionsBoard;
+    [SerializeField] private TextMeshProUGUI _playerSkillPopup;
 	[Header("Opponent")]
 	//init UI 
 	[SerializeField] private TextMeshProUGUI _opponentActiveSkillIndicator;
@@ -62,22 +61,18 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     
     [SerializeField] private TextMeshProUGUI _opponentActionRemains;
     
-    [SerializeField] private RectTransform _opponentScoreFill;
+    [SerializeField] private Image _opponentScoreFill;
     
     [SerializeField] private Image _opponentCoolDownIndicator;
-    [SerializeField] private RectTransform _opponentSkillDesContainer;
-	[SerializeField] private TextMeshProUGUI _opponentSkillDescription;
-
+    [SerializeField] private Image _opponentRemainingActionsBoard;
+	[SerializeField] private TextMeshProUGUI _opponentSkillPopup;
 	private float _opponentFillAmount;
 	private float _playerFillAmount;
     private float _scoreDifferent;
     private float _playerScoreToFloat;
     private float _opponentScoreToFloat;
-    private Image _playerRemainingActionsBoard;
-    private Image _opponentRemainingActionsBoard;
-    private float maxWidth = 1510;
-    private float baseWidth = 755;
-
+    private float baseScoreFill = 0.5f;
+    private float maxScoreFill = 1f;
     private float differenceRatio;
 	private void Awake()
 	{
@@ -85,6 +80,8 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
         _opponentPortraitInitPos = _opponentPortrait.rectTransform.anchoredPosition;
 		_playerRemainingActionsBoard = _playerActionRemains.GetComponentInParent<Image>();
         _opponentRemainingActionsBoard = _opponentActionRemains.GetComponentInParent<Image>();
+        _opponentScoreFill.fillAmount = baseScoreFill;
+        _playerScoreFill.fillAmount = maxScoreFill;
 	}
 
     //animation 
@@ -95,13 +92,11 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 
         Vector2 collisionPoint = (_playerPortraitInitPos + _opponentPortraitInitPos) / 2f;
         Sequence battleSequence = DOTween.Sequence();
-        battleSequence.Append(_playerPortrait.rectTransform.DOAnchorPos(collisionPoint, _animationDurationTime).SetEase(Ease.InOutQuad));
-        battleSequence.Join(_opponentPortrait.rectTransform.DOAnchorPos(collisionPoint, _animationDurationTime).SetEase(Ease.InOutQuad));
         battleSequence.AppendCallback(() =>
         {
             Vector2 playerKnockbackPos = collisionPoint - new Vector2(200f, 0f);
             Vector2 opponentKnockbackPos = collisionPoint + new Vector2(200f, 0f);
-			if (playerScore > opponentScore)
+            if (playerScore > opponentScore)
 			{
 				_opponentPortrait.rectTransform.DOAnchorPos(opponentKnockbackPos, _animationDurationTime).SetEase(Ease.OutBack);
 			}
@@ -111,8 +106,8 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 			}
 			else
 			{
-				_playerPortrait.rectTransform.DOShakeAnchorPos(_animationDurationTime, 10f);
-				_opponentPortrait.rectTransform.DOShakeAnchorPos(_animationDurationTime, 10f);
+				_playerPortrait.rectTransform.DOShakeAnchorPos(_animationDurationTime, 2f);
+				_opponentPortrait.rectTransform.DOShakeAnchorPos(_animationDurationTime, 2f);
 			}
 		});
         battleSequence.AppendCallback(() =>
@@ -177,57 +172,57 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 
 		playerCharacter = GamePlayManager.Instance.PlayerCharacter;
 		opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
-		_playerSkillDescription.text = playerCharacter.skillDescriptions;
 
 	}
-    public void UpdateUI()
+    public void UpdateScore()
     {
+		_playerScoreToFloat = float.Parse(_currentPlayerTurnScoreText.text);
+		_opponentScoreToFloat = float.Parse(_currentOpponentTurnScoreText.text);
 
-        _currentPlayerTurnScoreText.text = $"{DataManager.Instance.PlayerScore}";
-        _currentOpponentTurnScoreText.text = $"{DataManager.Instance.OpponentScore}";
-        _playerScoreToFloat = float.Parse(_currentPlayerTurnScoreText.text);
-        _opponentScoreToFloat = float.Parse(_currentOpponentTurnScoreText.text);
-        _scoreDifferent = Mathf.Abs(_playerScoreToFloat - _opponentScoreToFloat);
-        differenceRatio = (_scoreDifferent / (_playerScoreToFloat + _opponentScoreToFloat)) * maxWidth;
-        if (_playerScoreToFloat > _opponentScoreToFloat)
-        {
-            float newPlayerWidth = baseWidth + differenceRatio;
-            float newOpponentWidth = baseWidth - differenceRatio;
+		_scoreDifferent = Mathf.Abs(_playerScoreToFloat - _opponentScoreToFloat);
 
-            newPlayerWidth = Mathf.Clamp(newPlayerWidth, 0, maxWidth);
-            newOpponentWidth = Mathf.Clamp(newOpponentWidth, 0, maxWidth);
+		float totalScore = _playerScoreToFloat + _opponentScoreToFloat;
+		differenceRatio = (totalScore == 0) ? 0 : (_scoreDifferent / totalScore);
 
-            _playerScoreFill.DOSizeDelta(new Vector2(newPlayerWidth, _playerScoreFill.sizeDelta.y), _fillSpeed);
-            _opponentScoreFill.DOSizeDelta(new Vector2(newOpponentWidth, _opponentScoreFill.sizeDelta.y), _fillSpeed);
-        }
-        else if (_playerScoreToFloat < _opponentScoreToFloat) 
-        {
-            float newOpponentWidth = baseWidth + differenceRatio;
-            float newPlayerWidth = baseWidth - differenceRatio;
+		float maxFillVariation = 0.5f;
+		float fillChange = differenceRatio * maxFillVariation;
 
-			newPlayerWidth = Mathf.Clamp(newPlayerWidth, 0, maxWidth);
-			newOpponentWidth = Mathf.Clamp(newOpponentWidth, 0, maxWidth);
+		float targetFill;
 
-			_playerScoreFill.DOSizeDelta(new Vector2(newPlayerWidth, _playerScoreFill.sizeDelta.y), _fillSpeed);
-			_opponentScoreFill.DOSizeDelta(new Vector2(newOpponentWidth, _opponentScoreFill.sizeDelta.y), _fillSpeed);
+		if (_playerScoreToFloat > _opponentScoreToFloat)
+		{
+			targetFill = baseScoreFill - fillChange;
+		}
+		else if (_playerScoreToFloat < _opponentScoreToFloat)
+		{
+			targetFill = baseScoreFill + fillChange;
 		}
 		else
 		{
-			_playerScoreFill.DOSizeDelta(new Vector2(baseWidth, _playerScoreFill.sizeDelta.y), _fillSpeed);
-			_opponentScoreFill.DOSizeDelta(new Vector2(baseWidth, _opponentScoreFill.sizeDelta.y), _fillSpeed);
+			targetFill = baseScoreFill;
 		}
+
+		targetFill = Mathf.Clamp01(targetFill);
+
+		_opponentScoreFill.DOFillAmount(targetFill, _fillSpeed);
+	}
+    public void UpdateUI()
+    {
+        _currentPlayerTurnScoreText.text = $"{DataManager.Instance.PlayerScore}";
+        _currentOpponentTurnScoreText.text = $"{DataManager.Instance.OpponentScore}";
+        UpdateScore();
         if (GamePlayManager.Instance.GameTurnController.GetTurn() == 0) {
             _playerActionRemains.text = $"{DataManager.Instance.PlayerRemainActionPoints}";
-            _playerRemainingActionsBoard.enabled = true;
+            _playerRemainingActionsBoard.sprite = _turnState[0];
             _playerActionRemains.enabled = true;
-            _opponentRemainingActionsBoard.enabled = false;
+            _opponentRemainingActionsBoard.sprite = _turnState[1];
             _opponentActionRemains.enabled = false;
         }
         if (GamePlayManager.Instance.GameTurnController.GetTurn() == 1) {
             _opponentActionRemains.text = $"{DataManager.Instance.OpponentRemainActionPoints}";
-			_playerRemainingActionsBoard.enabled = false;
+			_playerRemainingActionsBoard.sprite = _turnState[1];
 			_playerActionRemains.enabled = false;
-			_opponentRemainingActionsBoard.enabled = true;
+			_opponentRemainingActionsBoard.sprite = _turnState[0];
 			_opponentActionRemains.enabled = true;
 		}
         _playerActionRemains.text = $"{DataManager.Instance.PlayerRemainActionPoints}";

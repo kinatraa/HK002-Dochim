@@ -18,7 +18,7 @@ public class GameTurnController : MonoBehaviour
     private bool isInAnimation = false;
 	private void Update()
 	{
-		if (GamePlayManager.Instance.DiamondManager.IsDropping()) return;
+		if (GamePlayManager.Instance.DiamondManager.IsDropping() || GamePlayManager.Instance.OnCoinFlip) return;
         if (!isInAnimation)
         {
             timer -= Time.deltaTime;

@@ -12,6 +12,12 @@ using UnityEngine.Tilemaps;
 public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
 {
     [SerializeField] private DiamondManager diamondManager;
+    public bool onCoinFlip = true;
+    public bool OnCoinFlip
+    {
+        get => onCoinFlip;
+        set => onCoinFlip = value;
+    }
 
     public DiamondManager DiamondManager
     {
@@ -132,6 +138,7 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
     {
         _coinFlipOutcome = outcome;
         _gameTurnController.InitTurn();
+        onCoinFlip = false;
     }
 
 	public bool IsInBound(Vector3Int v)

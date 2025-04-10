@@ -11,7 +11,7 @@ public abstract class BaseCharacter : MonoBehaviour
 	public string characterName;
 	[SerializeField]private int maxHP;
 	[SerializeField]private int currentHP;
-	public string skillDescriptions;
+	[SerializeField] private string skillActiveQuote;
 	public Sprite characterPortrait;
 	public Sprite SkillIcon;
 	protected bool isReady = false;
