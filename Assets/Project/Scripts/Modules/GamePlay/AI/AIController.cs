@@ -34,6 +34,7 @@ public class AIController : MonoBehaviour
 		DataManager.Instance.OpponentHP = character.GetCurrentHP();
 		DataManager.Instance.OpponentPortrait = character.characterPortrait;
 		DataManager.Instance.OpponentSkillIcon = character.SkillIcon;
+        DataManager.Instance.OpponentQuote = character.skillActiveQuote;
 		DataManager.Instance.OpponentSkillRequirementAmount = character.activeConditionAmount;
 		DataManager.Instance.OpponentCurrentTilesAcquired = 0;
 	}

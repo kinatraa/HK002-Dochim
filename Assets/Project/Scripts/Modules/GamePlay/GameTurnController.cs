@@ -150,7 +150,9 @@ public class GameTurnController : MonoBehaviour
 			//ModifyExistenceSkillTurn(playerCharacter);
 			opponentCharacter.ApplyBloodLoss(playerCharacter);
             DataManager.Instance.PlayerRemainActionPoints = remainingActions;
+            DataManager.Instance.OpponentHP = opponentCharacter.GetCurrentHP();
             DataManager.Instance.PlayerHP = playerCharacter.GetCurrentHP();
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChangedDuringTurn));
         }
 		else if (_turn == 1)
 		{
@@ -158,6 +160,9 @@ public class GameTurnController : MonoBehaviour
 			//ModifyExistenceSkillTurn(opponentCharacter);
 			playerCharacter.ApplyBloodLoss(opponentCharacter);
 			DataManager.Instance.OpponentRemainActionPoints = remainingActions;
+            DataManager.Instance.PlayerHP = playerCharacter.GetCurrentHP();
+			DataManager.Instance.OpponentHP = opponentCharacter.GetCurrentHP();
+			MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChangedDuringTurn));
 		}
 		isInAnimation = false;
 		PlayTurn();

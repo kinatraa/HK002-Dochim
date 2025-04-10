@@ -14,6 +14,8 @@ public class UIManager : Singleton<UIManager>, IMessageHandle
         MessageManager.Instance.AddSubcriber(MessageType.OnTimeChanged, this);
         MessageManager.Instance.AddSubcriber(MessageType.OnInitUI, this);
         MessageManager.Instance.AddSubcriber(MessageType.OnStatusChange, this);
+        MessageManager.Instance.AddSubcriber(MessageType.OnSkillActive, this);
+        MessageManager.Instance.AddSubcriber(MessageType.OnDataChangedDuringTurn, this); 
     }
 
     void OnDisable()
@@ -22,6 +24,8 @@ public class UIManager : Singleton<UIManager>, IMessageHandle
 		MessageManager.Instance.RemoveSubcriber(MessageType.OnTimeChanged, this);
         MessageManager.Instance.RemoveSubcriber(MessageType.OnInitUI,this);
         MessageManager.Instance.RemoveSubcriber(MessageType.OnStatusChange, this);
+        MessageManager.Instance.RemoveSubcriber(MessageType.OnSkillActive, this);
+		MessageManager.Instance.RemoveSubcriber(MessageType.OnDataChangedDuringTurn, this);
 	}
 
     public void Handle(Message message)
@@ -42,6 +46,9 @@ public class UIManager : Singleton<UIManager>, IMessageHandle
                 break;
             case MessageType.OnDataChangedDuringTurn:
                 UIGameHUD.HPChangedBySkill();
+                break;
+            case MessageType.OnSkillActive:
+                UIGameHUD.SkillActiveCutScene();
                 break;
         }
     }

@@ -444,14 +444,20 @@ public class DiamondManager : MonoBehaviour
 			{
 				var playercharacter = GamePlayManager.Instance.PlayerCharacter;
 				playercharacter.Trigger(clearTiles, clearTiles.Count);
-
+				if (playercharacter.IsActive)
+				{
+					MessageManager.Instance.SendMessage(new Message(MessageType.OnSkillActive));
+				}
 			}
 			else if (GamePlayManager.Instance.GameTurnController.GetTurn() == 1)
 			{
 				var opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
 				opponentCharacter.Trigger(clearTiles, clearTiles.Count);
-			}
-
+				if (opponentCharacter.IsActive)
+				{
+					MessageManager.Instance.SendMessage(new Message(MessageType.OnSkillActive));
+				}
+			}	
 			Dictionary<TileBase,int> destroyedTiles = new Dictionary<TileBase, int>();
             int bonus = 0, count = 0;
             CalculateScore(ref count, ref bonus, destroyedTiles);

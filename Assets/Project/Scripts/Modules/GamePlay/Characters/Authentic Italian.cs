@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class AuthenticItalian : BaseCharacter, IActiveSkill
 {
-	[SerializeField] private TileBase conditionTile;
+	[SerializeField] private List<TileBase> conditionTile;
 	[SerializeField] private TileBase fireTile;
 	private Tilemap tileMap;
 	private BoundsInt bounds;
@@ -25,7 +25,7 @@ public class AuthenticItalian : BaseCharacter, IActiveSkill
 		foreach (Vector3Int pos in listTile)
 		{
 			TileBase tile = tileMap.GetTile(pos);
-			if (tile == conditionTile)
+			if (conditionTile.Contains(tile))
 			{
 				currentConditionAmount++;
 			}
@@ -42,6 +42,7 @@ public class AuthenticItalian : BaseCharacter, IActiveSkill
 	{
 		if (!isReady)
 			return;
+		isActive = true;
 		Vector3Int tilePos;
 		do
 		{
@@ -52,7 +53,8 @@ public class AuthenticItalian : BaseCharacter, IActiveSkill
 		fireTileInField.Add(tilePos, activeSkillExistenceTurn);
 		fireTilePosition.Add(tilePos);
 		effectTileMap.SetTile(tilePos,fireTile);
-		isReady = false;	
+		isReady = false;
+		isActive = false;
 		currentConditionAmount = 0;
 	}
 

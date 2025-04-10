@@ -5,8 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class ButcherLoren : BaseCharacter, IPassiveSkill
 {
-	private int overflow = 0;
-	public bool IsActive {  get { return isActive; } }
 
 	public override void Active()
 	{
@@ -15,7 +13,6 @@ public class ButcherLoren : BaseCharacter, IPassiveSkill
 
 	public void PassiveSkills()
 	{
-		isActive = true;
 		GamePlayManager.Instance.GameTurnController.AddExtraAction(1);
 	}
 
@@ -26,12 +23,13 @@ public class ButcherLoren : BaseCharacter, IPassiveSkill
 
 	public override void Trigger(List<Vector3Int> triggerPosition, int amount)
 	{
+		isActive = false;
 		currentConditionAmount += amount;
 		if(currentConditionAmount >= activeConditionAmount)
 		{
+			isActive = true;
 			Active();
-			overflow = (int)(currentConditionAmount - activeConditionAmount) / 2;
-			currentConditionAmount = overflow;
+			currentConditionAmount = 0;
 		}
 	}
 }

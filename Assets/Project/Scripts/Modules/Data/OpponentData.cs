@@ -16,4 +16,5 @@ public class OpponentData
 	public int actionPoint;
 	public int maxHealth;
 	public List<StatusData> currentActiveStatus;
+	public string quote;
 }

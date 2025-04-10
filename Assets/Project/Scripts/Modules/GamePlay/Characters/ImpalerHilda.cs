@@ -68,7 +68,8 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 	 
 	public override void Trigger(List<Vector3Int> triggerPosition, int amount)
 	{
-		foreach(var position in triggerPosition)
+		isActive = false;
+		foreach (var position in triggerPosition)
 		{
 			TileBase tile = tilemap.GetTile(position);
 			if(conditionTile.Contains(tile))
@@ -77,6 +78,7 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 			}
 			if(currentConditionAmount >= activeConditionAmount)
 			{
+				isActive = true;
 				PassiveSkills();
 			}
 		}

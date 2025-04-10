@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
 		//send message for init 
 		DataManager.Instance.PlayerPortrait = _character.characterPortrait;
 		DataManager.Instance.PlayerSkillIcon = _character.SkillIcon;
+		DataManager.Instance.PlayerQuote = _character.skillActiveQuote;
 		DataManager.Instance.PlayerSkillRequirementAmount = _character.activeConditionAmount;
 		DataManager.Instance.PlayerMaxHP = _character.GetCurrentHP();
 		DataManager.Instance.PlayerHP = _character.GetCurrentHP();

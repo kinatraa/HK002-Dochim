@@ -176,7 +176,9 @@ MonoBehaviour:
   activeConditionAmount: 5
   currentConditionAmount: 0
   activeSkillExistenceTurn: 2
-  conditionTile: {fileID: 11400000, guid: baa58ff96767fe44c9eac5101dc2e7b1, type: 2}
+  conditionTile:
+  - {fileID: 11400000, guid: 137ec4df6177c7e4a9a12181469b1836, type: 2}
+  - {fileID: 11400000, guid: 28f6b45d638dff04ca57c91c461a8f9a, type: 2}
   fireTile: {fileID: 11400000, guid: 3dffb469411c46d4fb029db377774696, type: 2}
   fireTilePosition: []
 --- !u!1001 &720662106
@@ -229,7 +231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1155581211947677986, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1551013718637710458, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -352,6 +354,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6704735774813091471, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: _playerSkillPopup
+      value: 
+      objectReference: {fileID: 1885261415}
+    - target: {fileID: 6704735774813091471, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: _opponentSkillPopup
+      value: 
+      objectReference: {fileID: 1824072763}
+    - target: {fileID: 6704735774813091471, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: _playerSkillPopupRect
+      value: 
+      objectReference: {fileID: 1885261414}
+    - target: {fileID: 6704735774813091471, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: _turnState.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -359,6 +373,10 @@ PrefabInstance:
       propertyPath: _animationDurationTime
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6704735774813091471, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: _opponentSkillPopupRect
+      value: 
+      objectReference: {fileID: 1824072762}
     - target: {fileID: 6704735774813091471, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: _turnState.Array.data[0]
       value: 
@@ -409,35 +427,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7280886498282283478, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7280886498282283478, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7280886498282283478, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 251.05338
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7280886498282283478, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -220.48
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7619899613970509567, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7619899613970509567, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7619899613970509567, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 753.16016
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7619899613970509567, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -220.48
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7680355446468972267, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -548,7 +566,7 @@ MonoBehaviour:
   skillActiveQuote: One More
   characterPortrait: {fileID: 21300000, guid: 2878542ada9aea343a531b3caa67eec1, type: 3}
   SkillIcon: {fileID: 21300000, guid: 4d665d453ca58b84baf71d4735b351a7, type: 3}
-  activeConditionAmount: 10
+  activeConditionAmount: 25
   currentConditionAmount: 0
   activeSkillExistenceTurn: 0
 --- !u!1 &843615400
@@ -605,6 +623,7 @@ MonoBehaviour:
     actionPoint: 0
     maxHealth: 0
     currentActiveStatus: []
+    quote: 
   OpponentData:
     portrait: {fileID: 0}
     skillIcon: {fileID: 0}
@@ -615,6 +634,7 @@ MonoBehaviour:
     actionPoint: 0
     maxHealth: 0
     currentActiveStatus: []
+    quote: 
 --- !u!1 &869116742
 GameObject:
   m_ObjectHideFlags: 0

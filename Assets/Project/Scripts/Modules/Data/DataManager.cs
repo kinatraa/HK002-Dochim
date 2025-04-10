@@ -137,7 +137,15 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
             MessageManager.Instance.SendMessage(new Message(MessageType.OnStatusChange));
         }
     }
-    
+    public string PlayerQuote
+    {
+        get => PlayerData.quote;
+        set
+        {
+            PlayerData.quote = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
+        }
+    }
     public OpponentData OpponentData;
 
     public Sprite OpponentPortrait
@@ -220,6 +228,15 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
         {
             OpponentData.currentActiveStatus = value;
             MessageManager.Instance.SendMessage(new Message(MessageType.OnStatusChange));
+        }
+    }
+    public string OpponentQuote
+    {
+        get => OpponentData.quote;
+        set
+        {
+            OpponentData.quote = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
         }
     }
     public void Handle(Message message)

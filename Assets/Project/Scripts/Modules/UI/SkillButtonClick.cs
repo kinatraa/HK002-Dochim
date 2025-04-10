@@ -20,11 +20,14 @@ public class SkillButtonClick : MonoBehaviour, IPointerClickHandler
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
+		if (!_character.IsReady)
+			return;
 		if (_character is IActiveSkill)
 		{
 			_character.Active();
 		}
 		DataManager.Instance.PlayerCurrentTilesAcquired = 0;
+		MessageManager.Instance.SendMessage(new Message(MessageType.OnSkillActive));
 		Debug.Log("Click");
 	}
 }

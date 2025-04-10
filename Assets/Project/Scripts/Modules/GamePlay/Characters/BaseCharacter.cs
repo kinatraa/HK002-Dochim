@@ -1,3 +1,4 @@
+using HaKien;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -11,7 +12,7 @@ public abstract class BaseCharacter : MonoBehaviour
 	public string characterName;
 	[SerializeField]private int maxHP;
 	[SerializeField]private int currentHP;
-	[SerializeField] private string skillActiveQuote;
+	public string skillActiveQuote;
 	public Sprite characterPortrait;
 	public Sprite SkillIcon;
 	protected bool isReady = false;

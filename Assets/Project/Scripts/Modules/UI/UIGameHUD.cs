@@ -49,6 +49,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     [SerializeField] private Image _playerScoreFill;
     [SerializeField] private Image _playerRemainingActionsBoard;
     [SerializeField] private TextMeshProUGUI _playerSkillPopup;
+    [SerializeField] private RectTransform _playerSkillPopupRect;
 	[Header("Opponent")]
 	//init UI 
 	[SerializeField] private TextMeshProUGUI _opponentActiveSkillIndicator;
@@ -66,6 +67,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     [SerializeField] private Image _opponentCoolDownIndicator;
     [SerializeField] private Image _opponentRemainingActionsBoard;
 	[SerializeField] private TextMeshProUGUI _opponentSkillPopup;
+    [SerializeField] private RectTransform _opponentSkillPopupRect;
 	private float _opponentFillAmount;
 	private float _playerFillAmount;
     private float _scoreDifferent;
@@ -161,12 +163,13 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
         _playerPortrait.sprite = DataManager.Instance.PlayerPortrait;
         _playerSkillIcon.sprite = DataManager.Instance.PlayerSkillIcon;
         _playerActiveSkillIndicator.text = $"/{DataManager.Instance.PlayerSkillRequirementAmount}";
+        _playerSkillPopup.text = $"{DataManager.Instance.PlayerQuote}";
         _opponentPortrait.sprite = DataManager.Instance.OpponentPortrait;
         _opponentSkillIcon.sprite = DataManager.Instance.OpponentSkillIcon;
         _opponentActiveSkillIndicator.text = $"/{DataManager.Instance.OpponentSkillRequirementAmount}";
         _playerHP.text = $"{DataManager.Instance.PlayerHP}";
         _opponentHP.text = $"{DataManager.Instance.OpponentHP}";
-		Debug.Log(_opponentHP.text);
+		_opponentSkillPopup.text = $"{DataManager.Instance.OpponentQuote}";
 		_playerCoolDownIndicator.fillAmount = 0;
         _opponentCoolDownIndicator.fillAmount = 0;
 
@@ -174,7 +177,31 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 		opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
 
 	}
-    public void UpdateScore()
+	public void SkillActiveCutScene()
+	{
+		Sequence cutsceneSequence = DOTween.Sequence();
+
+		int currentTurn = GamePlayManager.Instance.GameTurnController.GetTurn();
+
+		if (currentTurn == 0)
+		{
+			cutsceneSequence.Append(_playerSkillPopupRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
+            cutsceneSequence.AppendInterval(1f);
+            cutsceneSequence.Append(_playerSkillPopupRect.DOAnchorPosX(1300, 0.5f).SetEase(Ease.OutQuad));
+            cutsceneSequence.Append(
+                _playerSkillPopupRect.DOAnchorPosX(-1300,0f).SetEase(Ease.OutQuad));
+		}
+		else if (currentTurn == 1)
+		{
+			cutsceneSequence.Append(_opponentSkillPopupRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
+			cutsceneSequence.AppendInterval(1f);
+			cutsceneSequence.Append(_opponentSkillPopupRect.DOAnchorPosX(-1300, 0.5f).SetEase(Ease.OutQuad));
+			cutsceneSequence.Append(
+				_opponentSkillPopupRect.DOAnchorPosX(1300, 0f).SetEase(Ease.OutQuad));
+		}
+	}
+
+	public void UpdateScore()
     {
 		_playerScoreToFloat = float.Parse(_currentPlayerTurnScoreText.text);
 		_opponentScoreToFloat = float.Parse(_currentOpponentTurnScoreText.text);
@@ -273,6 +300,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 
     public void HPChangedBySkill()
     {
+        Debug.Log("A");
         _playerHP.text = $"{DataManager.Instance.PlayerHP}";
         _playerFillAmount = (DataManager.Instance.PlayerMaxHP == 0) ? 1 : ((float)DataManager.Instance.PlayerHP / (float)DataManager.Instance.PlayerMaxHP);
         _playerHPFill.DOFillAmount(_playerFillAmount, _fillSpeed);

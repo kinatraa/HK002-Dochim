@@ -49,7 +49,6 @@ public class CharacterSelectionManager : MonoBehaviour
 	}
 	private void OnPointerEnter(int index)
 	{
-		//DOTween.Rewind(2, true);
 		characterSkillInfoContainers[index].enabled = true;
 		characterSkillInfos[index].enabled = true;
 		characterSkillInfoContainers[index].DOFade(1f, 2f).SetId(1);
@@ -58,8 +57,6 @@ public class CharacterSelectionManager : MonoBehaviour
 	}
 	private void OnPointerExit(int index)
 	{
-		//DOTween.Rewind(1,true);
-		//skillInfoContainerRect.DOLocalMove(new Vector3(0, 210, 0), 1f).SetEase(Ease.OutQuad).SetId(2);
 		characterSkillInfoContainers[index].enabled = false;
 		characterSkillInfos[index].enabled = false;
 		characterSkillInfoContainers[index].rectTransform.DOAnchorPosY(-246, 1f).SetEase(Ease.OutQuad);
