@@ -13,6 +13,12 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
 {
     [SerializeField] private DiamondManager diamondManager;
     public bool onCoinFlip = true;
+    private bool battleEnded = false;
+    public bool BattleEnded
+    {
+        get => battleEnded;
+        set => battleEnded = value;
+    }
     public bool OnCoinFlip
     {
         get => onCoinFlip;

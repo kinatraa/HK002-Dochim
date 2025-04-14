@@ -22,7 +22,7 @@ public class SkillButtonClick : MonoBehaviour, IPointerClickHandler
 	{
 		if (!_character.IsReady)
 			return;
-		if (_character is IActiveSkill)
+		if (_character is IActiveSkill && _gameTurnController.GetTurn() == 0)
 		{
 			_character.Active();
 		}

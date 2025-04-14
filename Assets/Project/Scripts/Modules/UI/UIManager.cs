@@ -7,7 +7,8 @@ using UnityEngine;
 public class UIManager : Singleton<UIManager>, IMessageHandle
 {
     public UIGameHUD UIGameHUD;
-    
+    public OutcomePopup OutcomePopup;
+    public bool _playerWon;
     void OnEnable()
     {
         MessageManager.Instance.AddSubcriber(MessageType.OnDataChanged, this);
@@ -16,6 +17,8 @@ public class UIManager : Singleton<UIManager>, IMessageHandle
         MessageManager.Instance.AddSubcriber(MessageType.OnStatusChange, this);
         MessageManager.Instance.AddSubcriber(MessageType.OnSkillActive, this);
         MessageManager.Instance.AddSubcriber(MessageType.OnDataChangedDuringTurn, this); 
+        MessageManager.Instance.AddSubcriber(MessageType.OnGameWin,this);
+        MessageManager.Instance.AddSubcriber(MessageType.OnGameLose,this);
     }
 
     void OnDisable()
@@ -26,6 +29,8 @@ public class UIManager : Singleton<UIManager>, IMessageHandle
         MessageManager.Instance.RemoveSubcriber(MessageType.OnStatusChange, this);
         MessageManager.Instance.RemoveSubcriber(MessageType.OnSkillActive, this);
 		MessageManager.Instance.RemoveSubcriber(MessageType.OnDataChangedDuringTurn, this);
+        MessageManager.Instance.RemoveSubcriber(MessageType.OnGameWin,this);
+        MessageManager.Instance.RemoveSubcriber(MessageType.OnGameLose, this);
 	}
 
     public void Handle(Message message)
@@ -49,6 +54,16 @@ public class UIManager : Singleton<UIManager>, IMessageHandle
                 break;
             case MessageType.OnSkillActive:
                 UIGameHUD.SkillActiveCutScene();
+                break;
+            case MessageType.OnGameWin:
+                GamePlayManager.Instance.BattleEnded = true;
+                _playerWon = true;
+                OutcomePopup.BattleEnd(_playerWon);
+                break;
+            case MessageType.OnGameLose:
+				GamePlayManager.Instance.BattleEnded = true;
+				_playerWon = false;
+                OutcomePopup.BattleEnd(_playerWon);
                 break;
         }
     }

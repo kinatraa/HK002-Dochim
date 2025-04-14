@@ -16,9 +16,9 @@ public class GameTurnController : MonoBehaviour
     private int turnCounter = 0;
     public float timer = 16;
     private bool isInAnimation = false;
-	private void Update()
-	{
-		if (GamePlayManager.Instance.DiamondManager.IsDropping() || GamePlayManager.Instance.OnCoinFlip) return;
+    private void Update()
+    {
+        if (GamePlayManager.Instance.DiamondManager.IsDropping() || GamePlayManager.Instance.OnCoinFlip || GamePlayManager.Instance.BattleEnded) return;
         if (!isInAnimation)
         {
             timer -= Time.deltaTime;
@@ -28,7 +28,7 @@ public class GameTurnController : MonoBehaviour
         {
             UseAction();
         }
-
+        
 		MessageManager.Instance.SendMessage(new Message(MessageType.OnTimeChanged));
 	}
 	private void Awake()
@@ -153,6 +153,7 @@ public class GameTurnController : MonoBehaviour
             DataManager.Instance.OpponentHP = opponentCharacter.GetCurrentHP();
             DataManager.Instance.PlayerHP = playerCharacter.GetCurrentHP();
             MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChangedDuringTurn));
+            CheckWinner();
         }
 		else if (_turn == 1)
 		{
@@ -163,11 +164,23 @@ public class GameTurnController : MonoBehaviour
             DataManager.Instance.PlayerHP = playerCharacter.GetCurrentHP();
 			DataManager.Instance.OpponentHP = opponentCharacter.GetCurrentHP();
 			MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChangedDuringTurn));
+            CheckWinner() ;
 		}
 		isInAnimation = false;
 		PlayTurn();
     }
-    public int GetTurn()
+	private void CheckWinner()
+	{
+		if (DataManager.Instance.PlayerHP == 0)
+		{
+			MessageManager.Instance.SendMessage(new Message(MessageType.OnGameLose));
+		}
+		else if (DataManager.Instance.OpponentHP == 0)
+		{
+			MessageManager.Instance.SendMessage(new Message(MessageType.OnGameWin));
+		}
+	}
+	public int GetTurn()
     {
         return _turn;
     }
