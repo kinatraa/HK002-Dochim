@@ -27,6 +27,8 @@ public class DiamondClick : MonoBehaviour
         _bordermap = GamePlayManager.Instance.BorderTilemap;
         
         _bounds = GamePlayManager.Instance.BoardBounds;
+        
+        _diamondManager = GamePlayManager.Instance.DiamondManager;
     }
 
     public IEnumerator SelectTile(Vector3Int selectedPos)
