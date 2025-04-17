@@ -9,21 +9,21 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
+public enum GameState{
+    PlayerTurn,
+    OpponentTurn,
+    PlayerWin,
+    PlayerLose,
+    CoinFlip,
+    BattleAnimation,
+    SkillAnimation
+}
 public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
 {
+    public bool SkillJustActivated { get; set; }
+    public GameState State {  get; set; }
+
     [SerializeField] private DiamondManager diamondManager;
-    public bool onCoinFlip = true;
-    private bool battleEnded = false;
-    public bool BattleEnded
-    {
-        get => battleEnded;
-        set => battleEnded = value;
-    }
-    public bool OnCoinFlip
-    {
-        get => onCoinFlip;
-        set => onCoinFlip = value;
-    }
 
     public DiamondManager DiamondManager
     {
@@ -139,12 +139,12 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         _bounds.xMax = _columns / 2;
         _bounds.yMin = -_rows / 2;
         _bounds.yMax = _rows / 2;
+		State = GameState.CoinFlip;
 	}
     public void SetCoinFlipOutcome(int outcome)
     {
         _coinFlipOutcome = outcome;
         _gameTurnController.InitTurn();
-        onCoinFlip = false;
     }
 
 	public bool IsInBound(Vector3Int v)
@@ -179,7 +179,6 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
     private void OnDisable()
     {
     }
-
     public void Handle(Message message)
     {
         throw new NotImplementedException();

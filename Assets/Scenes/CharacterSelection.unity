@@ -255,11 +255,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Khi \u0103n \u0111\u1EE7 8 \xF4 m\xE0u v\xE0ng, s\u1EBD c\xF3 th\u1EC3
-    k\xEDch ho\u1EA1t k\u0129 n\u0103ng \u0111\u1EC3 t\u1EA1o 1 th\u1EA3m l\u1EEDa
-    c\xF3 k\xEDch c\u1EE1 3x3 \u1EDF v\u1ECB tr\xED ng\u1EABu nhi\xEAn. M\u1ED7i
-    khi c\xF3 s\u1EF1 ki\u1EC7n ghi \u0111i\u1EC3m \u1EDF trong ph\u1EA1m vi c\u1EE7a
-    l\u1EEDa, ng\u01B0\u1EDDi k\xEDch ho\u1EA1t s\u1EBD nh\u1EADn \u0111\u01B0\u1EE3c
+  m_text: "Khi \u0103n \u0111\u1EE7 8 vi\xEAn dough ho\u1EB7c cheese , s\u1EBD c\xF3
+    th\u1EC3 k\xEDch ho\u1EA1t k\u0129 n\u0103ng \u0111\u1EC3 t\u1EA1o 1 th\u1EA3m
+    l\u1EEDa c\xF3 k\xEDch c\u1EE1 3x3 \u1EDF v\u1ECB tr\xED ng\u1EABu nhi\xEAn.
+    M\u1ED7i khi c\xF3 s\u1EF1 ki\u1EC7n ghi \u0111i\u1EC3m \u1EDF trong ph\u1EA1m
+    vi c\u1EE7a l\u1EEDa, ng\u01B0\u1EDDi k\xEDch ho\u1EA1t s\u1EBD nh\u1EADn \u0111\u01B0\u1EE3c
     n\u1EEDa t\u1ED5ng s\u1ED1 \xF4 b\u1ECB ph\xE1 h\u1EE7y trong ph\u1EA1m v\u1ECB
     l\u1EEDa."
   m_isRightToLeft: 0
@@ -799,14 +799,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "V\u1EDBi m\u1ED7i 5 \xF4 t\xEDm ho\u1EB7c \u0111\u1ECF \u0111\u01B0\u1EE3c
-    \u0103n, s\u1EBD g\xE1n 1 stack BloodLoss l\xEAn ng\u01B0\u1EDDi \u0111\u1ED1i
-    th\u1EE7. C\xF3 th\u1EC3 \u0103n 10 \xF4 b\u1EA5t k\xEC \u0111\u1EC3 b\u1ECF
-    1 stack. N\u1EBFu \u0111\u1EBFn cu\u1ED1i l\u01B0\u1EE3t c\u1EE7a \u0111\u1ED1i
-    ph\u01B0\u01A1ng m\xE0 hi\u1EC7u qu\u1EA3 v\u1EABn c\xF2n th\xEC s\u1EBD g\xE2y
-    s\xE1t th\u01B0\u01A1ng cho \u0111\u1ED1i ph\u01B0\u01A1ng v\xE0 h\u1ED3i ph\u1EE5c 
-    t\u01B0\u01A1ng \u0111\u01B0\u01A1ng v\u1EDBi s\u1ED1 stack. Khi h\u1ED3i \u0111\u1EE7
-    20 m\xE1u t\u1EEB hi\u1EC7u \u1EE9ng BloodLoss, k\u0129 n\u0103ng s\u1EBD \u0111\u01B0\u1EE3c
-    n\xE2ng c\u1EA5p."
+    \u0103n, g\xE1n 1 stack BloodLoss l\xEAn \u0111\u1ED1i th\u1EE7. \u0110\u1ED1i
+    ph\u01B0\u01A1ng c\xF3 th\u1EC3 \u0103n 10 \xF4 b\u1EA5t k\xEC \u0111\u1EC3 b\u1ECF
+    1 stack.\u0110\u1EBFn cu\u1ED1i l\u01B0\u1EE3t c\u1EE7a \u0111\u1ED1i ph\u01B0\u01A1ng
+    m\xE0 hi\u1EC7u qu\u1EA3 v\u1EABn c\xF2n th\xEC s\u1EBD g\xE2y s\xE1t th\u01B0\u01A1ng
+    cho \u0111\u1ED1i ph\u01B0\u01A1ng v\xE0 h\u1ED3i ph\u1EE5c  t\u01B0\u01A1ng
+    \u0111\u01B0\u01A1ng. Khi h\u1ED3i \u0111\u1EE7 20 m\xE1u t\u1EEB hi\u1EC7u \u1EE9ng,
+    k\u0129 n\u0103ng s\u1EBD \u0111\u01B0\u1EE3c n\xE2ng c\u1EA5p.Ch\u1EEBng n\xE0o
+    c\xF2n BloodLoss th\xEC kh\xF4ng th\u1EC3 b\u1ECB h\u1EA1 g\u1EE5c"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1373,10 +1373,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "M\u1ED7i khi \u0103n \u0111\u01B0\u1EE3c 20 \xF4 b\u1EA5t k\xEC, l\u1EADp
+  m_text: "M\u1ED7i khi \u0103n \u0111\u01B0\u1EE3c 25 \xF4 b\u1EA5t k\xEC, l\u1EADp
     t\u1EE9c nh\u1EADn \u0111\u01B0\u1EE3c th\xEAm 1 l\u01B0\u1EE3t h\xE0nh \u0111\u1ED9ng
-    n\u1EEFa. 1 n\u1EEDa ph\u1EA7n d\u01B0 ra s\u1EBD \u0111\u01B0\u1EE3c t\xEDnh
-    v\xE0o l\u1EA7n x\xE9t sau \u0111\xF3."
+    n\u1EEFa."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

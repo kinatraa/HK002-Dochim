@@ -446,6 +446,7 @@ public class DiamondManager : MonoBehaviour
 				playercharacter.Trigger(clearTiles, clearTiles.Count);
 				if (playercharacter.IsActive)
 				{
+					GamePlayManager.Instance.SkillJustActivated = true;
 					MessageManager.Instance.SendMessage(new Message(MessageType.OnSkillActive));
 				}
 			}
@@ -455,6 +456,7 @@ public class DiamondManager : MonoBehaviour
 				opponentCharacter.Trigger(clearTiles, clearTiles.Count);
 				if (opponentCharacter.IsActive)
 				{
+					GamePlayManager.Instance.SkillJustActivated = true;
 					MessageManager.Instance.SendMessage(new Message(MessageType.OnSkillActive));
 				}
 			}	
