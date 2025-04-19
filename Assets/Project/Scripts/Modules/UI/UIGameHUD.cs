@@ -183,23 +183,42 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 		Sequence cutsceneSequence = DOTween.Sequence();
 
 		int currentTurn = GamePlayManager.Instance.GameTurnController.GetTurn();
+		RectTransform targetRect = null;
 
 		if (currentTurn == 0)
 		{
-			cutsceneSequence.Append(_playerSkillPopupRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
-            cutsceneSequence.AppendInterval(1f);
-            cutsceneSequence.Append(_playerSkillPopupRect.DOAnchorPosX(1300, 0.5f).SetEase(Ease.OutQuad));
-            cutsceneSequence.Append(
-                _playerSkillPopupRect.DOAnchorPosX(-1300,0f).SetEase(Ease.OutQuad));
+			targetRect = _playerSkillPopupRect;
+			cutsceneSequence.Append(targetRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
+			cutsceneSequence.AppendInterval(1f);
+			cutsceneSequence.Append(targetRect.DOAnchorPosX(1300, 0.5f).SetEase(Ease.OutQuad));
+			cutsceneSequence.Append(targetRect.DOAnchorPosX(-1300, 0f).SetEase(Ease.OutQuad));
+																							   
+			cutsceneSequence.OnComplete(() => {
+				GamePlayManager.Instance.State = GameState.PlayerTurn;
+                if (GamePlayManager.Instance.PlayerCharacter is IPassiveSkill)
+                {
+                    GamePlayManager.Instance.GameTurnController.UseAction();
+                }
+				Debug.Log("Skill Cutscene Done - Player Turn");
+			});
 		}
 		else if (currentTurn == 1)
 		{
-			cutsceneSequence.Append(_opponentSkillPopupRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
+			targetRect = _opponentSkillPopupRect;
+			cutsceneSequence.Append(targetRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
 			cutsceneSequence.AppendInterval(1f);
-			cutsceneSequence.Append(_opponentSkillPopupRect.DOAnchorPosX(-1300, 0.5f).SetEase(Ease.OutQuad));
-			cutsceneSequence.Append(
-				_opponentSkillPopupRect.DOAnchorPosX(1300, 0f).SetEase(Ease.OutQuad));
+			cutsceneSequence.Append(targetRect.DOAnchorPosX(-1300, 0.5f).SetEase(Ease.OutQuad));
+			cutsceneSequence.Append(targetRect.DOAnchorPosX(1300, 0f).SetEase(Ease.OutQuad));
+			cutsceneSequence.OnComplete(() => {
+				GamePlayManager.Instance.State = GameState.OpponentTurn;
+				if (GamePlayManager.Instance.OpponentCharacter is IPassiveSkill)
+				{
+					GamePlayManager.Instance.GameTurnController.UseAction();
+				}
+				Debug.Log("Skill Cutscene Done - Opponent Turn");
+			});
 		}
+		cutsceneSequence.Play();
 	}
 
 	public void UpdateScore()

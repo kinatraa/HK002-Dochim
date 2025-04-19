@@ -47,9 +47,18 @@ public class DiamondClick : MonoBehaviour
                 }
                 else
                 {
-                    /*Debug.Log("Swap");*/
-                    yield return StartCoroutine(_diamondManager.ClearDiamond(selectedPos, _selectedTile));
-                    GamePlayManager.Instance.GameTurnController.UseAction();
+					/*Debug.Log("Swap");*/
+					GamePlayManager.Instance.SkillJustActivated = false;
+					yield return StartCoroutine(_diamondManager.ClearDiamond(selectedPos, _selectedTile));
+                    bool skillWasActivated = GamePlayManager.Instance.SkillJustActivated;
+                    if (skillWasActivated)
+                    {
+
+                    }
+                    else
+                    {
+                        GamePlayManager.Instance.GameTurnController.UseAction();
+                    }
                 }
                     
                 /*StartCoroutine(ClearDiamond());*/

@@ -18,7 +18,7 @@ namespace HaKien
         OnStatusChange,
         OnDataChangedDuringTurn,
         OnSelectDifficulty,
-        OnSkillActive
+        OnSkillActive,
     }
     public class Message
     {

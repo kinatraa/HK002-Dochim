@@ -53,15 +53,16 @@ public class UIManager : Singleton<UIManager>, IMessageHandle
                 UIGameHUD.HPChangedBySkill();
                 break;
             case MessageType.OnSkillActive:
-                UIGameHUD.SkillActiveCutScene();
+				GamePlayManager.Instance.State = GameState.SkillAnimation;
+				UIGameHUD.SkillActiveCutScene();
                 break;
             case MessageType.OnGameWin:
-                GamePlayManager.Instance.BattleEnded = true;
+                GamePlayManager.Instance.State = GameState.PlayerWin;
                 _playerWon = true;
                 OutcomePopup.BattleEnd(_playerWon);
                 break;
             case MessageType.OnGameLose:
-				GamePlayManager.Instance.BattleEnded = true;
+                GamePlayManager.Instance.State = GameState.PlayerLose;
 				_playerWon = false;
                 OutcomePopup.BattleEnd(_playerWon);
                 break;

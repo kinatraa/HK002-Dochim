@@ -18,33 +18,43 @@ public class GameTurnController : MonoBehaviour
     private bool isInAnimation = false;
     private void Update()
     {
-        if (GamePlayManager.Instance.DiamondManager.IsDropping() || GamePlayManager.Instance.OnCoinFlip || GamePlayManager.Instance.BattleEnded) return;
-        if (!isInAnimation)
-        {
-            timer -= Time.deltaTime;
-        }
-		
+		if (!(GamePlayManager.Instance.State == GameState.PlayerTurn || GamePlayManager.Instance.State == GameState.OpponentTurn) || GamePlayManager.Instance.DiamondManager.IsDropping())
+		{
+			return;
+		}
+
+		Debug.Log(GamePlayManager.Instance.State);
+
+		//if (!isInAnimation)
+		//{
+		//	timer -= Time.deltaTime;
+		//}
+		timer -= Time.deltaTime;
+
 		if (timer < 0)
-        {
-            UseAction();
-        }
-        
+		{
+			UseAction();
+		}
+
 		MessageManager.Instance.SendMessage(new Message(MessageType.OnTimeChanged));
 	}
 	private void Awake()
 	{
 		playerCharacter = GamePlayManager.Instance.PlayerCharacter;
 		opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
+        Debug.Log(timer);
     }
     public void InitTurn()
     {
 		if (GamePlayManager.Instance.CoinFlipOutCome == 0)
 		{
 			_turn = -1;
+            //GamePlayManager.Instance.State = GameState.PlayerTurn;
 		}
 		else
 		{
 			_turn = 0;
+			//GamePlayManager.Instance.State = GameState.OpponentTurn;
 		}
 		remainingActions = maxActionPerTurn;
 		DataManager.Instance.PlayerRemainActionPoints = remainingActions;
@@ -58,13 +68,15 @@ public class GameTurnController : MonoBehaviour
         {
             Debug.Log("Player turn");
             _player1.IsPlayerTurn = true;
+            //GamePlayManager.Instance.State = GameState.PlayerTurn;
         }
         else
         {
             Debug.Log("AI turn");
             _player1.IsPlayerTurn = false;
             _player2.PlayTurn();
-        }
+			//GamePlayManager.Instance.State = GameState.OpponentTurn;
+		}
     }
     public void UseAction()
     {
@@ -106,7 +118,8 @@ public class GameTurnController : MonoBehaviour
 	}
     private IEnumerator HandleBattleAnimation(int previousPlayerHP,int previousOpponentHP)
     {
-		isInAnimation = true;
+        //isInAnimation = true;
+        GamePlayManager.Instance.State = GameState.BattleAnimation;
 		UIManager.Instance.PlayBattleCollisionAnimation(DataManager.Instance.PlayerScore,DataManager.Instance.OpponentScore, previousPlayerHP, previousOpponentHP);
         yield return new WaitForSeconds(2f);
         DataManager.Instance.PlayerScore = 0;
@@ -146,7 +159,8 @@ public class GameTurnController : MonoBehaviour
         remainingActions = maxActionPerTurn;
 		if (_turn == 0)
 		{
-            playerCharacter.RemoveActiveSkill();
+			GamePlayManager.Instance.State = GameState.PlayerTurn;
+			playerCharacter.RemoveActiveSkill();
 			//ModifyExistenceSkillTurn(playerCharacter);
 			opponentCharacter.ApplyBloodLoss(playerCharacter);
             DataManager.Instance.PlayerRemainActionPoints = remainingActions;
@@ -157,6 +171,7 @@ public class GameTurnController : MonoBehaviour
         }
 		else if (_turn == 1)
 		{
+			GamePlayManager.Instance.State = GameState.OpponentTurn;
 			opponentCharacter.RemoveActiveSkill();
 			//ModifyExistenceSkillTurn(opponentCharacter);
 			playerCharacter.ApplyBloodLoss(opponentCharacter);
@@ -166,7 +181,7 @@ public class GameTurnController : MonoBehaviour
 			MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChangedDuringTurn));
             CheckWinner() ;
 		}
-		isInAnimation = false;
+		//isInAnimation = false;
 		PlayTurn();
     }
 	private void CheckWinner()
