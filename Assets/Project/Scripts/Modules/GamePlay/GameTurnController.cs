@@ -18,25 +18,19 @@ public class GameTurnController : MonoBehaviour
     private bool isInAnimation = false;
     private void Update()
     {
-		if (!(GamePlayManager.Instance.State == GameState.PlayerTurn || GamePlayManager.Instance.State == GameState.OpponentTurn) || GamePlayManager.Instance.DiamondManager.IsDropping())
+		if ((GamePlayManager.Instance.State == GameState.PlayerTurn ||
+		     GamePlayManager.Instance.State == GameState.OpponentTurn) &&
+		    !GamePlayManager.Instance.DiamondManager.IsDropping())
 		{
-			return;
+			timer -= Time.deltaTime;
+
+			if (timer < 0)
+			{
+				UseAction();
+			}
+
+			MessageManager.Instance.SendMessage(new Message(MessageType.OnTimeChanged));
 		}
-
-		Debug.Log(GamePlayManager.Instance.State);
-
-		//if (!isInAnimation)
-		//{
-		//	timer -= Time.deltaTime;
-		//}
-		timer -= Time.deltaTime;
-
-		if (timer < 0)
-		{
-			UseAction();
-		}
-
-		MessageManager.Instance.SendMessage(new Message(MessageType.OnTimeChanged));
 	}
 	private void Awake()
 	{

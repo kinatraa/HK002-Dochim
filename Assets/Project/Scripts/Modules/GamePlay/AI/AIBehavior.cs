@@ -32,6 +32,11 @@ public abstract class AIBehavior : MonoBehaviour
 
     public virtual IEnumerator SelectTile()
     {
+        while (GamePlayManager.Instance.State != GameState.OpponentTurn)
+        {
+            yield return null;
+        }
+        
         _possibleMoves.Clear();
         _possibleMoves = Utils.GetAllPossibleMoves(GamePlayManager.Instance.Tilemap);
         

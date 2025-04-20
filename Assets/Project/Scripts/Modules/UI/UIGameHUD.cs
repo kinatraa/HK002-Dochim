@@ -29,7 +29,8 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     private Vector2 _playerPortraitInitPos;
     private Vector2 _opponentPortraitInitPos;
     [SerializeField] float _animationDurationTime;
-    [SerializeField] Image _skillAnimationImage;
+    [SerializeField] private Animator _skillAnimator;
+    private Image _skillImage;
 	[SerializeField] float _skillAnimationFrameDuration = 0.08f;
 
 	private BaseCharacter playerCharacter;
@@ -85,14 +86,16 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
         _opponentPortraitInitPos = _opponentPortrait.rectTransform.anchoredPosition;
 		_playerRemainingActionsBoard = _playerActionRemains.GetComponentInParent<Image>();
         _opponentRemainingActionsBoard = _opponentActionRemains.GetComponentInParent<Image>();
+        _skillImage = _skillAnimator.GetComponent<Image>();
         _opponentScoreFill.fillAmount = baseScoreFill;
         _playerScoreFill.fillAmount = maxScoreFill;
 		//_skillAnimationImage.gameObject.SetActive(false);
 		//_skillAnimationImage.color = new Color(1, 1, 1, 0);
-        _skillAnimationImage.enabled = false;
+        /*_skillAnimationImage.enabled = false;*/
+        _skillImage.enabled = false;
 	}
 
-    //animation 
+	//animation 
     public void BattleAnimation(int playerScore,int opponentScore,int playerHP,int opponentHP)
     {
 		_playerPortrait.rectTransform.anchoredPosition = _playerPortraitInitPos;
@@ -148,7 +151,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 		_opponentFillAmount = (DataManager.Instance.OpponentMaxHP == 0) ? 1 : ((float)DataManager.Instance.OpponentHP / (float)DataManager.Instance.OpponentMaxHP);
 		_opponentHPFill.DOFillAmount(_opponentFillAmount, _fillSpeed);
 	}
-	private IEnumerator PlaySkillAnimation(Sprite[] animationFrames, System.Action onCompleteCallback) 
+	/*private IEnumerator PlaySkillAnimation(Sprite[] animationFrames, System.Action onCompleteCallback) 
 	{
 		_skillAnimationImage.enabled = true;
 		_skillAnimationImage.color = new Color(_skillAnimationImage.color.r, _skillAnimationImage.color.g, _skillAnimationImage.color.b, 0f);
@@ -167,7 +170,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 			_skillAnimationImage.sprite = null;  
 			onCompleteCallback?.Invoke(); 
 		});
-	}
+	}*/
 	void OnEnable()
     {
         UpdateUI();
@@ -205,12 +208,20 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 	public void SkillActiveCutScene()
 	{
 		Sequence cutsceneSequence = DOTween.Sequence();
+		SetupSequence(ref cutsceneSequence);
+		
+		// Set State
+		GamePlayManager.Instance.State = GameState.SkillAnimation;
 
+		cutsceneSequence.Play();
+	}
+
+	private void SetupSequence(ref Sequence sequence)
+	{
 		int currentTurn = GamePlayManager.Instance.GameTurnController.GetTurn();
 		RectTransform targetRect = null;
 		BaseCharacter currentCharacter = null;
-		Sprite[] skillFrames = null;
-
+		
 		if (currentTurn == 0) // Player
 		{
 			targetRect = _playerSkillPopupRect;
@@ -221,47 +232,31 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 			targetRect = _opponentSkillPopupRect;
 			currentCharacter = GamePlayManager.Instance.OpponentCharacter;
 		}
-
-		skillFrames = currentCharacter.SkillAnimationSprites;
-
-		// Set State
-		GamePlayManager.Instance.State = GameState.SkillAnimation;
-
+		
 		if (currentTurn == 0) // Player
 		{
 			targetRect.anchoredPosition = new Vector2(-1300, targetRect.anchoredPosition.y);
-			cutsceneSequence.Append(targetRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
-			cutsceneSequence.AppendInterval(1f);
-			cutsceneSequence.Append(targetRect.DOAnchorPosX(1300, 0.5f).SetEase(Ease.OutQuad));
-			cutsceneSequence.Append(targetRect.DOAnchorPosX(-1300, 0f).SetEase(Ease.OutQuad));
+			sequence.Append(targetRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
+			sequence.AppendInterval(1f);
+			sequence.Append(targetRect.DOAnchorPosX(1300, 0.5f).SetEase(Ease.OutQuad));
+			sequence.Append(targetRect.DOAnchorPosX(-1300, 0f).SetEase(Ease.OutQuad));
 		}
 		else // Opponent
 		{
 			targetRect.anchoredPosition = new Vector2(1300, targetRect.anchoredPosition.y);
-			cutsceneSequence.Append(targetRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
-			cutsceneSequence.AppendInterval(1f);
-			cutsceneSequence.Append(targetRect.DOAnchorPosX(-1300, 0.5f).SetEase(Ease.OutQuad));
-			cutsceneSequence.Append(targetRect.DOAnchorPosX(1300, 0f).SetEase(Ease.OutQuad));
+			sequence.Append(targetRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
+			sequence.AppendInterval(1f);
+			sequence.Append(targetRect.DOAnchorPosX(-1300, 0.5f).SetEase(Ease.OutQuad));
+			sequence.Append(targetRect.DOAnchorPosX(1300, 0f).SetEase(Ease.OutQuad));
 		}
-		System.Action postAnimationAction = () => {
-			// Reset State
-			if (currentTurn == 0)
+		
+		sequence.OnComplete(() => {
+			//Skill animation
+			if (currentCharacter.SkillAnimation)
 			{
-				GamePlayManager.Instance.State = GameState.PlayerTurn;
+				_skillAnimator.Play(currentCharacter.SkillAnimation.name);
 			}
-			else // Opponent's turn
-			{
-				GamePlayManager.Instance.State = GameState.OpponentTurn;
-			}
-		};
-
-		Sprite[] finalSkillFrames = skillFrames;
-		cutsceneSequence.OnComplete(() => {
-			StartCoroutine(PlaySkillAnimation(finalSkillFrames, postAnimationAction));
-			
 		});
-
-		cutsceneSequence.Play();
 	}
 
 	public void UpdateScore()

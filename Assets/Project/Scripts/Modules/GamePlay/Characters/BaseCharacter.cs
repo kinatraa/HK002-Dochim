@@ -12,7 +12,7 @@ public abstract class BaseCharacter : MonoBehaviour
 	public string characterName;
 	[SerializeField]private int maxHP;
 	[SerializeField]private int currentHP;
-	[SerializeField] private Sprite[] skillAnimationSprites;
+	[SerializeField] private AnimationClip skillAnimation;
 	public string skillActiveQuote;
 	public Sprite characterPortrait;
 	public Sprite SkillIcon;
@@ -38,7 +38,7 @@ public abstract class BaseCharacter : MonoBehaviour
 	}
 	public int ActiveConditionAmount {  get { return activeConditionAmount; } }
 
-	public Sprite[] SkillAnimationSprites {  get { return skillAnimationSprites; } }
+	public AnimationClip SkillAnimation {  get { return skillAnimation; } }
 
 	public int CurrentActiveSkillExistenceTurn
 	{
