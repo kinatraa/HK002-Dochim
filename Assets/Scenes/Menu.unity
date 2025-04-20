@@ -742,10 +742,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialPoolSize: 10
-  _musicSource: {fileID: 0}
+  _musicSource: {fileID: 190550253}
   _musicFadeDuration: 1
-  _mainMenuMusic: {fileID: 8300000, guid: 3a20dd02786ffda4c9c8dcc3b0c9c8f0, type: 3}
-  _gamePlayMusic: {fileID: 8300000, guid: b0fd551a021e412469a43b2cd38928d2, type: 3}
+  _mainMenuMusic: {fileID: 8300000, guid: b0fd551a021e412469a43b2cd38928d2, type: 3}
+  _gamePlayMusic: {fileID: 8300000, guid: ec960b36aad971b4cae371602c24a743, type: 3}
   _sfxGameOver: {fileID: 0}
   _sfxButtonClick: {fileID: 0}
   _sfxVictory: {fileID: 0}

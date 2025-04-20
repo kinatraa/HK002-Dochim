@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using HaKien;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.WebSockets;
@@ -71,6 +72,7 @@ public class CharacterSelectionManager : MonoBehaviour
 			opponentIndex = Random.Range(0, characterPrefabs.Count);
 		} while (opponentIndex == index);
 		PlayerPrefs.SetInt("OpponentSelection", opponentIndex);
+		MessageManager.Instance.SendMessage(new Message(MessageType.OnGameStart));
 		SceneManager.LoadScene("Game");
 	}
 }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 [Serializable]
 public class OpponentData
 {
+	public BaseCharacter character;
 	public Sprite portrait;
 	public Sprite skillIcon;
 	public int skillRequirementAmount;

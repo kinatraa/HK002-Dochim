@@ -51,15 +51,16 @@ public class DiamondClick : MonoBehaviour
 					GamePlayManager.Instance.SkillJustActivated = false;
 					yield return StartCoroutine(_diamondManager.ClearDiamond(selectedPos, _selectedTile));
                     bool skillWasActivated = GamePlayManager.Instance.SkillJustActivated;
-                    if (skillWasActivated)
-                    {
+					//if (skillWasActivated)
+					//{
 
-                    }
-                    else
-                    {
-                        GamePlayManager.Instance.GameTurnController.UseAction();
-                    }
-                }
+					//}
+					//else
+					//{
+					//    GamePlayManager.Instance.GameTurnController.UseAction();
+					//}
+					GamePlayManager.Instance.GameTurnController.UseAction();
+				}
                     
                 /*StartCoroutine(ClearDiamond());*/
             }
@@ -86,7 +87,9 @@ public class DiamondClick : MonoBehaviour
 
     public bool CanClick()
     {
-        return !_diamondManager.IsDropping();
+        GameState currentState = GamePlayManager.Instance.State;
+		bool isInTurn = currentState == GameState.PlayerTurn || currentState == GameState.OpponentTurn;
+		return isInTurn && !_diamondManager.IsDropping();
     }
     
 }

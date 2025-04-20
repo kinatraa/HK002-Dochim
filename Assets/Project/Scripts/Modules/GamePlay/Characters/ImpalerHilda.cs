@@ -46,29 +46,28 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 	{
 		if (threshHold <= 20)
 		{
-			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 1, -1, true, 1, 100, null);
+			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 1, -1, true, 1, 15, null);
 			target.ApplyStatus(bloodLoss);
 			//Debug.Log($"ImpalerHilda: Applied Bloodloss to {target.characterName}");
 
-			// Reset indicator
-			currentConditionAmount = 0;
 			//Debug.Log("ImpalerHilda: Indicator reset to 0");
 		}
 		else
 		{
-			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 2, -1, true, 1, 100, null);
+			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 2, -1, true, 1, 20, null);
 			target.ApplyStatus(bloodLoss);
 			//Debug.Log($"ImpalerHilda: Applied Bloodloss to {target.characterName}");
 
-			// Reset indicator
-			currentConditionAmount = 0;
 			//Debug.Log("ImpalerHilda: Indicator reset to 0");
 		}
+		// Reset indicator
+		currentConditionAmount = 0;
 	}
 	 
 	public override void Trigger(List<Vector3Int> triggerPosition, int amount)
 	{
 		isActive = false;
+		bool conditionMetThisTrigger = false;
 		foreach (var position in triggerPosition)
 		{
 			TileBase tile = tilemap.GetTile(position);
@@ -78,10 +77,12 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 			}
 			if(currentConditionAmount >= activeConditionAmount)
 			{
-				isActive = true;
 				PassiveSkills();
+				conditionMetThisTrigger = true;
 			}
 		}
+		if (conditionMetThisTrigger)
+			isActive = true;
 	}
 	public override void Heal(int amount)
 	{

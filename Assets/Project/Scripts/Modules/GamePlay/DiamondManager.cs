@@ -409,7 +409,7 @@ public class DiamondManager : MonoBehaviour
     {
         _dropping = 0;
         _firstMousePos = firstPos;
-        _secondMousePos = secondPos;
+        _secondMousePos = secondPos;	
         
         while (true)
         {
@@ -439,27 +439,35 @@ public class DiamondManager : MonoBehaviour
 	            _dropping = -1;
                 break;
             }
-
-			if (GamePlayManager.Instance.GameTurnController.GetTurn() == 0)
+			BaseCharacter characterToCheck = null;
+			int currentTurn = GamePlayManager.Instance.GameTurnController.GetTurn();
+			if (currentTurn == 0)
 			{
-				var playercharacter = GamePlayManager.Instance.PlayerCharacter;
-				playercharacter.Trigger(clearTiles, clearTiles.Count);
-				if (playercharacter.IsActive)
+				characterToCheck = GamePlayManager.Instance.PlayerCharacter;
+			}
+			else if (currentTurn == 1)
+			{
+				characterToCheck = GamePlayManager.Instance.OpponentCharacter;
+			}
+
+			if (characterToCheck != null)
+			{
+				characterToCheck.Trigger(clearTiles, clearTiles.Count);
+
+				if (characterToCheck.IsActive && GamePlayManager.Instance.State != GameState.SkillAnimation)
 				{
 					GamePlayManager.Instance.SkillJustActivated = true;
 					MessageManager.Instance.SendMessage(new Message(MessageType.OnSkillActive));
+
+					characterToCheck.IsActive = false;
+				}
+				else if (characterToCheck.IsActive && GamePlayManager.Instance.State == GameState.SkillAnimation)
+				{
+					characterToCheck.IsActive = false;
 				}
 			}
-			else if (GamePlayManager.Instance.GameTurnController.GetTurn() == 1)
-			{
-				var opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
-				opponentCharacter.Trigger(clearTiles, clearTiles.Count);
-				if (opponentCharacter.IsActive)
-				{
-					GamePlayManager.Instance.SkillJustActivated = true;
-					MessageManager.Instance.SendMessage(new Message(MessageType.OnSkillActive));
-				}
-			}	
+
+
 			Dictionary<TileBase,int> destroyedTiles = new Dictionary<TileBase, int>();
             int bonus = 0, count = 0;
             CalculateScore(ref count, ref bonus, destroyedTiles);

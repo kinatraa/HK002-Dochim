@@ -118,13 +118,17 @@ public class GameTurnController : MonoBehaviour
 	}
     private IEnumerator HandleBattleAnimation(int previousPlayerHP,int previousOpponentHP)
     {
-        //isInAnimation = true;
-        GamePlayManager.Instance.State = GameState.BattleAnimation;
+        while(GamePlayManager.Instance.State == GameState.SkillAnimation)
+            yield return null;
+		GamePlayManager.Instance.State = GameState.BattleAnimation;
 		UIManager.Instance.PlayBattleCollisionAnimation(DataManager.Instance.PlayerScore,DataManager.Instance.OpponentScore, previousPlayerHP, previousOpponentHP);
         yield return new WaitForSeconds(2f);
-        DataManager.Instance.PlayerScore = 0;
+		DataManager.Instance.PlayerHP = playerCharacter.GetCurrentHP();
+		DataManager.Instance.OpponentHP = opponentCharacter.GetCurrentHP();
+		DataManager.Instance.PlayerScore = 0;
 		DataManager.Instance.OpponentScore = 0;
 		turnCounter = 0;
+        CheckWinner();
 		ChangeTurn();
 	}
     public void CaculateDamage()
@@ -149,7 +153,13 @@ public class GameTurnController : MonoBehaviour
 	}
 	public void ChangeTurn()
     {
-        int damage = 0;
+        CheckWinner();
+		if (GamePlayManager.Instance.State == GameState.PlayerWin || GamePlayManager.Instance.State == GameState.PlayerLose)
+		{
+			// Debug.Log("ChangeTurn: Game ended, skipping turn change.");
+			return;
+		}
+
 		if (_turn == -1)
         {
             _turn = 1;
@@ -167,7 +177,6 @@ public class GameTurnController : MonoBehaviour
             DataManager.Instance.OpponentHP = opponentCharacter.GetCurrentHP();
             DataManager.Instance.PlayerHP = playerCharacter.GetCurrentHP();
             MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChangedDuringTurn));
-            CheckWinner();
         }
 		else if (_turn == 1)
 		{
@@ -179,7 +188,7 @@ public class GameTurnController : MonoBehaviour
             DataManager.Instance.PlayerHP = playerCharacter.GetCurrentHP();
 			DataManager.Instance.OpponentHP = opponentCharacter.GetCurrentHP();
 			MessageManager.Instance.SendMessage(new Message(MessageType.OnDataChangedDuringTurn));
-            CheckWinner() ;
+            //CheckWinner() ;
 		}
 		//isInAnimation = false;
 		PlayTurn();

@@ -20,11 +20,14 @@ public class SkillButtonClick : MonoBehaviour, IPointerClickHandler
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-		if (!_character.IsReady)
+		Debug.Log(GamePlayManager.Instance.State.ToString());
+		if (!_character.IsReady || _gameTurnController.GetTurn() == 1 || GamePlayManager.Instance.DiamondManager.IsDropping())
 			return;
-		if (_gameTurnController.GetTurn() == 1)
+		if (GamePlayManager.Instance.State != GameState.PlayerTurn)
+		{
 			return;
-		if (_character is IActiveSkill && !GamePlayManager.Instance.DiamondManager.IsDropping())
+		}
+		if (_character is IActiveSkill)
 		{
 			_character.Active();
 		}

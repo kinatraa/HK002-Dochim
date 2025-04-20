@@ -202,6 +202,31 @@ MonoBehaviour:
   characterName: Italian
   maxHP: 100
   currentHP: 0
+  skillAnimationSprites:
+  - {fileID: 21300000, guid: 0f5273725dbb49944a0f2e6d447f0012, type: 3}
+  - {fileID: 21300000, guid: ef133e01669cc0b4f800c196b9fe0683, type: 3}
+  - {fileID: 21300000, guid: 97a68a1916a3f75439e3f87f6a82e8f2, type: 3}
+  - {fileID: 21300000, guid: 02a936a06f1c35d4598c52e538213cf4, type: 3}
+  - {fileID: 21300000, guid: c58edd729ec8a324f82cfbb1a1031c5f, type: 3}
+  - {fileID: 21300000, guid: f34d308bd3dfb644ba20f49c6651be6c, type: 3}
+  - {fileID: 21300000, guid: bb8d102ef10eb944e81c969c0ff38e69, type: 3}
+  - {fileID: 21300000, guid: c0fd006c2910c2f46b957258373e8d53, type: 3}
+  - {fileID: 21300000, guid: f8290a87906db184396e97da0aafadce, type: 3}
+  - {fileID: 21300000, guid: 0b3593335c878534d9dd14c11821cb1f, type: 3}
+  - {fileID: 21300000, guid: 4da9b0360af988e4384a704024faeab0, type: 3}
+  - {fileID: 21300000, guid: 8ed8179691464da4380ab59849cf175b, type: 3}
+  - {fileID: 21300000, guid: 44486d776666f5c4ba47e88119472e82, type: 3}
+  - {fileID: 21300000, guid: 466e7d0e7561ff24ca05166d00b9a636, type: 3}
+  - {fileID: 21300000, guid: edd5de09b7d3f0a49978ba3700e238a5, type: 3}
+  - {fileID: 21300000, guid: 9c9ad87ed3867a84ab2fc293e947b830, type: 3}
+  - {fileID: 21300000, guid: a082cbfe8b66b6b4a98ad86fd20b5c13, type: 3}
+  - {fileID: 21300000, guid: ae6624d4907a79b4abeeabef977b5df0, type: 3}
+  - {fileID: 21300000, guid: 9963c12bc783e414582656e0abe4e5fc, type: 3}
+  - {fileID: 21300000, guid: ae9b15bc30d120f4d9216bcc89603a59, type: 3}
+  - {fileID: 21300000, guid: ca7b0b760fb0e69469be35b7efa6b850, type: 3}
+  - {fileID: 21300000, guid: 3ed6f84fae9254343ae9145af06985d9, type: 3}
+  - {fileID: 21300000, guid: 2c91b1e34bd4aba4d90a1e53f0d0c301, type: 3}
+  - {fileID: 21300000, guid: ced9e33500287304294f1bf99c33b101, type: 3}
   skillActiveQuote: Chu!Chu!Chu
   characterPortrait: {fileID: 21300000, guid: 23f0a9910bb1def4299bf40ff2ca8e5f, type: 3}
   SkillIcon: {fileID: 21300000, guid: 2706d375352041649b91d0562ddad4bb, type: 3}
@@ -223,35 +248,43 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 159410358891323704, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 159410358891323704, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 159410358891323704, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 159410358891323704, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 659521557607393523, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: outComeImg.Array.data[0]
+      value: 
+      objectReference: {fileID: 3854854, guid: 49a0f7e6841128e4e8b3166fe7927429, type: 3}
+    - target: {fileID: 659521557607393523, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: outComeImg.Array.data[1]
+      value: 
+      objectReference: {fileID: -505562101, guid: 243519b76539cb14381b2e725a21878a, type: 3}
     - target: {fileID: 986865743570820135, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 986865743570820135, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 986865743570820135, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 986865743570820135, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 1068139340127649264, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -431,19 +464,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3466259221961167384, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3466259221961167384, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3466259221961167384, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3466259221961167384, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 3997382328466756826, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_Name
@@ -509,6 +542,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 4852612200606832402, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: particleEffect
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5380205457902810532, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -565,6 +602,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -49
       objectReference: {fileID: 0}
+    - target: {fileID: 6376662929242069356, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6400154311050662666, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -605,9 +646,13 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6704735774813091471, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: _skillAnimationImage
+      value: 
+      objectReference: {fileID: 1280363725}
     - target: {fileID: 7009595638271781475, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7060854356281638459, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -809,6 +854,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.3648
       objectReference: {fileID: 0}
+    - target: {fileID: 8882658705835434257, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: m_text
+      value: You Win
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882658705835434257, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: m_fontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882658705835434257, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 8983452337840121384, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
       propertyPath: m_sharedMaterial
       value: 
@@ -820,8 +877,10 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1467572223539803344, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
     - {fileID: 5588909472433329451, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+    - {fileID: 4852612200606832402, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
     m_RemovedGameObjects:
     - {fileID: 707543977765388672, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+    - {fileID: 6385658552467111115, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
@@ -872,6 +931,31 @@ MonoBehaviour:
   characterName: Loren
   maxHP: 100
   currentHP: 0
+  skillAnimationSprites:
+  - {fileID: 21300000, guid: 0f5273725dbb49944a0f2e6d447f0012, type: 3}
+  - {fileID: 21300000, guid: ef133e01669cc0b4f800c196b9fe0683, type: 3}
+  - {fileID: 21300000, guid: 97a68a1916a3f75439e3f87f6a82e8f2, type: 3}
+  - {fileID: 21300000, guid: 02a936a06f1c35d4598c52e538213cf4, type: 3}
+  - {fileID: 21300000, guid: c58edd729ec8a324f82cfbb1a1031c5f, type: 3}
+  - {fileID: 21300000, guid: f34d308bd3dfb644ba20f49c6651be6c, type: 3}
+  - {fileID: 21300000, guid: bb8d102ef10eb944e81c969c0ff38e69, type: 3}
+  - {fileID: 21300000, guid: c0fd006c2910c2f46b957258373e8d53, type: 3}
+  - {fileID: 21300000, guid: f8290a87906db184396e97da0aafadce, type: 3}
+  - {fileID: 21300000, guid: 0b3593335c878534d9dd14c11821cb1f, type: 3}
+  - {fileID: 21300000, guid: 4da9b0360af988e4384a704024faeab0, type: 3}
+  - {fileID: 21300000, guid: 8ed8179691464da4380ab59849cf175b, type: 3}
+  - {fileID: 21300000, guid: 44486d776666f5c4ba47e88119472e82, type: 3}
+  - {fileID: 21300000, guid: 466e7d0e7561ff24ca05166d00b9a636, type: 3}
+  - {fileID: 21300000, guid: edd5de09b7d3f0a49978ba3700e238a5, type: 3}
+  - {fileID: 21300000, guid: 9c9ad87ed3867a84ab2fc293e947b830, type: 3}
+  - {fileID: 21300000, guid: a082cbfe8b66b6b4a98ad86fd20b5c13, type: 3}
+  - {fileID: 21300000, guid: ae6624d4907a79b4abeeabef977b5df0, type: 3}
+  - {fileID: 21300000, guid: 9963c12bc783e414582656e0abe4e5fc, type: 3}
+  - {fileID: 21300000, guid: ae9b15bc30d120f4d9216bcc89603a59, type: 3}
+  - {fileID: 21300000, guid: ca7b0b760fb0e69469be35b7efa6b850, type: 3}
+  - {fileID: 21300000, guid: 3ed6f84fae9254343ae9145af06985d9, type: 3}
+  - {fileID: 21300000, guid: 2c91b1e34bd4aba4d90a1e53f0d0c301, type: 3}
+  - {fileID: 21300000, guid: ced9e33500287304294f1bf99c33b101, type: 3}
   skillActiveQuote: One More
   characterPortrait: {fileID: 21300000, guid: 2878542ada9aea343a531b3caa67eec1, type: 3}
   SkillIcon: {fileID: 21300000, guid: 4d665d453ca58b84baf71d4735b351a7, type: 3}
@@ -923,6 +1007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerData:
+    character: {fileID: 0}
     portrait: {fileID: 0}
     skillIcon: {fileID: 0}
     skillRequirementAmount: 0
@@ -934,6 +1019,7 @@ MonoBehaviour:
     currentActiveStatus: []
     quote: 
   OpponentData:
+    character: {fileID: 0}
     portrait: {fileID: 0}
     skillIcon: {fileID: 0}
     skillRequirementAmount: 0
@@ -991,6 +1077,31 @@ MonoBehaviour:
   characterName: Hilda
   maxHP: 100
   currentHP: 0
+  skillAnimationSprites:
+  - {fileID: 21300000, guid: 0f5273725dbb49944a0f2e6d447f0012, type: 3}
+  - {fileID: 21300000, guid: ef133e01669cc0b4f800c196b9fe0683, type: 3}
+  - {fileID: 21300000, guid: 97a68a1916a3f75439e3f87f6a82e8f2, type: 3}
+  - {fileID: 21300000, guid: 02a936a06f1c35d4598c52e538213cf4, type: 3}
+  - {fileID: 21300000, guid: c58edd729ec8a324f82cfbb1a1031c5f, type: 3}
+  - {fileID: 21300000, guid: f34d308bd3dfb644ba20f49c6651be6c, type: 3}
+  - {fileID: 21300000, guid: bb8d102ef10eb944e81c969c0ff38e69, type: 3}
+  - {fileID: 21300000, guid: c0fd006c2910c2f46b957258373e8d53, type: 3}
+  - {fileID: 21300000, guid: f8290a87906db184396e97da0aafadce, type: 3}
+  - {fileID: 21300000, guid: 0b3593335c878534d9dd14c11821cb1f, type: 3}
+  - {fileID: 21300000, guid: 4da9b0360af988e4384a704024faeab0, type: 3}
+  - {fileID: 21300000, guid: 8ed8179691464da4380ab59849cf175b, type: 3}
+  - {fileID: 21300000, guid: 44486d776666f5c4ba47e88119472e82, type: 3}
+  - {fileID: 21300000, guid: 466e7d0e7561ff24ca05166d00b9a636, type: 3}
+  - {fileID: 21300000, guid: edd5de09b7d3f0a49978ba3700e238a5, type: 3}
+  - {fileID: 21300000, guid: 9c9ad87ed3867a84ab2fc293e947b830, type: 3}
+  - {fileID: 21300000, guid: a082cbfe8b66b6b4a98ad86fd20b5c13, type: 3}
+  - {fileID: 21300000, guid: ae6624d4907a79b4abeeabef977b5df0, type: 3}
+  - {fileID: 21300000, guid: 9963c12bc783e414582656e0abe4e5fc, type: 3}
+  - {fileID: 21300000, guid: ae9b15bc30d120f4d9216bcc89603a59, type: 3}
+  - {fileID: 21300000, guid: ca7b0b760fb0e69469be35b7efa6b850, type: 3}
+  - {fileID: 21300000, guid: 3ed6f84fae9254343ae9145af06985d9, type: 3}
+  - {fileID: 21300000, guid: 2c91b1e34bd4aba4d90a1e53f0d0c301, type: 3}
+  - {fileID: 21300000, guid: ced9e33500287304294f1bf99c33b101, type: 3}
   skillActiveQuote: Feel The Pain
   characterPortrait: {fileID: 21300000, guid: 6b511c3c5317b9440bb9482e53e40c78, type: 3}
   SkillIcon: {fileID: 21300000, guid: ff87d7d6f254952459bf39ec7a6a70dc, type: 3}
@@ -1159,6 +1270,17 @@ Tilemap:
   m_CorrespondingSourceObject: {fileID: 1595181160599217181, guid: 4d51321aee99b4243af2e0ab343ed6c3, type: 3}
   m_PrefabInstance: {fileID: 1114832247}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1280363725 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7363499680411026597, guid: c3b7ed784be7e0b4a9ab7dd1135fb9a4, type: 3}
+  m_PrefabInstance: {fileID: 720662106}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1377086446
 GameObject:
   m_ObjectHideFlags: 0

@@ -53,7 +53,11 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
         MessageManager.Instance.SendMessage(new Message(MessageType.OnStatusChange));
     }
 	public PlayerData PlayerData;
-
+    public BaseCharacter PlayerCharacter
+    {
+        get => PlayerData.character;
+        set => PlayerData.character = value;
+    }
     public Sprite PlayerPortrait
     {
         get => PlayerData.portrait;
@@ -147,7 +151,11 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
         }
     }
     public OpponentData OpponentData;
-
+    public BaseCharacter OpponentCharacter
+    {
+        get => OpponentData.character;
+        set => OpponentData.character = value;
+    }
     public Sprite OpponentPortrait
     {
         get => OpponentData.portrait;

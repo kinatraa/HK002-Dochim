@@ -29,8 +29,10 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     private Vector2 _playerPortraitInitPos;
     private Vector2 _opponentPortraitInitPos;
     [SerializeField] float _animationDurationTime;
+    [SerializeField] Image _skillAnimationImage;
+	[SerializeField] float _skillAnimationFrameDuration = 0.08f;
 
-    private BaseCharacter playerCharacter;
+	private BaseCharacter playerCharacter;
     private BaseCharacter opponentCharacter;
     private GameObject currentIcon;
 	[SerializeField] private float _fillSpeed;
@@ -85,6 +87,9 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
         _opponentRemainingActionsBoard = _opponentActionRemains.GetComponentInParent<Image>();
         _opponentScoreFill.fillAmount = baseScoreFill;
         _playerScoreFill.fillAmount = maxScoreFill;
+		//_skillAnimationImage.gameObject.SetActive(false);
+		//_skillAnimationImage.color = new Color(1, 1, 1, 0);
+        _skillAnimationImage.enabled = false;
 	}
 
     //animation 
@@ -143,7 +148,26 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 		_opponentFillAmount = (DataManager.Instance.OpponentMaxHP == 0) ? 1 : ((float)DataManager.Instance.OpponentHP / (float)DataManager.Instance.OpponentMaxHP);
 		_opponentHPFill.DOFillAmount(_opponentFillAmount, _fillSpeed);
 	}
+	private IEnumerator PlaySkillAnimation(Sprite[] animationFrames, System.Action onCompleteCallback) 
+	{
+		_skillAnimationImage.enabled = true;
+		_skillAnimationImage.color = new Color(_skillAnimationImage.color.r, _skillAnimationImage.color.g, _skillAnimationImage.color.b, 0f);
+		_skillAnimationImage.DOFade(1f, 0.2f);
 
+
+		for (int i = 0; i < animationFrames.Length; i++)
+		{
+			_skillAnimationImage.sprite = animationFrames[i];
+			yield return new WaitForSeconds(_skillAnimationFrameDuration);
+		}
+
+		_skillAnimationImage.DOFade(0f, 0.2f).OnComplete(() => {
+			Debug.Log("PlaySkillAnimation Fade Out Complete.");
+			_skillAnimationImage.enabled = false; 
+			_skillAnimationImage.sprite = null;  
+			onCompleteCallback?.Invoke(); 
+		});
+	}
 	void OnEnable()
     {
         UpdateUI();
@@ -184,40 +208,59 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 
 		int currentTurn = GamePlayManager.Instance.GameTurnController.GetTurn();
 		RectTransform targetRect = null;
+		BaseCharacter currentCharacter = null;
+		Sprite[] skillFrames = null;
 
-		if (currentTurn == 0)
+		if (currentTurn == 0) // Player
 		{
 			targetRect = _playerSkillPopupRect;
+			currentCharacter = GamePlayManager.Instance.PlayerCharacter;
+		}
+		else if (currentTurn == 1) // Opponent
+		{
+			targetRect = _opponentSkillPopupRect;
+			currentCharacter = GamePlayManager.Instance.OpponentCharacter;
+		}
+
+		skillFrames = currentCharacter.SkillAnimationSprites;
+
+		// Set State
+		GamePlayManager.Instance.State = GameState.SkillAnimation;
+
+		if (currentTurn == 0) // Player
+		{
+			targetRect.anchoredPosition = new Vector2(-1300, targetRect.anchoredPosition.y);
 			cutsceneSequence.Append(targetRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
 			cutsceneSequence.AppendInterval(1f);
 			cutsceneSequence.Append(targetRect.DOAnchorPosX(1300, 0.5f).SetEase(Ease.OutQuad));
 			cutsceneSequence.Append(targetRect.DOAnchorPosX(-1300, 0f).SetEase(Ease.OutQuad));
-																							   
-			cutsceneSequence.OnComplete(() => {
-				GamePlayManager.Instance.State = GameState.PlayerTurn;
-                if (GamePlayManager.Instance.PlayerCharacter is IPassiveSkill)
-                {
-                    GamePlayManager.Instance.GameTurnController.UseAction();
-                }
-				Debug.Log("Skill Cutscene Done - Player Turn");
-			});
 		}
-		else if (currentTurn == 1)
+		else // Opponent
 		{
-			targetRect = _opponentSkillPopupRect;
+			targetRect.anchoredPosition = new Vector2(1300, targetRect.anchoredPosition.y);
 			cutsceneSequence.Append(targetRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
 			cutsceneSequence.AppendInterval(1f);
 			cutsceneSequence.Append(targetRect.DOAnchorPosX(-1300, 0.5f).SetEase(Ease.OutQuad));
 			cutsceneSequence.Append(targetRect.DOAnchorPosX(1300, 0f).SetEase(Ease.OutQuad));
-			cutsceneSequence.OnComplete(() => {
-				GamePlayManager.Instance.State = GameState.OpponentTurn;
-				if (GamePlayManager.Instance.OpponentCharacter is IPassiveSkill)
-				{
-					GamePlayManager.Instance.GameTurnController.UseAction();
-				}
-				Debug.Log("Skill Cutscene Done - Opponent Turn");
-			});
 		}
+		System.Action postAnimationAction = () => {
+			// Reset State
+			if (currentTurn == 0)
+			{
+				GamePlayManager.Instance.State = GameState.PlayerTurn;
+			}
+			else // Opponent's turn
+			{
+				GamePlayManager.Instance.State = GameState.OpponentTurn;
+			}
+		};
+
+		Sprite[] finalSkillFrames = skillFrames;
+		cutsceneSequence.OnComplete(() => {
+			StartCoroutine(PlaySkillAnimation(finalSkillFrames, postAnimationAction));
+			
+		});
+
 		cutsceneSequence.Play();
 	}
 

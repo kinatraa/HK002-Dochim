@@ -12,6 +12,7 @@ public abstract class BaseCharacter : MonoBehaviour
 	public string characterName;
 	[SerializeField]private int maxHP;
 	[SerializeField]private int currentHP;
+	[SerializeField] private Sprite[] skillAnimationSprites;
 	public string skillActiveQuote;
 	public Sprite characterPortrait;
 	public Sprite SkillIcon;
@@ -30,9 +31,14 @@ public abstract class BaseCharacter : MonoBehaviour
 
 	//status
 	public bool IsReady {  get { return isReady; } }
-	public bool IsActive {  get { return isActive; } }
+	public bool IsActive
+	{
+		get { return isActive; }
+		set { isActive = value; }
+	}
 	public int ActiveConditionAmount {  get { return activeConditionAmount; } }
 
+	public Sprite[] SkillAnimationSprites {  get { return skillAnimationSprites; } }
 
 	public int CurrentActiveSkillExistenceTurn
 	{
