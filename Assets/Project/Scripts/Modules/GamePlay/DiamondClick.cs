@@ -33,6 +33,13 @@ public class DiamondClick : MonoBehaviour
 
     public IEnumerator SelectTile(Vector3Int selectedPos)
     {
+        while (!(GamePlayManager.Instance.State == GameState.PlayerTurn ||
+                GamePlayManager.Instance.State == GameState.OpponentTurn) ||
+               GamePlayManager.Instance.DiamondManager.IsDropping())
+        {
+            yield return null;
+        }
+        
         if (_selected)
         {
             _selected = false;

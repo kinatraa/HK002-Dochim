@@ -254,7 +254,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 			//Skill animation
 			if (currentCharacter.SkillAnimation)
 			{
-				_skillAnimator.Play(currentCharacter.SkillAnimation.name);
+				_skillAnimator.Play(currentCharacter.SkillAnimation.name, 0, 0f);
 			}
 		});
 	}
