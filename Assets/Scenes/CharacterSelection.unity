@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchoredPosition: {x: 10.009, y: 22}
+  m_SizeDelta: {x: 479.9813, y: 434.4844}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &84500649
 MonoBehaviour:
@@ -365,15 +365,15 @@ RectTransform:
   m_GameObject: {fileID: 397892678}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1542271901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchoredPosition: {x: 9, y: 13}
+  m_SizeDelta: {x: 434.4846, y: 445.4037}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &397892680
 MonoBehaviour:
@@ -597,8 +597,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchoredPosition: {x: -15, y: 25.478}
+  m_SizeDelta: {x: 449.0435, y: 449.0435}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &821545399
 MonoBehaviour:
@@ -996,9 +996,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefabs:
-  - {fileID: 3838431962462747341, guid: 9e7aa0ca12ea3f44faaa2a64e7ae354f, type: 3}
-  - {fileID: 2193619999919489811, guid: 47e653b570d7afb4082710e9e302c2e6, type: 3}
-  - {fileID: 5020139110538635595, guid: 967478c11bb54e14d9204dc765043afa, type: 3}
+  - {fileID: 1855292574081995965, guid: 9e7aa0ca12ea3f44faaa2a64e7ae354f, type: 3}
+  - {fileID: 8289140840194973309, guid: 47e653b570d7afb4082710e9e302c2e6, type: 3}
+  - {fileID: 4734986885078048303, guid: 967478c11bb54e14d9204dc765043afa, type: 3}
   characterPortraits:
   - {fileID: 397892680}
   - {fileID: 821545399}

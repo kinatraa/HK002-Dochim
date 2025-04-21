@@ -203,7 +203,16 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 
 		playerCharacter = GamePlayManager.Instance.PlayerCharacter;
 		opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
-
+		if(playerCharacter is AuthenticItalian)
+		{
+			RectTransform test = _playerPortrait.GetComponent<RectTransform>();
+			test.rotation = Quaternion.Euler(180, 0, 180);
+		}
+		if(opponentCharacter is ImpalerHilda)
+		{
+			RectTransform test = _opponentPortrait.GetComponent <RectTransform>();
+			test.rotation = Quaternion.Euler(180, 0, 180);
+		}
 	}
 	public void SkillActiveCutScene()
 	{
@@ -235,19 +244,19 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 		
 		if (currentTurn == 0) // Player
 		{
-			targetRect.anchoredPosition = new Vector2(-1300, targetRect.anchoredPosition.y);
+			targetRect.anchoredPosition = new Vector2(-1400, targetRect.anchoredPosition.y);
 			sequence.Append(targetRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
 			sequence.AppendInterval(1f);
-			sequence.Append(targetRect.DOAnchorPosX(1300, 0.5f).SetEase(Ease.OutQuad));
-			sequence.Append(targetRect.DOAnchorPosX(-1300, 0f).SetEase(Ease.OutQuad));
+			sequence.Append(targetRect.DOAnchorPosX(1400, 0.5f).SetEase(Ease.OutQuad));
+			sequence.Append(targetRect.DOAnchorPosX(-1400, 0f).SetEase(Ease.OutQuad));
 		}
 		else // Opponent
 		{
-			targetRect.anchoredPosition = new Vector2(1300, targetRect.anchoredPosition.y);
+			targetRect.anchoredPosition = new Vector2(1400, targetRect.anchoredPosition.y);
 			sequence.Append(targetRect.DOAnchorPosX(0, 1f).SetEase(Ease.OutQuad));
 			sequence.AppendInterval(1f);
-			sequence.Append(targetRect.DOAnchorPosX(-1300, 0.5f).SetEase(Ease.OutQuad));
-			sequence.Append(targetRect.DOAnchorPosX(1300, 0f).SetEase(Ease.OutQuad));
+			sequence.Append(targetRect.DOAnchorPosX(-1400, 0.5f).SetEase(Ease.OutQuad));
+			sequence.Append(targetRect.DOAnchorPosX(1400, 0f).SetEase(Ease.OutQuad));
 		}
 		
 		sequence.OnComplete(() => {

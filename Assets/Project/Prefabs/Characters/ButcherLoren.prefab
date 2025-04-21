@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3231540371131524380
+--- !u!1 &2857618734527523331
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6131153045685670292}
-  - component: {fileID: 2193619999919489811}
+  - component: {fileID: 7870105173151823588}
+  - component: {fileID: 8289140840194973309}
   m_Layer: 0
   m_Name: ButcherLoren
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6131153045685670292
+--- !u!4 &7870105173151823588
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3231540371131524380}
+  m_GameObject: {fileID: 2857618734527523331}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,13 +32,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2193619999919489811
+--- !u!114 &8289140840194973309
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3231540371131524380}
+  m_GameObject: {fileID: 2857618734527523331}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f427143836368db479debe900c668a79, type: 3}
@@ -47,12 +47,10 @@ MonoBehaviour:
   characterName: Loren
   maxHP: 100
   currentHP: 0
-  skillDescriptions: "M\u1ED7i khi \u0103n \u0111\u01B0\u1EE3c 20 \xF4 b\u1EA5t k\xEC,
-    l\u1EADp t\u1EE9c nh\u1EADn \u0111\u01B0\u1EE3c th\xEAm 1 l\u01B0\u1EE3t h\xE0nh
-    \u0111\u1ED9ng n\u1EEFa. 1 n\u1EEDa ph\u1EA7n d\u01B0 ra s\u1EBD \u0111\u01B0\u1EE3c
-    t\xEDnh v\xE0o l\u1EA7n x\xE9t sau \u0111\xF3."
+  skillAnimation: {fileID: 7400000, guid: bb60d7cf3b8e1d34e8d6244a43c92e69, type: 2}
+  skillActiveQuote: One More
   characterPortrait: {fileID: 21300000, guid: 2878542ada9aea343a531b3caa67eec1, type: 3}
   SkillIcon: {fileID: 21300000, guid: 4d665d453ca58b84baf71d4735b351a7, type: 3}
-  activeConditionAmount: 10
+  activeConditionAmount: 25
   currentConditionAmount: 0
   activeSkillExistenceTurn: 0
