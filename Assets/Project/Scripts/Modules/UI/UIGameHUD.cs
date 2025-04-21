@@ -214,6 +214,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 			test.rotation = Quaternion.Euler(180, 0, 180);
 		}
 	}
+    
 	public void SkillActiveCutScene()
 	{
 		Sequence cutsceneSequence = DOTween.Sequence();
@@ -284,6 +285,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 		float targetFill;
 
 		if (_playerScoreToFloat > _opponentScoreToFloat)
+			
 		{
 			targetFill = baseScoreFill - fillChange;
 		}

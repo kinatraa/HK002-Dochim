@@ -10,7 +10,7 @@ public abstract class AIBehavior : MonoBehaviour
     protected DiamondClick _diamondClick;
     protected BoundsInt _bounds;
     
-    private Dictionary<TileBase, TileProperties> _tilesData = new Dictionary<TileBase, TileProperties>();
+    protected Dictionary<TileBase, TileProperties> _tilesData = new Dictionary<TileBase, TileProperties>();
     protected List<(Vector3Int, Vector3Int)> _possibleMoves = new List<(Vector3Int, Vector3Int)>();
     protected List<Dictionary<TileColor, int>> colorCounter = new List<Dictionary<TileColor, int>>();
     
@@ -36,7 +36,7 @@ public abstract class AIBehavior : MonoBehaviour
         {
             yield return null;
         }
-        
+
         _possibleMoves.Clear();
         _possibleMoves = Utils.GetAllPossibleMoves(GamePlayManager.Instance.Tilemap);
         

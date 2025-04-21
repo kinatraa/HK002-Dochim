@@ -20,7 +20,7 @@ public class HardAI : AIBehavior
         _pretendDiamondManager.CalculateAllCasesScore();
         colorCounter = _pretendDiamondManager.ColorCounter;
         scoreCounter = _pretendDiamondManager.ScoreCounter;
-
+        
         int idx = GetMove();
         
         yield return new WaitForSeconds(0.5f);
@@ -38,14 +38,56 @@ public class HardAI : AIBehavior
             return Random.Range(0, _possibleMoves.Count);
         }
         
-        int idx = 0;
+        BaseCharacter character = GamePlayManager.Instance.OpponentCharacter;
         
-        // brute - force
-        for (int i = 0; i < scoreCounter.Count; i++)
+        List<int> idxPool = new List<int>();
+        
+        for (int i = 0; i < colorCounter.Count; i++)
         {
-            if (scoreCounter[i] > scoreCounter[idx])
+            int cnt = 0;
+            if (character.conditionTile.Count > 0)
             {
-                idx = i;
+                foreach (var t in character.conditionTile)
+                {
+                    var c = _tilesData[t].Color;
+                    cnt += colorCounter[i][c];
+                }
+            }
+            else
+            {
+                foreach (var p in colorCounter[i])
+                {
+                    cnt += p.Value;
+                }
+            }
+
+            if (cnt + character.currentConditionAmount >= character.activeConditionAmount)
+            {
+                idxPool.Add(i);
+            }
+        }
+        
+        int idx = 0;
+
+        if (idxPool.Count > 0)
+        {
+            for (int i = 0; i < idxPool.Count; i++)
+            {
+                if (scoreCounter[idxPool[i]] > scoreCounter[idx])
+                {
+                    idx = idxPool[i];
+                }
+            }
+        }
+        else
+        {
+            // brute - force
+            for (int i = 0; i < scoreCounter.Count; i++)
+            {
+                if (scoreCounter[i] > scoreCounter[idx])
+                {
+                    idx = i;
+                }
             }
         }
         

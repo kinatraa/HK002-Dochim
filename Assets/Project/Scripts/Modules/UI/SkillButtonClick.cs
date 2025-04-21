@@ -33,6 +33,6 @@ public class SkillButtonClick : MonoBehaviour, IPointerClickHandler
 		}
 		DataManager.Instance.PlayerCurrentTilesAcquired = 0;
 		MessageManager.Instance.SendMessage(new Message(MessageType.OnSkillActive));
-		Debug.Log("Click");
+		/*Debug.Log("Click");*/
 	}
 }

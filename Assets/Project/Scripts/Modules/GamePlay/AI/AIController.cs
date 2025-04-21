@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using HaKien;
 using TMPro;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -47,6 +48,24 @@ public class AIController : MonoBehaviour
 
     public void PlayTurn()
     {
+	    CheckForActiveSkill();
         StartCoroutine(_ai.SelectTile());
+    }
+    
+    private void CheckForActiveSkill()
+    {
+	    if (!character.IsReady || GamePlayManager.Instance.DiamondManager.IsDropping() ||
+	        GamePlayManager.Instance.State != GameState.OpponentTurn)
+	    {
+		    return;
+	    }
+		    
+	    if (character is IActiveSkill)
+	    {
+		    character.Active();
+	    }
+	    
+	    DataManager.Instance.OpponentCurrentTilesAcquired = 0;
+	    MessageManager.Instance.SendMessage(new Message(MessageType.OnSkillActive));
     }
 }

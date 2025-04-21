@@ -6,7 +6,6 @@ using UnityEngine.Tilemaps;
 
 public class AuthenticItalian : BaseCharacter, IActiveSkill
 {
-	[SerializeField] private List<TileBase> conditionTile;
 	[SerializeField] private TileBase fireTile;
 	private Tilemap tileMap;
 	private BoundsInt bounds;

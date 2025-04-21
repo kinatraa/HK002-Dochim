@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 {
 	private BaseCharacter target;			
-	[SerializeField] private List<TileBase> conditionTile;
+	
 	private Tilemap tilemap;
 	private int threshHold = 0;
 	protected override void Awake()
