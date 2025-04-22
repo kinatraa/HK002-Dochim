@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3141759384006572655}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.197405, y: -0.58251536, z: 0.046818286}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -765,7 +765,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ca9c9734355e2384d869e375f106777a, type: 2}
   - {fileID: 11400000, guid: 66a0f9f8fbc8b9042aba355aff5cc2a5, type: 2}
   _areaTile: {fileID: 11400000, guid: ebecdf701b65401418cbebaa3fb77b07, type: 2}
-  licoriceTile: {fileID: 11400000, guid: f9e8cc91bca33c8419292d75ecc4ed03, type: 2}
+  licoriceTile: {fileID: 11400000, guid: 0687cb48798c22746b39c3951a3f2644, type: 2}
   licoriceTileMap: {fileID: 1595181160599217181}
   _tilemap: {fileID: 3406213739376807711}
   _terrainTile: {fileID: 2946470212360054921}
