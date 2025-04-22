@@ -769,6 +769,7 @@ MonoBehaviour:
   licoriceTileMap: {fileID: 1595181160599217181}
   _tilemap: {fileID: 3406213739376807711}
   _terrainTile: {fileID: 2946470212360054921}
+  _specialTileEffect: {fileID: 728933894608220339, guid: 8c475db8791f59a439372f14d40293d4, type: 3}
 --- !u!1 &8579815666515410758
 GameObject:
   m_ObjectHideFlags: 0

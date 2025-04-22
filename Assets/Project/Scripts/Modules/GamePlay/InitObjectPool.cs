@@ -11,6 +11,7 @@ public class InitObjectPool : MonoBehaviour
     private Queue<SpriteRenderer> _tilePool = new Queue<SpriteRenderer>();
     [SerializeField] private GameObject _tilemapPrefab;
     private Queue<Tilemap> _tilemapPool = new Queue<Tilemap>();
+    [SerializeField] private List<Transform> _specialEffectPool;
 
     void Awake()
     {
@@ -37,5 +38,10 @@ public class InitObjectPool : MonoBehaviour
     public Queue<Tilemap> GetTilemapPool()
     {
         return _tilemapPool;
+    }
+
+    public Queue<Transform> GetSpecialEffectPool()
+    {
+        return new Queue<Transform>(_specialEffectPool);
     }
 }

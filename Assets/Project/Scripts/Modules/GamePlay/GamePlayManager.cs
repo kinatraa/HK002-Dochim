@@ -74,6 +74,11 @@ public class GamePlayManager : Singleton<GamePlayManager>, IMessageHandle
         get => _objectPool.GetTilemapPool();
     }
 
+    public Queue<Transform> EffectPool
+    {
+        get => _objectPool.GetSpecialEffectPool();
+    }
+
     [SerializeField] private TilesData _tileData;
 
     public Dictionary<TileBase, TileProperties> TilesData

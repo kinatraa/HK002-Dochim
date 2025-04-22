@@ -25,12 +25,16 @@ public class DiamondManager : MonoBehaviour
     private GameTurnController _gameTurnController;
     
     private Queue<SpriteRenderer> _tilePool;
+    private Queue<Transform> _effectPool;
 
     private BoundsInt _bounds;
     private int _rows;
     private int _columns;
 
+    private int _count = 0, _bonus = 0;
+
     private int _dropping = -1;
+    private int _effectRunning = 0;
     private bool _swapping = false;
     
     private Vector3Int _firstMousePos, _secondMousePos;
@@ -54,6 +58,9 @@ public class DiamondManager : MonoBehaviour
 			new Vector3Int(-1, 1, 0),
 		};
 
+	[SerializeField] private Transform _specialTileEffect;
+	List<Vector3Int> _clearEffectTiles = new List<Vector3Int>();
+	
 	void Awake()
     {
         _tilemap = GamePlayManager.Instance.Tilemap;
@@ -70,6 +77,7 @@ public class DiamondManager : MonoBehaviour
         _bounds = GamePlayManager.Instance.BoardBounds;
         //Debug.Log($"{_bounds.xMin}, {_bounds.yMin}, {_bounds.xMax}, {_bounds.yMax}");
         _tilePool = GamePlayManager.Instance.TilePool;
+        _effectPool = GamePlayManager.Instance.EffectPool;
         GenerateBoard();
     }
 
@@ -302,6 +310,7 @@ public class DiamondManager : MonoBehaviour
 
     private int ActiveSpecialTile(Vector3Int pos)
     {
+	    List<Vector3Int> clearEffectTile = new List<Vector3Int>();
 	    int count = 0;
 	    
 	    TileBase tile = _tilemap.GetTile(pos);
@@ -315,7 +324,8 @@ public class DiamondManager : MonoBehaviour
 			    if (!IsLocked(pos))
 			    {
 				    if (_tilesData[tile].Type != TileType.Normal) ActiveSpecialTile(pos);
-				    _tilemap.SetTile(pos, null);
+				    /*_tilemap.SetTile(pos, null);*/
+				    clearEffectTile.Add(pos);
 				    ++count;
 			    }
 			    else
@@ -323,6 +333,7 @@ public class DiamondManager : MonoBehaviour
 				    lockTiles.Add(pos);
 			    }
 		    }
+		    RunSpectialTileEffect(_tilemap.GetCellCenterWorld(pos), 0, clearEffectTile);
 	    }
 	    else if (_tilesData[tile].Type == TileType.Row)
 	    {
@@ -334,7 +345,8 @@ public class DiamondManager : MonoBehaviour
 			    if (!IsLocked(pos))
 			    {
 				    if (_tilesData[tile].Type != TileType.Normal) ActiveSpecialTile(pos);
-				    _tilemap.SetTile(pos, null);
+				    /*_tilemap.SetTile(pos, null);*/
+				    clearEffectTile.Add(pos);
 				    ++count;
 			    }
 			    else
@@ -342,6 +354,7 @@ public class DiamondManager : MonoBehaviour
 				    lockTiles.Add(pos);
 			    }
 		    }
+		    RunSpectialTileEffect(_tilemap.GetCellCenterWorld(pos), 1, clearEffectTile);
 	    }
 	    else if (_tilesData[tile].Type == TileType.Area)
 	    {
@@ -366,8 +379,10 @@ public class DiamondManager : MonoBehaviour
 	    return count;
     }
 
-    private void CalculateScore(ref int count, ref int bonus, Dictionary<TileBase, int> destroyedTiles)
+    private IEnumerator CalculateScore(Dictionary<TileBase, int> destroyedTiles)
     {
+	    _clearEffectTiles.Clear();
+	    
 	    foreach (Vector3Int tilePos in clearTiles)
 	    {
 		    TileBase tile = _tilemap.GetTile(tilePos);
@@ -384,17 +399,24 @@ public class DiamondManager : MonoBehaviour
 		    }
 		    if (CheckTerrainEffect(tilePos))
 		    {
-			    bonus += 1;
+			    _bonus += 1;
 		    }
 
 		    if (_tilesData[tile].Type != TileType.Normal)
 		    {
-			    count += ActiveSpecialTile(tilePos);
+			    _count += ActiveSpecialTile(tilePos);
 		    }
 		    
 		    _tilemap.SetTile(tilePos, null);
-		    ++count;
+		    ++_count;
 	    }
+	    
+	    while (_effectRunning > 0)
+	    {
+		    yield return null;
+	    }
+
+	    yield return null;
     }
 
     private void UnlockTiles()
@@ -469,8 +491,8 @@ public class DiamondManager : MonoBehaviour
 
 
 			Dictionary<TileBase,int> destroyedTiles = new Dictionary<TileBase, int>();
-            int bonus = 0, count = 0;
-            CalculateScore(ref count, ref bonus, destroyedTiles);
+			_bonus = 0; _count = 0;
+            yield return StartCoroutine(CalculateScore(destroyedTiles));
             
             UnlockTiles();
             
@@ -493,7 +515,7 @@ public class DiamondManager : MonoBehaviour
 				}
 			}
 
-			UpdatePlayersScore(count, (int)Mathf.Ceil(bonus / 2.0f));
+			UpdatePlayersScore(_count, (int)Mathf.Ceil(_bonus / 2.0f));
 			
             yield return StartCoroutine(DropTile());
             
@@ -684,5 +706,97 @@ public class DiamondManager : MonoBehaviour
 	               _tilesData[bTile].Color == TileColor.All;
 	    
 	    return res;
+    }
+
+    //axis: 0 - column, 1 - row
+    private void RunSpectialTileEffect(Vector3 pos, int axis, List<Vector3Int> clearEffectTiles)
+    {
+	    if (axis == 0)
+	    {
+		    Vector3 fromPos = new Vector3(pos.x, _bounds.yMin, 0);
+		    Vector3 toPos = new Vector3(pos.x, _bounds.yMax, 0);
+		    clearEffectTiles.Sort((a, b) => a.y.CompareTo(b.y));
+		    StartCoroutine(MoveEffectCoroutine(fromPos, toPos, axis, clearEffectTiles));
+	    }
+	    else
+	    {
+		    Vector3 fromPos = new Vector3(_bounds.xMin, pos.y, 0);
+		    Vector3 toPos = new Vector3(_bounds.xMax, pos.y, 0);
+		    clearEffectTiles.Sort((a, b) => a.x.CompareTo(b.x));
+		    StartCoroutine(MoveEffectCoroutine(fromPos, toPos, axis, clearEffectTiles));
+	    }
+    }
+    
+    private IEnumerator MoveEffectCoroutine(Vector3 fromPos, Vector3 toPos, int axis, List<Vector3Int> clearEffectTiles)
+    {
+
+	    ++_effectRunning;
+        
+	    float elapsedTime = 0f;
+	    float duration = 1f;
+
+	    Transform tempEffect = null;
+
+	    if (_effectPool.Count > 0)
+	    {
+		    tempEffect = _effectPool.Dequeue();
+		    tempEffect.gameObject.SetActive(true);
+	    }
+	    /*Transform newEffect = Instantiate(_specialTileEffect, GameObject.Find("---GAMEPLAY").transform);*/
+	    if (axis == 0)
+	    {
+		    tempEffect.rotation = Quaternion.Euler(0, 0, 90);
+	    }
+	    
+	    tempEffect.position = fromPos;
+
+	    while (elapsedTime < duration)
+	    {
+		    float t = elapsedTime / duration;
+		    t = t * t * (3f - 2f * t);
+
+		    tempEffect.position = Vector3.Lerp(fromPos, toPos, t);
+
+		    while (clearEffectTiles.Count > 0)
+		    {
+			    if (axis == 0)
+			    {
+				    if (clearEffectTiles[0].y <= tempEffect.position.y)
+				    {
+					    _tilemap.SetTile(clearEffectTiles[0], null);
+					    clearEffectTiles.RemoveAt(0);
+				    }
+				    else
+				    {
+					    break;
+				    }
+			    }
+			    else
+			    {
+				    if (clearEffectTiles[0].x <= tempEffect.position.x)
+				    {
+					    _tilemap.SetTile(clearEffectTiles[0], null);
+					    clearEffectTiles.RemoveAt(0);
+				    }
+				    else
+				    {
+					    break;
+				    }
+			    }
+		    }
+
+		    elapsedTime += Time.deltaTime;
+		    yield return null;
+	    }
+
+	    while (clearEffectTiles.Count > 0)
+	    {
+		    _tilemap.SetTile(clearEffectTiles[0], null);
+		    clearEffectTiles.RemoveAt(0);
+	    }
+	    
+	    tempEffect.gameObject.SetActive(false);
+	    _effectPool.Enqueue(tempEffect);
+	    --_effectRunning;
     }
 }
