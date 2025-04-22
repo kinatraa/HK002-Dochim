@@ -9,11 +9,13 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] GameObject settingPopup;
 	[SerializeField] GameObject popupBackground;
 	[SerializeField] GameObject exitPopup;
+
+	[SerializeField] private PopupManager popupManager;
 	public void Start()
 	{
 		popupBackground.SetActive(false);
 		settingPopup.SetActive(false);
-
+		exitPopup.SetActive(false);
 	}
 	public void Play()
 	{
@@ -27,6 +29,13 @@ public class MenuManager : MonoBehaviour
 	{
 		popupBackground?.SetActive(true);
 		exitPopup.SetActive(true);
+		popupManager.LoadSetting();
+	}
+	public void CloseSettingAndSave()
+	{
+		popupManager.SaveOption();
+		popupBackground.SetActive(false);
+		settingPopup.SetActive(false);
 	}
 	public void Setting()
 	{

@@ -2630,7 +2630,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1163980371}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: CloseSetting
+        m_MethodName: CloseSettingAndSave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3797,6 +3797,7 @@ MonoBehaviour:
   settingPopup: {fileID: 1984578769}
   popupBackground: {fileID: 1624088218}
   exitPopup: {fileID: 1940007678}
+  popupManager: {fileID: 1711746702}
 --- !u!1 &1166301288
 GameObject:
   m_ObjectHideFlags: 0
@@ -5466,6 +5467,7 @@ MonoBehaviour:
   musicSelectOptions:
   - {fileID: 1306852433}
   - {fileID: 1901944666}
+  difficultyDropdown: {fileID: 1801884544}
 --- !u!1 &1753325830
 GameObject:
   m_ObjectHideFlags: 0

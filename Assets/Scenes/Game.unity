@@ -1840,6 +1840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 319115d3f0238694f997ff6ba9c4e936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _accuracy: 50
 --- !u!114 &2981517869738951820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1950,6 +1951,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3389c887bc25e304c96d92577aa37e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _aiOptions:
+  - {fileID: 5449309539096399883}
+  - {fileID: 952410762725895779}
+  - {fileID: 4052475411189300611}
   _aiObject: {fileID: 4052475411189300611}
   character: {fileID: 0}
   _scoreText: {fileID: 0}

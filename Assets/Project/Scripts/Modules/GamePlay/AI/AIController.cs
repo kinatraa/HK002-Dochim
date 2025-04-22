@@ -10,6 +10,7 @@ public class AIController : MonoBehaviour
 {
     private DiamondClick _diamondClick;
 
+    [SerializeField] private GameObject[] _aiOptions;
     [SerializeField] private GameObject _aiObject;
     [SerializeField] private BaseCharacter character;
     private AIBehavior _ai;
@@ -22,6 +23,8 @@ public class AIController : MonoBehaviour
 
 	void Awake()
     {
+        int difficultyindex = PlayerPrefs.GetInt("GameDifficulty");
+        _aiObject = _aiOptions[difficultyindex];
         _diamondClick = GetComponent<DiamondClick>();
         _bounds = GamePlayManager.Instance.BoardBounds;
 		int index = PlayerPrefs.GetInt("OpponentSelection");

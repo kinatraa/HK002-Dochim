@@ -7,7 +7,10 @@ public class AudioManager : MonoBehaviour, IMessageHandle
 {
 	public static AudioManager Instance { get; private set; }
 	//save setting with playerpref
-
+	private const string SoundStateKey = "SoundState";
+	private const string MusicStateKey = "MusicState";
+	private const string MusicVolumeKey = "MusicVolume";
+	private const string SFXVolumeKey = "SFXVolume";  
 
 	protected virtual void Awake()
 	{
@@ -18,6 +21,7 @@ public class AudioManager : MonoBehaviour, IMessageHandle
 			DontDestroyOnLoad(gameObject);
 
 			InitializeAudioSources();
+			LoadAudioSettings();
 		}
 		else if (Instance != this)
 		{
@@ -47,6 +51,8 @@ public class AudioManager : MonoBehaviour, IMessageHandle
 	private List<AudioSource> _sfxAudioSourcePool;
 	private AudioClip _currentMusicClip;
 
+	private bool _isMusicOn = true;
+	private bool _isSFXOn = true;
 	private float _musicVolume = 1f;
 	private float _sfxVolume = 1f;
 
@@ -72,7 +78,50 @@ public class AudioManager : MonoBehaviour, IMessageHandle
 			}
 		}
 	}
+	private void LoadAudioSettings()
+	{
+		_isMusicOn = PlayerPrefs.GetInt(MusicStateKey, 1) == 1;
+		_isSFXOn = PlayerPrefs.GetInt(SoundStateKey, 1) == 1;
 
+		_musicVolume = PlayerPrefs.GetFloat(MusicVolumeKey, 1f);
+		_sfxVolume = PlayerPrefs.GetFloat(SFXVolumeKey, 1f);
+
+		ApplyMusicState(_isMusicOn);
+		ApplySFXState(_isSFXOn);
+
+		Debug.Log($"Audio Settings Loaded: Music On: {_isMusicOn}, SFX On: {_isSFXOn}, Music Vol: {_musicVolume}, SFX Vol: {_sfxVolume}");
+	}
+	private void ApplyMusicState(bool isOn)
+	{
+		if (_musicSource == null) return;
+
+		if (isOn)
+		{
+			_musicSource.volume = _musicVolume;
+			_musicSource.mute = false; 
+			if (!_musicSource.isPlaying && _currentMusicClip != null)
+			{
+				// _musicSource.Play(); 
+			}
+		}
+		else
+		{
+			_musicSource.volume = 0f; 
+		}
+	}
+	private void ApplySFXState(bool isOn)
+	{
+		float targetVolume = isOn ? _sfxVolume : 0f;
+		bool muteState = !isOn;
+
+		foreach (var source in _sfxAudioSourcePool)
+		{
+			if (source != null)
+			{
+				source.volume = targetVolume;
+			}
+		}
+	}
 	private void InitializeAudioSources()
 	{
 		Debug.Log("Initializing Audio Sources..."); 
@@ -111,7 +160,6 @@ public class AudioManager : MonoBehaviour, IMessageHandle
 
 	private void OnEnable()
 	{
-		// Quan trọng: Vẫn cần đăng ký Message
 		SubscribeToMessages();
 	}
 
@@ -204,6 +252,29 @@ public class AudioManager : MonoBehaviour, IMessageHandle
 		StopCoroutine(nameof(FadeMusicCoroutine)); 
 		float targetVolume = _musicVolume * Mathf.Clamp01(volumeScale); 
 		StartCoroutine(FadeMusicCoroutine(clip, loop, targetVolume, _musicFadeDuration));
+	}
+
+	public void SetMusicState(bool isOn)
+	{
+		if (_isMusicOn == isOn) return;
+
+		_isMusicOn = isOn;
+		PlayerPrefs.SetInt(MusicStateKey, _isMusicOn ? 1 : 0);
+		ApplyMusicState(_isMusicOn);
+		Debug.Log($"Music state set to: {_isMusicOn}");
+		if (_isMusicOn && _musicSource != null && !_musicSource.isPlaying && _mainMenuMusic != null)
+		{
+			PlayMusic(_mainMenuMusic); 
+		}
+	}
+	public void SetSFXState(bool isOn)
+	{
+		if (_isSFXOn == isOn) return;
+
+		_isSFXOn = isOn;
+		PlayerPrefs.SetInt(SoundStateKey, _isSFXOn ? 1 : 0);
+		ApplySFXState(_isSFXOn);
+		Debug.Log($"SFX state set to: {_isSFXOn}");
 	}
 
 	private IEnumerator FadeMusicCoroutine(AudioClip newClip, bool loop, float targetVolume, float duration)
