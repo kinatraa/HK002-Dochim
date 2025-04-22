@@ -24,7 +24,7 @@ public abstract class BaseCharacter : MonoBehaviour
 	private Dictionary<StatusType,int> tileDestroyedPreEffect = new Dictionary<StatusType,int>();
 	public int activeSkillExistenceTurn = 0;
 	[SerializeField] public List<TileBase> conditionTile;
-	
+	[SerializeField] public bool canBeRevived = false;
 	protected virtual void Awake()
 	{
 		currentHP = maxHP;

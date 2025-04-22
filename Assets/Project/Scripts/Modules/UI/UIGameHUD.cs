@@ -13,11 +13,14 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
     [SerializeField] private TextMeshProUGUI _currentPlayerTurnScoreText;
     [SerializeField] private TextMeshProUGUI _currentOpponentTurnScoreText;
     [SerializeField] private Sprite[] _turnState;
+	[Header("PlayerConditionTiles")]
+	[SerializeField] private Image[] _playerConditionTiles; 
     [Header("Player Status")]
     [SerializeField] CanvasGroup _playerStatusCanvasGroup;
     [SerializeField] Image[] _playersCurrentStatusIconList;
     [SerializeField] TextMeshProUGUI[] _playersCurrentStatusTextList;
-
+	[Header("OpponentConditionTiles")]
+	[SerializeField] private Image[] _opponentConditionTiles;
     [Header("Opponent Status")]
     [SerializeField] CanvasGroup _opponentStatusCanvasGroup;
     [SerializeField] Image[] _opponentCurrentStatusIconList;
@@ -203,6 +206,18 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 
 		playerCharacter = GamePlayManager.Instance.PlayerCharacter;
 		opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
+
+		for (int i = 0; i < DataManager.Instance.PlayerConditionTilesSprite.Count; i++) 
+		{
+			_playerConditionTiles[i].sprite = DataManager.Instance.PlayerConditionTilesSprite[i];
+			_playerConditionTiles[i].enabled = true;
+		}
+		for(int i = 0;i<DataManager.Instance.OpponentConditionTilesSprite.Count; i++)
+		{
+			_opponentConditionTiles[i].sprite = DataManager.Instance.OpponentConditionTilesSprite[i];
+			_opponentConditionTiles[i].enabled = true;
+		}
+
 		if(playerCharacter is AuthenticItalian)
 		{
 			RectTransform test = _playerPortrait.GetComponent<RectTransform>();
@@ -213,6 +228,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 			RectTransform test = _opponentPortrait.GetComponent <RectTransform>();
 			test.rotation = Quaternion.Euler(180, 0, 180);
 		}
+
 	}
     
 	public void SkillActiveCutScene()
