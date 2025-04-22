@@ -747,6 +747,10 @@ public class DiamondManager : MonoBehaviour
 	    {
 		    tempEffect.rotation = Quaternion.Euler(0, 0, 90);
 	    }
+	    else
+	    {
+		    tempEffect.rotation = Quaternion.Euler(0, 0, 0);
+	    }
 	    
 	    tempEffect.position = fromPos;
 
@@ -795,10 +799,6 @@ public class DiamondManager : MonoBehaviour
 		    clearEffectTiles.RemoveAt(0);
 	    }
 	    
-	    if (axis == 0)
-	    {
-		    tempEffect.rotation = Quaternion.Euler(0, 0, 0);
-	    }
 	    tempEffect.gameObject.SetActive(false);
 	    _effectPool.Enqueue(tempEffect);
 	    --_effectRunning;
