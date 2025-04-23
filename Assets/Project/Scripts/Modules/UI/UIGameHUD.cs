@@ -96,6 +96,7 @@ public class UIGameHUD : MonoBehaviour, IUIGameBase
 		//_skillAnimationImage.color = new Color(1, 1, 1, 0);
         /*_skillAnimationImage.enabled = false;*/
         _skillImage.enabled = false;
+		_playerSkillPopup.text = "<font=\"MyFont\">AAAA</font>";
 	}
 
 	//animation 
