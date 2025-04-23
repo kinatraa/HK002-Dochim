@@ -13,7 +13,7 @@ public class OutcomeButtonController : MonoBehaviour
 	public void Home()
 	{
 		SceneManager.LoadScene("Menu");
-		MessageManager.Instance.SendMessage(new Message(MessageType.OnGameStart));
+		MessageManager.Instance.SendMessage(new Message(MessageType.OnGameRestart));
 	}
 	public void Exit()
 	{

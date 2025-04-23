@@ -177,6 +177,7 @@ public class AudioManager : MonoBehaviour, IMessageHandle
 			MessageManager.Instance.AddSubcriber(MessageType.OnGameWin, this);
 			MessageManager.Instance.AddSubcriber(MessageType.OnGameLose, this);
 			MessageManager.Instance.AddSubcriber(MessageType.OnButtonClick, this);
+			MessageManager.Instance.AddSubcriber(MessageType.OnGameRestart, this);
 		}
 		else
 		{
@@ -192,6 +193,7 @@ public class AudioManager : MonoBehaviour, IMessageHandle
 			MessageManager.Instance.RemoveSubcriber(MessageType.OnGameWin, this);
 			MessageManager.Instance.RemoveSubcriber(MessageType.OnGameLose, this);
 			MessageManager.Instance.RemoveSubcriber(MessageType.OnButtonClick, this);
+			MessageManager.Instance.RemoveSubcriber(MessageType.OnGameRestart,this);
 		}
 	}
 
@@ -331,7 +333,10 @@ public class AudioManager : MonoBehaviour, IMessageHandle
 		{
 			// Music
 			case MessageType.OnGameStart:
-				if (_gamePlayMusic != null) PlayMusic(_gamePlayMusic, true, 1f); 
+				PlayMusic(_gamePlayMusic, true, 1f); 
+				break;
+			case MessageType.OnGameRestart:
+				PlayMusic(_mainMenuMusic, true, 1f);
 				break;
 
 			// SFX
