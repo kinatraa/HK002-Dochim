@@ -1858,7 +1858,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4734986885078048303, guid: 967478c11bb54e14d9204dc765043afa, type: 3}
       propertyPath: maxHP
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4734986885078048303, guid: 967478c11bb54e14d9204dc765043afa, type: 3}
       propertyPath: activeConditionAmount
@@ -2218,7 +2218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddcd3bef905882441ac89fcad463df82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _accuracy: 60
+  _accuracy: 80
 --- !u!4 &2940575489127633473
 Transform:
   m_ObjectHideFlags: 0
@@ -2261,7 +2261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 319115d3f0238694f997ff6ba9c4e936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _accuracy: 50
+  _accuracy: 60
 --- !u!114 &2981517869738951820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2883,7 +2883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1855292574081995965, guid: 9e7aa0ca12ea3f44faaa2a64e7ae354f, type: 3}
       propertyPath: maxHP
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1855292574081995965, guid: 9e7aa0ca12ea3f44faaa2a64e7ae354f, type: 3}
       propertyPath: activeConditionAmount

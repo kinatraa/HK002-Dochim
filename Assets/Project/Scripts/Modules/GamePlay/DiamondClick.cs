@@ -66,8 +66,8 @@ public class DiamondClick : MonoBehaviour
 					//{
 					//    GamePlayManager.Instance.GameTurnController.UseAction();
 					//}
-					GamePlayManager.Instance.GameTurnController.UseAction();
-				}
+                    yield return StartCoroutine(GamePlayManager.Instance.GameTurnController.UseAction());
+                }
                     
                 /*StartCoroutine(ClearDiamond());*/
             }

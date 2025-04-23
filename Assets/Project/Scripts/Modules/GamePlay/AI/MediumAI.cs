@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class MediumAI : AIBehavior
 {
     [Tooltip("Accuracy in the range of 0 to 100 (0 means random)")]
-    [SerializeField] private int _accuracy = 50;
+    [SerializeField] private int _accuracy = 60;
     private List<Dictionary<TileColor, int>> colorCounter;
     private List<int> scoreCounter;
     

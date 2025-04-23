@@ -16,28 +16,41 @@ public class GameTurnController : MonoBehaviour
     private int turnCounter = 0;
     public float timer = 16;
     private bool isInAnimation = false;
-    private void Update()
-    {
-		if ((GamePlayManager.Instance.State == GameState.PlayerTurn ||
-		     GamePlayManager.Instance.State == GameState.OpponentTurn) &&
-		    !GamePlayManager.Instance.DiamondManager.IsDropping())
-		{
-			timer -= Time.deltaTime;
 
-			if (timer < 0)
-			{
-				UseAction();
-			}
-
-			MessageManager.Instance.SendMessage(new Message(MessageType.OnTimeChanged));
-		}
-	}
 	private void Awake()
 	{
 		playerCharacter = GamePlayManager.Instance.PlayerCharacter;
 		opponentCharacter = GamePlayManager.Instance.OpponentCharacter;
         Debug.Log(timer);
     }
+
+	void Start()
+	{
+		StartCoroutine(CoroutineUpdate());
+	}
+
+	private IEnumerator CoroutineUpdate()
+	{
+		while (true)
+		{
+			if ((GamePlayManager.Instance.State == GameState.PlayerTurn ||
+			     GamePlayManager.Instance.State == GameState.OpponentTurn) &&
+			    !GamePlayManager.Instance.DiamondManager.IsDropping())
+			{
+				timer -= Time.deltaTime;
+
+				if (timer < 0)
+				{
+					yield return StartCoroutine(UseAction());
+				}
+
+				MessageManager.Instance.SendMessage(new Message(MessageType.OnTimeChanged));
+			}
+
+			yield return null;
+		}
+	}
+	
     public void InitTurn()
     {
 		if (GamePlayManager.Instance.CoinFlipOutCome == 0)
@@ -53,8 +66,8 @@ public class GameTurnController : MonoBehaviour
 		remainingActions = maxActionPerTurn;
 		DataManager.Instance.PlayerRemainActionPoints = remainingActions;
 		DataManager.Instance.OpponentRemainActionPoints = remainingActions;
-		ChangeTurn();
-	}
+		StartCoroutine(ChangeTurn());
+    }
 
     public void PlayTurn()
     {
@@ -72,7 +85,7 @@ public class GameTurnController : MonoBehaviour
 			//GamePlayManager.Instance.State = GameState.OpponentTurn;
 		}
     }
-    public void UseAction()
+    public IEnumerator UseAction()
     {
         remainingActions--;
         if(_turn == 0)
@@ -96,11 +109,11 @@ public class GameTurnController : MonoBehaviour
                 int previousOpponentHP = DataManager.Instance.OpponentHP;
                 DataManager.Instance.PlayerHP = playerCharacter.GetCurrentHP();
                 DataManager.Instance.OpponentHP = opponentCharacter.GetCurrentHP();
-                StartCoroutine(HandleBattleAnimation(previousPlayerHP, previousOpponentHP));
+                yield return StartCoroutine(HandleBattleAnimation(previousPlayerHP, previousOpponentHP));
             }
             else
             {
-                ChangeTurn();
+	            yield return StartCoroutine(ChangeTurn());
             }
         }
         else
@@ -123,8 +136,8 @@ public class GameTurnController : MonoBehaviour
 		DataManager.Instance.OpponentScore = 0;
 		turnCounter = 0;
         CheckWinner();
-		ChangeTurn();
-	}
+        yield return StartCoroutine(ChangeTurn());
+    }
     public void CaculateDamage()
     {
 		int damage = Mathf.Abs(DataManager.Instance.PlayerScore - DataManager.Instance.OpponentScore);
@@ -145,13 +158,18 @@ public class GameTurnController : MonoBehaviour
 		remainingActions += extra;
 		Debug.Log("gain " + extra + " action");
 	}
-	public void ChangeTurn()
+	public IEnumerator ChangeTurn()
     {
+	    while (GamePlayManager.Instance.State == GameState.SkillAnimation)
+	    {
+		    yield return null;
+	    }
+	    
         CheckWinner();
         if (GamePlayManager.Instance.State == GameState.PlayerWin || GamePlayManager.Instance.State == GameState.PlayerLose)
 		{
 			// Debug.Log("ChangeTurn: Game ended, skipping turn change.");
-			return;
+			yield break;
 		}
 
 		if (_turn == -1)
