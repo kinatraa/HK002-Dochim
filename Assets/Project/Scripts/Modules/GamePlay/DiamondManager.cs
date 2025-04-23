@@ -515,7 +515,7 @@ public class DiamondManager : MonoBehaviour
 				}
 			}
 
-			UpdatePlayersScore(_count, (int)Mathf.Ceil(_bonus / 2.0f));
+			UpdatePlayersScore(_count, (int)Mathf.Ceil(_bonus));
 			
             yield return StartCoroutine(DropTile());
             

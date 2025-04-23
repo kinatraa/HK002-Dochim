@@ -148,7 +148,7 @@ public class GameTurnController : MonoBehaviour
 	public void ChangeTurn()
     {
         CheckWinner();
-		if (GamePlayManager.Instance.State == GameState.PlayerWin || GamePlayManager.Instance.State == GameState.PlayerLose)
+        if (GamePlayManager.Instance.State == GameState.PlayerWin || GamePlayManager.Instance.State == GameState.PlayerLose)
 		{
 			// Debug.Log("ChangeTurn: Game ended, skipping turn change.");
 			return;
@@ -191,11 +191,29 @@ public class GameTurnController : MonoBehaviour
 	{
 		if (DataManager.Instance.PlayerHP == 0)
 		{
-			MessageManager.Instance.SendMessage(new Message(MessageType.OnGameLose));
+            if (playerCharacter.canBeRevived)
+            {
+                playerCharacter.canBeRevived = false;
+                playerCharacter.Heal(1);
+                DataManager.Instance.PlayerHP = playerCharacter.GetCurrentHP();
+            }
+            else
+            {
+                MessageManager.Instance.SendMessage(new Message(MessageType.OnGameLose));
+            }
 		}
 		else if (DataManager.Instance.OpponentHP == 0)
 		{
-			MessageManager.Instance.SendMessage(new Message(MessageType.OnGameWin));
+            if (opponentCharacter.canBeRevived)
+            {
+                opponentCharacter.canBeRevived = false;
+                opponentCharacter.Heal(1);
+                DataManager.Instance.OpponentHP = opponentCharacter.GetCurrentHP();
+            }
+            else
+            {
+                MessageManager.Instance.SendMessage(new Message(MessageType.OnGameWin));
+            }
 		}
 	}
 	public int GetTurn()

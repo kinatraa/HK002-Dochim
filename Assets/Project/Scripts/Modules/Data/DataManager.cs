@@ -76,6 +76,15 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
             MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
         }
     }
+    public List<Sprite> PlayerConditionTilesSprite
+    {
+        get => PlayerData.conditionTilesSprite;
+        set
+        {
+            PlayerData.conditionTilesSprite = value;
+            MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
+        }
+    }
     public int PlayerSkillRequirementAmount
     {
         get => PlayerData.skillRequirementAmount;
@@ -175,7 +184,16 @@ public class DataManager : Singleton<DataManager>, IMessageHandle
             MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
         }
     }
-    public int OpponentSkillRequirementAmount
+	public List<Sprite> OpponentConditionTilesSprite
+	{
+		get => OpponentData.conditionTilesSprite;
+		set
+		{
+			OpponentData.conditionTilesSprite = value;
+			MessageManager.Instance.SendMessage(new Message(MessageType.OnInitUI));
+		}
+	}
+	public int OpponentSkillRequirementAmount
     {
         get => OpponentData.skillRequirementAmount;
         set

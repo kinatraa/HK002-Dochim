@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using HaKien;
 using TMPro;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using UnityEngine.Tilemaps;
 
 public class AIController : MonoBehaviour
 {
@@ -31,6 +33,7 @@ public class AIController : MonoBehaviour
 		character = characterPool[index].GetComponent<BaseCharacter>();
         GamePlayManager.Instance.OpponentCharacter = character;
         //send message for init 
+        DataManager.Instance.OpponentCharacter = character;
         Debug.Log(character.GetCurrentHP());
         Debug.Log(character.currentConditionAmount);
         Debug.Log(character.activeConditionAmount);
@@ -38,7 +41,12 @@ public class AIController : MonoBehaviour
 		DataManager.Instance.OpponentHP = character.GetCurrentHP();
 		DataManager.Instance.OpponentPortrait = character.characterPortrait;
 		DataManager.Instance.OpponentSkillIcon = character.SkillIcon;
-        DataManager.Instance.OpponentQuote = character.skillActiveQuote;
+		DataManager.Instance.OpponentConditionTilesSprite = character.conditionTile
+        .OfType<Tile>()
+        .Select(tile => tile.sprite)
+        .Where(sprite => sprite != null)
+        .ToList();
+		DataManager.Instance.OpponentQuote = character.skillActiveQuote;
 		DataManager.Instance.OpponentSkillRequirementAmount = character.activeConditionAmount;
 		DataManager.Instance.OpponentCurrentTilesAcquired = 0;
 	}

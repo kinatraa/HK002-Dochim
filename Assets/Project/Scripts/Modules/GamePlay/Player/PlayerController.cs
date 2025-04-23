@@ -30,12 +30,18 @@ public class PlayerController : MonoBehaviour
 		//_character = characterPool.First().GetComponent<BaseCharacter>();
 		GamePlayManager.Instance.PlayerCharacter = _character;
 		//send message for init 
+		DataManager.Instance.PlayerCharacter = _character;
 		DataManager.Instance.PlayerPortrait = _character.characterPortrait;
 		DataManager.Instance.PlayerSkillIcon = _character.SkillIcon;
 		DataManager.Instance.PlayerQuote = _character.skillActiveQuote;
 		DataManager.Instance.PlayerSkillRequirementAmount = _character.activeConditionAmount;
 		DataManager.Instance.PlayerMaxHP = _character.GetCurrentHP();
 		DataManager.Instance.PlayerHP = _character.GetCurrentHP();
+		DataManager.Instance.PlayerConditionTilesSprite = _character.conditionTile
+		 .OfType<Tile>()
+		 .Select(tile => tile.sprite)
+		 .Where(sprite => sprite != null) 
+		 .ToList();
 		SkillButtonClick skillButton = FindObjectOfType<SkillButtonClick>();
 		if (skillButton != null)
 		{

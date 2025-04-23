@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
-public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
+public class ImpalerHilda : BaseCharacter,IPassiveSkill
 {
 	private BaseCharacter target;			
 	
@@ -15,6 +15,7 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 	{
 		base.Awake();
 		tilemap = GamePlayManager.Instance.Tilemap;
+		canBeRevived = true;
 	}
 	private void Start()
 	{
@@ -29,24 +30,13 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 	}
 	public override void Active()
 	{
-		if (!isReady)
-			return;
-		ActiveSkills();
+		PassiveSkills();
 	}
-
-	public void ActiveSkills()
-	{
-			Debug.Log("UseSkill");
-			isReady = true;
-			TakeDamageDuringTurn(10);
-			GamePlayManager.Instance.GameTurnController.AddExtraAction(1);
-	}
-
 	public void PassiveSkills()
 	{
-		if (threshHold <= 20)
+		if (threshHold <= 15)
 		{
-			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 1, -1, true, 1, 15, null);
+			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 1, -1, true, 2, 15, null);
 			target.ApplyStatus(bloodLoss);
 			//Debug.Log($"ImpalerHilda: Applied Bloodloss to {target.characterName}");
 
@@ -54,7 +44,7 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 		}
 		else
 		{
-			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 2, -1, true, 1, 20, null);
+			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 2, -1, true, 2, 20, null);
 			target.ApplyStatus(bloodLoss);
 			//Debug.Log($"ImpalerHilda: Applied Bloodloss to {target.characterName}");
 
@@ -77,7 +67,7 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 			}
 			if(currentConditionAmount >= activeConditionAmount)
 			{
-				PassiveSkills();
+				Active();
 				conditionMetThisTrigger = true;
 			}
 		}
@@ -89,10 +79,6 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 		base.Heal(amount);
 		threshHold += amount;
 		Debug.Log(threshHold);
-		if(threshHold >= 2)
-		{
-			isReady = true;
-		}
 	}
 	public override void RemoveActiveSkill()
 	{
@@ -103,6 +89,4 @@ public class ImpalerHilda : BaseCharacter,IActiveSkill,IPassiveSkill
 	{
 		
 	}
-
-	public bool IsReady { get { return isReady; } }
 }

@@ -18,4 +18,5 @@ public class PlayerData
     public int maxHealth;
     public List<StatusData> currentActiveStatus;
     public string quote;
+    public List<Sprite> conditionTilesSprite;
 }
