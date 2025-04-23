@@ -19,6 +19,7 @@ namespace HaKien
         OnDataChangedDuringTurn,
         OnSelectDifficulty,
         OnSkillActive,
+        OnGameRestart
     }
     public class Message
     {
