@@ -295,10 +295,10 @@ public class PretendDiamondManager : MonoBehaviour
 		    {
 			    colorCounter[_curId][_tilesData[tile].Color]++;
 		    }
-		    /*if (CheckTerrainEffect(tilePos))
-		    {
-			    bonus += 1;
-		    }*/
+		    //if (CheckTerrainEffect(tilePos))
+		    //{
+			   // bonus += 1;
+		    //}
 
 		    if (_tilesData[tile].Type != TileType.Normal)
 		    {
