@@ -36,7 +36,7 @@ public class ImpalerHilda : BaseCharacter,IPassiveSkill
 	{
 		if (threshHold <= 15)
 		{
-			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 1, -1, true, 2, 15, null);
+			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 1, -1, true, 2, 20, null);
 			target.ApplyStatus(bloodLoss);
 			//Debug.Log($"ImpalerHilda: Applied Bloodloss to {target.characterName}");
 
@@ -44,7 +44,7 @@ public class ImpalerHilda : BaseCharacter,IPassiveSkill
 		}
 		else
 		{
-			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 2, -1, true, 2, 20, null);
+			StatusData bloodLoss = new StatusData(StatusType.BloodLoss, 2, -1, true, 2, 25, null);
 			target.ApplyStatus(bloodLoss);
 			//Debug.Log($"ImpalerHilda: Applied Bloodloss to {target.characterName}");
 
